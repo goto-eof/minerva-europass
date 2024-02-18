@@ -1,0 +1,5 @@
+com:
+  andreidodu:
+    iteuropass:
+      templates-directory: "templates"
+      resume-template-name: "resume-document.xsl"
