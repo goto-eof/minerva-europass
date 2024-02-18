@@ -18,11 +18,11 @@
                 <fo:table-row>
                     <fo:table-cell height="26cm" background-color="rgb(240,240,240)" number-columns-spanned="2"
                                    padding="2px">
-                        <fo:block>
+                        <fo:block-container>
                             <xsl:call-template name="profile">
                                 <xsl:with-param name="root" select="root"/>
                             </xsl:call-template>
-                        </fo:block>
+                        </fo:block-container>
                     </fo:table-cell>
                     <fo:table-cell number-columns-spanned="4" padding="2px">
                         <fo:block>

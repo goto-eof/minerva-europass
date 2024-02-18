@@ -19,7 +19,11 @@
                                                          content-height="32px"
                                                          content-width="32px"/>
                                 </fo:block>
-                                <fo:block font-size="7pt">IT Europass</fo:block>
+                                <fo:block font-size="7pt">IT Europass |
+                                    <xsl:value-of select="$root/firstName"/>
+                                    <xsl:value-of select="' '"/>
+                                    <xsl:value-of select="$root/lastName"/>
+                                </fo:block>
                             </fo:block>
                         </fo:table-cell>
 

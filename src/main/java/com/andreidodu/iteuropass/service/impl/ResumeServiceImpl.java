@@ -17,8 +17,8 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public Map<String, Object> processResumeAndReturnMap(ResumeDTO resumeDTO) {
         Map<String, Object> result = new HashMap<>();
-        result.put("firstname", resumeDTO.getFirstName());
-        result.put("lastname", resumeDTO.getLastName());
+        result.put("firstName", resumeDTO.getFirstName());
+        result.put("lastName", resumeDTO.getLastName());
         result.put("city", resumeDTO.getCity());
         result.put("county", resumeDTO.getCounty());
         result.put("country", resumeDTO.getCountry());
