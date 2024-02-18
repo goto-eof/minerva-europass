@@ -2,15 +2,17 @@
 <xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
-    <xsl:template name="email-list">
+    <xsl:template name="url-list">
         <xsl:param name="root" select="'default-value'"/>
-        <fo:block text-align="left" font-size="10pt">
+        <fo:block-container text-align="left" font-size="10pt">
+            <fo:block>
+                URLs
+            </fo:block>
             <fo:table>
                 <fo:table-column/>
                 <fo:table-column/>
                 <fo:table-body>
-
-                    <xsl:for-each select="$root/emailList/item">
+                    <xsl:for-each select="$root/urlList/item">
                         <fo:table-row>
                             <fo:table-cell padding="2px">
                                 <fo:block>
@@ -24,9 +26,8 @@
                             </fo:table-cell>
                         </fo:table-row>
                     </xsl:for-each>
-
                 </fo:table-body>
             </fo:table>
-        </fo:block>
+        </fo:block-container>
     </xsl:template>
 </xsl:stylesheet>

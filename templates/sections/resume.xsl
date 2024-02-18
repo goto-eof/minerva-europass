@@ -3,8 +3,6 @@
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
     <xsl:include href="profile.xsl"/>
-
-
     <xsl:template name="resume">
         <xsl:param name="root" select="'default-value'"/>
         <fo:table table-layout="fixed" width="100%" font-size="7pt" space-before="0.5em" space-after="0.5em">
