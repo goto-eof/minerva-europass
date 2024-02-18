@@ -16,7 +16,7 @@
                 <fo:simple-page-master master-name="simpleA4"
                                        page-height="29.7cm" page-width="21cm" margin-top="1cm" margin-bottom="1cm"
                                        margin-left="1cm" margin-right="1cm">
-                    <fo:region-body margin-top="2cm"/>
+                    <fo:region-body margin-top="0.2cm"/>
                     <fo:region-before region-name="header-region"/>
                     <fo:region-after region-name="footer-region"/>
                 </fo:simple-page-master>
@@ -39,11 +39,11 @@
                     <fo:block font-size="20pt" text-align="center" padding="10px">
                         <xsl:value-of select="root/title"/>
                     </fo:block>
-                    <fo:block padding-top="20px">
+                    <fo:block-container height="26cm" padding-top="0px">
                         <xsl:call-template name="resume">
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
-                    </fo:block>
+                    </fo:block-container>
                 </fo:flow>
             </fo:page-sequence>
 

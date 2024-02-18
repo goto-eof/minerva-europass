@@ -2,9 +2,12 @@
 <xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
+    <xsl:include href="profile.xsl"/>
+
+
     <xsl:template name="resume">
         <xsl:param name="root" select="'default-value'"/>
-        <fo:table font-size="7pt" space-before="0.5em" space-after="0.5em" table-layout="fixed">
+        <fo:table table-layout="fixed" width="100%" font-size="7pt" space-before="0.5em" space-after="0.5em">
 
             <fo:table-column/>
             <fo:table-column/>
@@ -15,106 +18,20 @@
 
             <fo:table-body>
                 <fo:table-row>
-                    <fo:table-cell padding="2px">
+                    <fo:table-cell height="26cm" background-color="rgb(240,240,240)" number-columns-spanned="2"
+                                   padding="2px">
                         <fo:block>
-                            <xsl:value-of select="'Firstname and Lastname:'"/>
+                            <xsl:call-template name="profile">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
                         </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell padding="2px">
+                    <fo:table-cell number-columns-spanned="4" padding="2px">
                         <fo:block>
-                            <xsl:value-of select="$root/firstname"/>
-                            <xsl:value-of select="' '"/>
-                            <xsl:value-of select="$root/lastname"/>
-                        </fo:block>
-                    </fo:table-cell>
-
-                    <fo:table-cell padding="2px">
-                        <fo:block>
-                            <xsl:value-of select="'Citizenship:'"/>
-                        </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell padding="2px">
-                        <fo:block>
-                            <xsl:value-of select="$root/citizenship"/>
-                        </fo:block>
-                    </fo:table-cell>
-
-                    <fo:table-cell padding="2px">
-                        <fo:block>
-                            <xsl:value-of select="'Birth date:'"/>
-                        </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell padding="2px">
-                        <fo:block>
-                            <xsl:value-of select="$root/birthDate"/>
-                        </fo:block>
-                    </fo:table-cell>
-
-                </fo:table-row>
-
-
-                <fo:table-row>
-                    <fo:table-cell padding="2px">
-                        <fo:block>
-                            <xsl:value-of select="'City:'"/>
-                        </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell padding="2px">
-                        <fo:block>
-                            <xsl:value-of select="$root/city"/>
-                            <xsl:value-of select="', '"/>
-                            <xsl:value-of select="$root/county"/>
-                            <xsl:value-of select="', '"/>
-                            <xsl:value-of select="$root/country"/>
+                            mondo
                         </fo:block>
                     </fo:table-cell>
                 </fo:table-row>
-
-                <xsl:for-each select="$root/emailList/item">
-                    <fo:table-row>
-                        <fo:table-cell padding="2px">
-                            <fo:block>
-                                <xsl:value-of select="name"/>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell padding="2px">
-                            <fo:block>
-                                <xsl:value-of select="value"/>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                </xsl:for-each>
-
-                <xsl:for-each select="$root/phoneNumberList/item">
-                    <fo:table-row>
-                        <fo:table-cell padding="2px">
-                            <fo:block>
-                                <xsl:value-of select="name"/>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell padding="2px">
-                            <fo:block>
-                                <xsl:value-of select="value"/>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                </xsl:for-each>
-
-                <xsl:for-each select="$root/urlList/item">
-                    <fo:table-row>
-                        <fo:table-cell padding="2px">
-                            <fo:block>
-                                <xsl:value-of select="name"/>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell padding="2px">
-                            <fo:block>
-                                <xsl:value-of select="value"/>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
-                </xsl:for-each>
-
             </fo:table-body>
         </fo:table>
     </xsl:template>
