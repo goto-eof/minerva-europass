@@ -22,6 +22,7 @@ public class ResumeDTO {
     private LocalDate birthDate;
     private Map<String, String> urlMap;
     private IntroductionDTO introduction;
-    private List<String> mainSkills;
-    private List<String> languages;
+    private List<String> mainSkillList;
+    private List<String> languageList;
+    private List<ExperienceDTO> experienceList;
 }

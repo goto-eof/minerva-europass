@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/resume")
 @RequiredArgsConstructor
-public class ResumeGenerator {
+public class ResumeGeneratorController {
 
     final private ResumeService resumeService;
     final private PdfGeneratorService pdfGeneratorService;

@@ -1,8 +1,11 @@
 package com.andreidodu.iteuropass.service.impl;
 
+import com.andreidodu.iteuropass.constants.ApplicationConst;
 import com.andreidodu.iteuropass.constants.ResumeConst;
+import com.andreidodu.iteuropass.dto.ExperienceDTO;
 import com.andreidodu.iteuropass.dto.ResumeDTO;
 import com.andreidodu.iteuropass.service.ResumeService;
+import com.andreidodu.iteuropass.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
@@ -39,14 +42,35 @@ public class ResumeServiceImpl implements ResumeService {
             result.put("introductionTitle", resumeDTO.getIntroduction().getTitle());
             result.put("introductionContent", resumeDTO.getIntroduction().getContent());
         }
-        result.put("applicationName", "Minerva Europass");
-        result.put("generatedOn", formatLocalDate(LocalDate.now()));
+        result.put("applicationName", ApplicationConst.APPLICATION_NAME);
+        result.put("generatedOn", DateUtil.formatLocalDate(LocalDate.now(), DateUtil.PATTERN_DD_MM_YYYY));
         result.put("jobTitle", resumeDTO.getJobTitle());
 
-        result.put("mainSkills", listToString(resumeDTO.getMainSkills()));
-        result.put("languages", listToString(resumeDTO.getLanguages()));
+        result.put("mainSkills", listToString(resumeDTO.getMainSkillList()));
+        result.put("languages", listToString(resumeDTO.getLanguageList()));
+
+        result.put("experienceList", experiencesToListMap(resumeDTO.getExperienceList()));
 
         return result;
+    }
+
+    private List<Map<String, String>> experiencesToListMap(List<ExperienceDTO> experienceList) {
+        return experienceList.stream().map(item -> {
+            Map<String, String> result = new HashMap<>();
+
+            result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_DD_MM_YYYY));
+            result.put("dateTo", DateUtil.formatLocalDate(item.getDateTo(), DateUtil.PATTERN_DD_MM_YYYY));
+            result.put("jobTitle", item.getJobTitle());
+            result.put("description", item.getDescription());
+            result.put("mainActivities", item.getMainActivities());
+            result.put("customer", item.getCustomer());
+            result.put("sector", item.getSector());
+            result.put("backEndTechnologyList", listToString(item.getBackEndTechnologyList()));
+            result.put("frontEndTechnologyList", listToString(item.getFrontEndTechnologyList()));
+            result.put("toolList", listToString(item.getToolList()));
+
+            return result;
+        }).toList();
     }
 
     private List<Map<String, Object>> listToListMap(Map<String, String> listOfMap) {
@@ -80,12 +104,9 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     private int calculateYearsOld(LocalDate from, LocalDate to) {
-      return from.until(to)
+        return from.until(to)
                 .getYears();
     }
 
-    private String formatLocalDate(LocalDate date) {
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return date.format(pattern);
-    }
+
 }
