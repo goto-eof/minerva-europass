@@ -14,7 +14,8 @@
                         <fo:table-cell vertical-align="middle">
                             <fo:block text-align="left">
                                 <fo:block font-size="7pt">
-                                    <xsl:value-of select="$root/applicationName"/>
+                                    <xsl:value-of select="$root/applicationName"/> |
+                                    <xsl:value-of select="$root/generatedOn"/>
                                 </fo:block>
                             </fo:block>
                         </fo:table-cell>

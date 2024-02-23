@@ -11,8 +11,6 @@
                     <fo:table-row>
                         <fo:table-cell vertical-align="middle">
                             <fo:block text-align="left">
-
-
                                 <fo:block font-size="16pt" padding-bottom="10px" text-align="center">
                                     <xsl:value-of select="$root/introductionTitle"/>
                                 </fo:block>
@@ -21,7 +19,7 @@
                     </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell>
-                            <fo:block wrap-option="wrap" text-align="justify">
+                            <fo:block linefeed-treatment="preserve" wrap-option="wrap" text-align="justify">
                                 <xsl:value-of select="$root/introductionContent"/>
                             </fo:block>
                         </fo:table-cell>

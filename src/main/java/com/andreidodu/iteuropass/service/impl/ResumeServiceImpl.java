@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +33,15 @@ public class ResumeServiceImpl implements ResumeService {
         result.put(ResumeConst.FIELD_URL_LIST, listToListMap(resumeDTO.getUrlMap()));
         result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, listToListMap(resumeDTO.getPhoneNumberMap()));
         result.put(ResumeConst.FIELD_BIRTH_DATE, resumeDTO.getBirthDate().toString());
+        result.put("yearsOld", String.valueOf(calculateYearsOld(resumeDTO.getBirthDate(), LocalDate.now())));
 
         if (resumeDTO.getIntroduction() != null) {
             result.put("introductionTitle", resumeDTO.getIntroduction().getTitle());
             result.put("introductionContent", resumeDTO.getIntroduction().getContent());
         }
-        result.put("applicationName", "IT Europass");
+        result.put("applicationName", "Minerva Europass");
+        result.put("generatedOn", formatLocalDate(LocalDate.now()));
+        result.put("jobTitle", resumeDTO.getJobTitle());
 
         result.put("mainSkills", listToString(resumeDTO.getMainSkills()));
         result.put("languages", listToString(resumeDTO.getLanguages()));
@@ -71,5 +77,17 @@ public class ResumeServiceImpl implements ResumeService {
     private String listToString(List<String> list) {
         return StringUtils.join(list, '•')
                 .replace("•", " • ");
+    }
+
+    private int calculateYearsOld(LocalDate from, LocalDate to) {
+        int years = from.until(to)
+                .getYears();
+        System.out.println(years);
+        return years;
+    }
+
+    private String formatLocalDate(LocalDate date) {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return date.format(pattern);
     }
 }

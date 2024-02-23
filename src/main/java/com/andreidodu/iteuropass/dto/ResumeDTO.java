@@ -15,6 +15,7 @@ public class ResumeDTO {
     private String city;
     private String county;
     private String country;
+    private String jobTitle;
     private List<String> citizenshipList;
     private Map<String, String> emailMap;
     private Map<String, String> phoneNumberMap;

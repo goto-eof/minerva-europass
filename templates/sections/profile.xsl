@@ -6,6 +6,7 @@
     <xsl:include href="generic-list.xsl"/>
     <xsl:include href="generic-item.xsl"/>
     <xsl:include href="generic-item-same-row.xsl"/>
+    <xsl:include href="generic-item-same-row-bi-value.xsl"/>
 
     <xsl:template name="profile">
         <xsl:param name="root" select="'default-value'"/>
@@ -70,6 +71,14 @@
 
                     <fo:table-row>
                         <fo:table-cell padding-bottom="5px">
+                            <fo:block text-align="center" font-size="12pt">
+                                <xsl:value-of select="$root/jobTitle"/>
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+
+                    <fo:table-row>
+                        <fo:table-cell padding-bottom="5px">
                             <fo:block text-align="center">
                                 <xsl:value-of select="$root/city"/>
                                 <xsl:value-of select="', '"/>
@@ -94,8 +103,10 @@
                     <fo:table-row>
                         <fo:table-cell padding-top="4px">
                             <fo:block>
-                                <xsl:call-template name="generic-item-same-row">
-                                    <xsl:with-param name="value" select="$root/birthDate"/>
+                                <xsl:call-template name="generic-item-same-row-bi-value">
+                                    <xsl:with-param name="value1" select="$root/birthDate"/>
+                                    <xsl:with-param name="value2" select="$root/yearsOld"/>
+                                    <xsl:with-param name="value2Label" select="'years old'"/>
                                     <xsl:with-param name="title" select="'Birth date'"/>
                                 </xsl:call-template>
                             </fo:block>
