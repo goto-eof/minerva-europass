@@ -80,10 +80,8 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     private int calculateYearsOld(LocalDate from, LocalDate to) {
-        int years = from.until(to)
+      return from.until(to)
                 .getYears();
-        System.out.println(years);
-        return years;
     }
 
     private String formatLocalDate(LocalDate date) {
