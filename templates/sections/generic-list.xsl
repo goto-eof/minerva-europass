@@ -18,12 +18,12 @@
                     <xsl:for-each select="$items">
                         <fo:table-row>
                             <fo:table-cell number-columns-spanned="1">
-                                <fo:block>
+                                <fo:block padding-top="4px">
                                     <xsl:value-of select="name"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="2">
-                                <fo:block>
+                                <fo:block padding-top="4px">
                                     <xsl:value-of select="value"/>
                                 </fo:block>
                             </fo:table-cell>
