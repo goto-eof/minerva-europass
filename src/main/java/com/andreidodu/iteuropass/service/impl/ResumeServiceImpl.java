@@ -1,5 +1,6 @@
 package com.andreidodu.iteuropass.service.impl;
 
+import com.andreidodu.iteuropass.constants.ResumeConst;
 import com.andreidodu.iteuropass.dto.ResumeDTO;
 import com.andreidodu.iteuropass.service.ResumeService;
 import lombok.RequiredArgsConstructor;
@@ -14,19 +15,21 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
+
+
     @Override
     public Map<String, Object> processResumeAndReturnMap(ResumeDTO resumeDTO) {
         Map<String, Object> result = new HashMap<>();
-        result.put("firstName", resumeDTO.getFirstName());
-        result.put("lastName", resumeDTO.getLastName());
-        result.put("city", resumeDTO.getCity());
-        result.put("county", resumeDTO.getCounty());
-        result.put("country", resumeDTO.getCountry());
-        result.put("citizenship", StringUtils.join(resumeDTO.getCitizenshipList(), ',').replace(",", ", "));
-        result.put("emailList", listToListMap(resumeDTO.getEmailMap()));
-        result.put("urlList", listToListMap(resumeDTO.getUrlMap()));
-        result.put("phoneNumberList", listToListMap(resumeDTO.getPhoneNumberMap()));
-        result.put("birthDate", resumeDTO.getBirthDate().toString());
+        result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
+        result.put(ResumeConst.FIELD_LAST_NAME, resumeDTO.getLastName());
+        result.put(ResumeConst.FIELD_CITY, resumeDTO.getCity());
+        result.put(ResumeConst.FIELD_COUNTY, resumeDTO.getCounty());
+        result.put(ResumeConst.FIELD_COUNTRY, resumeDTO.getCountry());
+        result.put(ResumeConst.FIELD_CITIZENSHIP, StringUtils.join(resumeDTO.getCitizenshipList(), ',').replace(",", ", "));
+        result.put(ResumeConst.FIELD_EMAIL_LIST, listToListMap(resumeDTO.getEmailMap()));
+        result.put(ResumeConst.FIELD_URL_LIST, listToListMap(resumeDTO.getUrlMap()));
+        result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, listToListMap(resumeDTO.getPhoneNumberMap()));
+        result.put(ResumeConst.FIELD_BIRTH_DATE, resumeDTO.getBirthDate().toString());
         return result;
     }
 
@@ -35,8 +38,8 @@ public class ResumeServiceImpl implements ResumeService {
 
         for (String key : listOfMap.keySet()) {
             Map<String, Object> map = new HashMap<>();
-            map.put("name", key);
-            map.put("value", listOfMap.get(key));
+            map.put(ResumeConst.FIELD_NAME, key);
+            map.put(ResumeConst.FIELD_VALUE, listOfMap.get(key));
             result.add(map);
         }
 
