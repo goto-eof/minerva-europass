@@ -30,6 +30,16 @@ public class ResumeServiceImpl implements ResumeService {
         result.put(ResumeConst.FIELD_URL_LIST, listToListMap(resumeDTO.getUrlMap()));
         result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, listToListMap(resumeDTO.getPhoneNumberMap()));
         result.put(ResumeConst.FIELD_BIRTH_DATE, resumeDTO.getBirthDate().toString());
+
+        if (resumeDTO.getIntroduction() != null) {
+            result.put("introductionTitle", resumeDTO.getIntroduction().getTitle());
+            result.put("introductionContent", resumeDTO.getIntroduction().getContent());
+        }
+        result.put("applicationName", "IT Europass");
+
+        result.put("mainSkills", listToString(resumeDTO.getMainSkills()));
+        result.put("languages", listToString(resumeDTO.getLanguages()));
+
         return result;
     }
 
@@ -44,5 +54,22 @@ public class ResumeServiceImpl implements ResumeService {
         }
 
         return result;
+    }
+
+    private List<Map<String, Object>> listToList(List<String> list) {
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (String item : list) {
+            Map<String, Object> map = new HashMap<>();
+            map.put(ResumeConst.FIELD_VALUE, item);
+            result.add(map);
+        }
+
+        return result;
+    }
+
+    private String listToString(List<String> list) {
+        return StringUtils.join(list, '•')
+                .replace("•", " • ");
     }
 }

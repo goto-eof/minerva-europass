@@ -20,4 +20,7 @@ public class ResumeDTO {
     private Map<String, String> phoneNumberMap;
     private LocalDate birthDate;
     private Map<String, String> urlMap;
+    private IntroductionDTO introduction;
+    private List<String> mainSkills;
+    private List<String> languages;
 }

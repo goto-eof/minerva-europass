@@ -6,6 +6,7 @@
     <xsl:include href="sections/header.xsl"/>
     <xsl:include href="sections/footer.xsl"/>
     <xsl:include href="sections/resume.xsl"/>
+    <xsl:include href="sections/experience.xsl"/>
 
     <xsl:output method="xml" version="1.0" omit-xml-declaration="no" indent="yes"/>
     <xsl:param name="version" select="'1.0'"/>
@@ -21,6 +22,40 @@
                     <fo:region-after region-name="footer-region"/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
+
+            <fo:declarations>
+                <x:xmpmeta xmlns:x="adobe:ns:meta/">
+                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <rdf:Description rdf:about=""
+                                         xmlns:dc="http://purl.org/dc/elements/1.1/">
+                            <!-- Dublin Core properties go here -->
+                            <dc:title>
+                                <xsl:value-of select="root/applicationName"/>
+                                <xsl:value-of select="' | '"/>
+                                <xsl:value-of select="root/firstName"/>
+                                <xsl:value-of select="' '"/>
+                                <xsl:value-of select="root/lastName"/>
+                            </dc:title>
+                            <dc:creator>
+                                <xsl:value-of select="root/applicationName"/>
+                            </dc:creator>
+
+                            <dc:description>
+                                <xsl:value-of select="root/applicationName"/>
+                            </dc:description>
+                        </rdf:Description>
+                        <rdf:Description rdf:about=""
+                                         xmlns:xmp="http://ns.adobe.com/xap/1.0/">
+                            <!-- XMP properties go here -->
+                            <xmp:CreatorTool>
+                                <fo:block>
+                                    <xsl:value-of select="root/applicationName"/>
+                                </fo:block>
+                            </xmp:CreatorTool>
+                        </rdf:Description>
+                    </rdf:RDF>
+                </x:xmpmeta>
+            </fo:declarations>
 
             <fo:page-sequence master-reference="simpleA4" initial-page-number="1" id="end">
                 <fo:static-content flow-name="header-region" font-size="10pt">
@@ -39,8 +74,13 @@
                     <fo:block font-size="20pt" text-align="center" padding="10px">
                         <xsl:value-of select="root/title"/>
                     </fo:block>
-                    <fo:block-container height="26cm" padding-top="0px">
+                    <fo:block-container min-height="26cm" padding-top="0px">
                         <xsl:call-template name="resume">
+                            <xsl:with-param name="root" select="root"/>
+                        </xsl:call-template>
+                    </fo:block-container>
+                    <fo:block-container min-height="26cm" padding-top="0px">
+                        <xsl:call-template name="experience">
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>

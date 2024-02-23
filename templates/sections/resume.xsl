@@ -3,34 +3,45 @@
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
     <xsl:include href="profile.xsl"/>
+    <xsl:include href="introduction.xsl"/>
     <xsl:template name="resume">
         <xsl:param name="root" select="'default-value'"/>
-        <fo:table table-layout="fixed" width="100%" font-size="7pt" space-before="0.5em" space-after="0.5em">
+        <fo:block page-break-after="always">
+            <fo:table table-layout="fixed" width="100%" font-size="7pt" space-before="0.5em" space-after="0.5em">
 
-            <fo:table-column/>
-            <fo:table-column/>
-            <fo:table-column/>
-            <fo:table-column/>
-            <fo:table-column/>
-            <fo:table-column/>
+                <fo:table-column/>
+                <fo:table-column/>
+                <fo:table-column/>
+                <fo:table-column/>
+                <fo:table-column/>
+                <fo:table-column/>
 
-            <fo:table-body>
-                <fo:table-row>
-                    <fo:table-cell height="26cm" background-color="rgb(240,240,240)" number-columns-spanned="2"
-                                   padding="2px">
-                        <fo:block-container>
-                            <xsl:call-template name="profile">
-                                <xsl:with-param name="root" select="root"/>
-                            </xsl:call-template>
-                        </fo:block-container>
-                    </fo:table-cell>
-                    <fo:table-cell number-columns-spanned="4" padding="2px">
-                        <fo:block>
-                            mondo
-                        </fo:block>
-                    </fo:table-cell>
-                </fo:table-row>
-            </fo:table-body>
-        </fo:table>
+                <fo:table-body height="100pvh">
+                    <fo:table-row>
+                        <fo:table-cell number-columns-spanned="6">
+                            <fo:block font-size="18pt" padding-bottom="10px" text-align="center">
+                                Curriculum Vitae
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="2">
+                            <fo:block-container>
+                                <xsl:call-template name="profile">
+                                    <xsl:with-param name="root" select="root"/>
+                                </xsl:call-template>
+                            </fo:block-container>
+                        </fo:table-cell>
+                        <fo:table-cell number-columns-spanned="4">
+                            <fo:block-container height="25cm"  margin-left="3px" margin-right="3px">
+                                <xsl:call-template name="introduction">
+                                    <xsl:with-param name="root" select="root"/>
+                                </xsl:call-template>
+                            </fo:block-container>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+        </fo:block>
     </xsl:template>
 </xsl:stylesheet>

@@ -2,8 +2,8 @@
 <xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
-    <xsl:template name="generic-list">
-        <xsl:param name="items" select="'default-value'"/>
+    <xsl:template name="generic-item">
+        <xsl:param name="value" select="'default-value'"/>
         <xsl:param name="title" select="'default-value'"/>
         <fo:block text-align="left" font-size="10pt">
 
@@ -21,15 +21,13 @@
                         </fo:table-cell>
                     </fo:table-row>
 
-                    <xsl:for-each select="$items">
-                        <fo:table-row>
-                            <fo:table-cell number-columns-spanned="1">
-                                <fo:block padding-top="4px">
-                                    <xsl:value-of select="value"/>
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                    </xsl:for-each>
+                    <fo:table-row>
+                        <fo:table-cell number-columns-spanned="3">
+                            <fo:block padding-top="4px">
+                                <xsl:value-of select="$value"/>
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
 
                 </fo:table-body>
             </fo:table>

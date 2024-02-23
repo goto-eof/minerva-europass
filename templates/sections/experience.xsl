@@ -2,33 +2,31 @@
 <xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
-    <xsl:template name="header">
+    <xsl:template name="experience">
         <xsl:param name="root" select="'default-value'"/>
-        <fo:block text-align="right" font-size="10pt">
+        <fo:block font-size="10pt">
             <fo:table>
-                <fo:table-column/>
-                <fo:table-column/>
                 <fo:table-column/>
                 <fo:table-body>
                     <fo:table-row>
                         <fo:table-cell vertical-align="middle">
                             <fo:block text-align="left">
-                                <fo:block font-size="7pt">
-                                    <xsl:value-of select="$root/applicationName"/>
+
+                                <fo:block margin-left="0px">
+                                    <fo:external-graphic src="classpath:static/icon.png"
+                                                         content-height="32px"
+                                                         content-width="32px"/>
+                                </fo:block>
+                                <fo:block font-size="16pt" padding-bottom="10px" text-align="center">
+                                    <xsl:value-of select="$root/introductionTitle"/>
                                 </fo:block>
                             </fo:block>
                         </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
                         <fo:table-cell>
-                            <fo:block text-align="center">
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell>
-                            <fo:block font-size="7pt" wrap-option="wrap">
-                                Curriculum Vitae |
-                                <xsl:value-of select="' '"/>
-                                <xsl:value-of select="$root/firstName"/>
-                                <xsl:value-of select="' '"/>
-                                <xsl:value-of select="$root/lastName"/>
+                            <fo:block wrap-option="wrap" text-align="justify">
+                                <xsl:value-of select="$root/introductionContent"/>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
