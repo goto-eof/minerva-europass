@@ -20,17 +20,17 @@
                                                          content-width="32px"/>
                                 </fo:block>
                                 <fo:block font-size="16pt" padding-bottom="10px" text-align="center">
-                                    <xsl:value-of select="$root/introductionTitle"/>
+                                    <xsl:value-of select="$root/experienceTitle"/>
                                 </fo:block>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
-                    <xsl:for-each select="$root/experienceList">
+                    <xsl:for-each select="$root/experienceList/item">
                         <fo:table-row>
                             <fo:table-cell>
                                 <fo:block wrap-option="wrap" text-align="justify">
                                     <xsl:call-template name="job-experience">
-                                        <xsl:with-param name="item" select="item"/>
+                                        <xsl:with-param name="item" select="."/>
                                         <xsl:with-param name="title" select="''"/>
                                     </xsl:call-template>
                                 </fo:block>

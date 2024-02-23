@@ -2,7 +2,7 @@ package com.andreidodu.iteuropass.service.impl;
 
 import com.andreidodu.iteuropass.constants.ApplicationConst;
 import com.andreidodu.iteuropass.constants.ResumeConst;
-import com.andreidodu.iteuropass.dto.ExperienceDTO;
+import com.andreidodu.iteuropass.dto.ExperienceItemDTO;
 import com.andreidodu.iteuropass.dto.ResumeDTO;
 import com.andreidodu.iteuropass.service.ResumeService;
 import com.andreidodu.iteuropass.util.DateUtil;
@@ -11,8 +11,6 @@ import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,17 +47,18 @@ public class ResumeServiceImpl implements ResumeService {
         result.put("mainSkills", listToString(resumeDTO.getMainSkillList()));
         result.put("languages", listToString(resumeDTO.getLanguageList()));
 
-        result.put("experienceList", experiencesToListMap(resumeDTO.getExperienceList()));
+        result.put("experienceTitle", resumeDTO.getExperience().getTitle());
+        result.put("experienceList", experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
 
         return result;
     }
 
-    private List<Map<String, String>> experiencesToListMap(List<ExperienceDTO> experienceList) {
+    private List<Map<String, String>> experiencesToListMap(List<ExperienceItemDTO> experienceList) {
         return experienceList.stream().map(item -> {
             Map<String, String> result = new HashMap<>();
 
-            result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_DD_MM_YYYY));
-            result.put("dateTo", DateUtil.formatLocalDate(item.getDateTo(), DateUtil.PATTERN_DD_MM_YYYY));
+            result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
+            result.put("dateTo", DateUtil.formatLocalDate(item.getDateTo(), DateUtil.PATTERN_MMM_YYYY));
             result.put("jobTitle", item.getJobTitle());
             result.put("description", item.getDescription());
             result.put("mainActivities", item.getMainActivities());

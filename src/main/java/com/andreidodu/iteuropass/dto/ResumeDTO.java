@@ -24,5 +24,5 @@ public class ResumeDTO {
     private IntroductionDTO introduction;
     private List<String> mainSkillList;
     private List<String> languageList;
-    private List<ExperienceDTO> experienceList;
+    private ExperienceDTO experience;
 }

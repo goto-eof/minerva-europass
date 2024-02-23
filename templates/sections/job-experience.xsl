@@ -17,7 +17,7 @@
 
                     <fo:table-row>
                         <fo:table-cell number-columns-spanned="5">
-                            <fo:block text-align="left" font-weight="bold">
+                            <fo:block text-align="left" padding="10px" font-weight="bold">
                                 <xsl:value-of select="$title"/>
                             </fo:block>
                         </fo:table-cell>
