@@ -30,7 +30,7 @@ public class ResumeServiceImpl implements ResumeService {
         result.put(ResumeConst.FIELD_EMAIL_LIST, ResumeUtil.listToListMap(resumeDTO.getEmailMap()));
         result.put(ResumeConst.FIELD_URL_LIST, ResumeUtil.listToListMap(resumeDTO.getUrlMap()));
         result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, ResumeUtil.listToListMap(resumeDTO.getPhoneNumberMap()));
-        result.put(ResumeConst.FIELD_BIRTH_DATE, resumeDTO.getBirthDate().toString());
+        result.put(ResumeConst.FIELD_BIRTH_DATE, DateUtil.formatLocalDate(resumeDTO.getBirthDate(), DateUtil.PATTERN_DD_MM_YYYY));
         result.put(ResumeConst.FIELD_YEARS_OLD, String.valueOf(DateUtil.calculateYearsOld(resumeDTO.getBirthDate(), LocalDate.now())));
 
         if (resumeDTO.getIntroduction() != null) {
