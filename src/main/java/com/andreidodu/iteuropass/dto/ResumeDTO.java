@@ -26,4 +26,5 @@ public class ResumeDTO {
     private List<String> languageList;
     private ExperienceDTO experience;
     private PersonalProjectsDTO personalProjects;
+    private EducationDTO education;
 }

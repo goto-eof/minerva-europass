@@ -13,14 +13,17 @@
                     <fo:table-row>
                         <fo:table-cell vertical-align="middle">
                             <fo:block text-align="left">
-
-                                <fo:block margin-left="0px">
-                                    <fo:external-graphic src="classpath:static/icon.png"
-                                                         content-height="32px"
-                                                         content-width="32px"/>
-                                </fo:block>
                                 <fo:block font-size="16pt" padding-bottom="10px" text-align="center">
                                     <xsl:value-of select="$root/experienceTitle"/>
+                                </fo:block>
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell>
+                            <fo:block>
+                                <fo:block>
+                                    <xsl:value-of select="$root/experienceDescription"/>
                                 </fo:block>
                             </fo:block>
                         </fo:table-cell>

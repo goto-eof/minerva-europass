@@ -14,6 +14,8 @@ public class ExperienceItemDTO {
     private String jobTitle;
     private String name;
     private String description;
+    private String url;
+    private List<UrlDTO> urlList;
     private String mainActivities;
     private String customer;
     private String sector;

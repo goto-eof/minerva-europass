@@ -2,8 +2,10 @@ package com.andreidodu.iteuropass.service.impl;
 
 import com.andreidodu.iteuropass.constants.ApplicationConst;
 import com.andreidodu.iteuropass.constants.ResumeConst;
+import com.andreidodu.iteuropass.dto.EducationItemDTO;
 import com.andreidodu.iteuropass.dto.ExperienceItemDTO;
 import com.andreidodu.iteuropass.dto.ResumeDTO;
+import com.andreidodu.iteuropass.dto.UrlDTO;
 import com.andreidodu.iteuropass.service.ResumeService;
 import com.andreidodu.iteuropass.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +13,7 @@ import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -47,22 +46,53 @@ public class ResumeServiceImpl implements ResumeService {
         result.put("mainSkills", listToString(resumeDTO.getMainSkillList()));
         result.put("languages", listToString(resumeDTO.getLanguageList()));
 
-        result.put("experienceTitle", resumeDTO.getExperience().getTitle());
-        result.put("experienceList", experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
-        result.put("personalProjectsTitle", resumeDTO.getPersonalProjects().getTitle());
-        result.put("personalProjectList", experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
+        if (resumeDTO.getExperience() != null) {
+            resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+            result.put("experienceTitle", resumeDTO.getExperience().getTitle());
+            result.put("experienceDescription", resumeDTO.getExperience().getDescription());
+            result.put("experienceList", experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
+        }
+
+        if (resumeDTO.getPersonalProjects() != null) {
+            resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+            result.put("personalProjectsDescription", resumeDTO.getPersonalProjects().getDescription());
+            result.put("personalProjectsTitle", resumeDTO.getPersonalProjects().getTitle());
+            result.put("personalProjectList", experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
+        }
+
+        if (resumeDTO.getEducation() != null) {
+            resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
+            result.put("educationTitle", resumeDTO.getEducation().getTitle());
+            result.put("educationDescription", resumeDTO.getEducation().getDescription());
+            result.put("educationList", educationToListMap(resumeDTO.getEducation().getEducationList()));
+        }
 
         return result;
     }
 
-    private List<Map<String, String>> experiencesToListMap(List<ExperienceItemDTO> experienceList) {
-        return experienceList.stream().map(item -> {
-            Map<String, String> result = new HashMap<>();
+
+    private List<Map<String, Object>> educationToListMap(List<EducationItemDTO> educationItemDTOList) {
+        return educationItemDTOList.stream().map(item -> {
+            Map<String, Object> result = new HashMap<>();
 
             result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
-            result.put("dateTo", DateUtil.formatLocalDate(item.getDateTo(), DateUtil.PATTERN_MMM_YYYY));
+            result.put("dateTo", calculateDateTo(item.getDateTo()));
+            result.put("name", item.getName());
+            result.put("description", item.getDescription());
+
+            return result;
+        }).toList();
+    }
+
+    private List<Map<String, Object>> experiencesToListMap(List<ExperienceItemDTO> experienceList) {
+        return experienceList.stream().map(item -> {
+            Map<String, Object> result = new HashMap<>();
+
+            result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
+            result.put("dateTo", calculateDateTo(item.getDateTo()));
             result.put("jobTitle", item.getJobTitle());
             result.put("name", item.getName());
+            result.put("url", item.getUrl());
             result.put("description", item.getDescription());
             result.put("mainActivities", item.getMainActivities());
             result.put("customer", item.getCustomer());
@@ -70,9 +100,29 @@ public class ResumeServiceImpl implements ResumeService {
             result.put("backEndTechnologyList", listToString(item.getBackEndTechnologyList()));
             result.put("frontEndTechnologyList", listToString(item.getFrontEndTechnologyList()));
             result.put("toolList", listToString(item.getToolList()));
+            if (item.getUrlList() != null && !item.getUrlList().isEmpty()) {
+                result.put("urlList", urlListToListMap(item.getUrlList()));
+            }
 
             return result;
         }).toList();
+    }
+
+    private List<Map<String, String>> urlListToListMap(List<UrlDTO> urlList) {
+
+        return urlList.stream().map(item -> {
+            Map<String, String> result = new HashMap<>();
+            result.put("url", item.getUrl());
+            result.put("description", item.getDescription());
+            return result;
+        }).toList();
+    }
+
+    private String calculateDateTo(LocalDate dateTo) {
+        if (dateTo == null) {
+            return "oggi";
+        }
+        return DateUtil.formatLocalDate(dateTo, DateUtil.PATTERN_MMM_YYYY);
     }
 
     private List<Map<String, Object>> listToListMap(Map<String, String> listOfMap) {
@@ -101,6 +151,9 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     private String listToString(List<String> list) {
+        if (list.isEmpty()) {
+            return null;
+        }
         return StringUtils.join(list, '•')
                 .replace("•", " • ");
     }

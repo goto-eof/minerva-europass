@@ -7,8 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PersonalProjectsDTO {
+public class EducationDTO {
     private String title;
     private String description;
-    private List<ExperienceItemDTO> experienceList;
+    private List<EducationItemDTO> educationList;
 }

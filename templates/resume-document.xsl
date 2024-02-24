@@ -7,6 +7,7 @@
     <xsl:include href="sections/footer.xsl"/>
     <xsl:include href="sections/resume.xsl"/>
     <xsl:include href="sections/experience.xsl"/>
+    <xsl:include href="sections/education.xsl"/>
     <xsl:include href="sections/personal-projects.xsl"/>
 
     <xsl:output method="xml" version="1.0" omit-xml-declaration="no" indent="yes"/>
@@ -80,12 +81,17 @@
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
-                    <fo:block-container min-height="26cm" padding-top="0px">
+                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                         <xsl:call-template name="experience">
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
-                    <fo:block-container min-height="26cm" padding-top="0px">
+                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                        <xsl:call-template name="education">
+                            <xsl:with-param name="root" select="root"/>
+                        </xsl:call-template>
+                    </fo:block-container>
+                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                         <xsl:call-template name="personal-projects">
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
