@@ -19,7 +19,7 @@
                     </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell>
-                            <fo:block font-size="10pt" linefeed-treatment="preserve" wrap-option="wrap" text-align="justify">
+                            <fo:block font-size="9pt" linefeed-treatment="preserve" wrap-option="wrap" text-align="justify">
                                 <xsl:value-of select="$root/introductionContent"/>
                             </fo:block>
                         </fo:table-cell>

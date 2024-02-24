@@ -52,12 +52,12 @@
                                         <fo:table-row>
                                             <fo:table-cell>
                                                 <fo:block font-weight="normal" font-size="5pt" text-align="right">
-                                                    <xsl:value-of select="'(first name)'"/>
+                                                    <xsl:value-of select="'(nome)'"/>
                                                 </fo:block>
                                             </fo:table-cell>
                                             <fo:table-cell>
                                                 <fo:block font-weight="normal" font-size="5pt" text-align="left">
-                                                    <xsl:value-of select="'(last name)'"/>
+                                                    <xsl:value-of select="'(cognome)'"/>
                                                 </fo:block>
                                             </fo:table-cell>
                                         </fo:table-row>
@@ -94,7 +94,7 @@
                             <fo:block>
                                 <xsl:call-template name="generic-item-same-row">
                                     <xsl:with-param name="value" select="$root/citizenship"/>
-                                    <xsl:with-param name="title" select="'Nationality'"/>
+                                    <xsl:with-param name="title" select="'Cittadinanza'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
@@ -106,8 +106,8 @@
                                 <xsl:call-template name="generic-item-same-row-bi-value">
                                     <xsl:with-param name="value1" select="$root/birthDate"/>
                                     <xsl:with-param name="value2" select="$root/yearsOld"/>
-                                    <xsl:with-param name="value2Label" select="'years old'"/>
-                                    <xsl:with-param name="title" select="'Birth date'"/>
+                                    <xsl:with-param name="value2Label" select="'anni'"/>
+                                    <xsl:with-param name="title" select="'Data di nascita'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
@@ -118,7 +118,7 @@
                             <fo:block padding-top="10px">
                                 <xsl:call-template name="generic-map">
                                     <xsl:with-param name="items" select="$root/phoneNumberList/item"/>
-                                    <xsl:with-param name="title" select="'Phone numbers'"/>
+                                    <xsl:with-param name="title" select="'Numeri di telefono'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
@@ -129,7 +129,7 @@
                             <fo:block padding-top="10px">
                                 <xsl:call-template name="generic-map">
                                     <xsl:with-param name="items" select="$root/emailList/item"/>
-                                    <xsl:with-param name="title" select="'E-Mails'"/>
+                                    <xsl:with-param name="title" select="'E-Mail'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
@@ -140,7 +140,7 @@
                             <fo:block padding-top="10px">
                                 <xsl:call-template name="generic-map">
                                     <xsl:with-param name="items" select="$root/urlList/item"/>
-                                    <xsl:with-param name="title" select="'URLs'"/>
+                                    <xsl:with-param name="title" select="'Siti internet'"/>
                                     <xsl:with-param name="isLink" select="'true'"/>
                                 </xsl:call-template>
                             </fo:block>
@@ -152,7 +152,7 @@
                             <fo:block padding-top="10px">
                                 <xsl:call-template name="generic-item">
                                     <xsl:with-param name="value" select="$root/mainSkills"/>
-                                    <xsl:with-param name="title" select="'Main skills'"/>
+                                    <xsl:with-param name="title" select="'Competenze principali'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
@@ -163,7 +163,7 @@
                             <fo:block padding-top="10px">
                                 <xsl:call-template name="generic-item">
                                     <xsl:with-param name="value" select="$root/languages"/>
-                                    <xsl:with-param name="title" select="'Languages'"/>
+                                    <xsl:with-param name="title" select="'Lingue'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
