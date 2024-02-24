@@ -27,4 +27,5 @@ public class ResumeDTO {
     private ExperienceDTO experience;
     private PersonalProjectsDTO personalProjects;
     private EducationDTO education;
+    private OtherSkillsDTO otherSkills;
 }

@@ -67,6 +67,14 @@ public class ResumeServiceImpl implements ResumeService {
             result.put("educationList", educationToListMap(resumeDTO.getEducation().getEducationList()));
         }
 
+        if (resumeDTO.getOtherSkills() != null) {
+            result.put("otherSkillsTitle", resumeDTO.getOtherSkills().getTitle());
+            result.put("otherSkillsDescription", resumeDTO.getOtherSkills().getDescription());
+            result.put("otherSkillSocialList", listToString(resumeDTO.getOtherSkills().getSocialList()));
+            result.put("otherSkillOrganizationalList", listToString(resumeDTO.getOtherSkills().getOrganizationalList()));
+            result.put("otherSkillOtherList", listToString(resumeDTO.getOtherSkills().getOtherList()));
+        }
+
         return result;
     }
 
