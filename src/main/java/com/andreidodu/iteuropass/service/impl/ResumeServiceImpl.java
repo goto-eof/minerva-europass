@@ -5,6 +5,7 @@ import com.andreidodu.iteuropass.constants.ResumeConst;
 import com.andreidodu.iteuropass.dto.*;
 import com.andreidodu.iteuropass.service.ResumeService;
 import com.andreidodu.iteuropass.util.DateUtil;
+import com.andreidodu.iteuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
@@ -26,56 +27,56 @@ public class ResumeServiceImpl implements ResumeService {
         result.put(ResumeConst.FIELD_COUNTY, resumeDTO.getCounty());
         result.put(ResumeConst.FIELD_COUNTRY, resumeDTO.getCountry());
         result.put(ResumeConst.FIELD_CITIZENSHIP, StringUtils.join(resumeDTO.getCitizenshipList(), ',').replace(",", ", "));
-        result.put(ResumeConst.FIELD_EMAIL_LIST, listToListMap(resumeDTO.getEmailMap()));
-        result.put(ResumeConst.FIELD_URL_LIST, listToListMap(resumeDTO.getUrlMap()));
-        result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, listToListMap(resumeDTO.getPhoneNumberMap()));
+        result.put(ResumeConst.FIELD_EMAIL_LIST, ResumeUtil.listToListMap(resumeDTO.getEmailMap()));
+        result.put(ResumeConst.FIELD_URL_LIST, ResumeUtil.listToListMap(resumeDTO.getUrlMap()));
+        result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, ResumeUtil.listToListMap(resumeDTO.getPhoneNumberMap()));
         result.put(ResumeConst.FIELD_BIRTH_DATE, resumeDTO.getBirthDate().toString());
-        result.put("yearsOld", String.valueOf(calculateYearsOld(resumeDTO.getBirthDate(), LocalDate.now())));
+        result.put(ResumeConst.FIELD_YEARS_OLD, String.valueOf(DateUtil.calculateYearsOld(resumeDTO.getBirthDate(), LocalDate.now())));
 
         if (resumeDTO.getIntroduction() != null) {
-            result.put("introductionTitle", resumeDTO.getIntroduction().getTitle());
-            result.put("introductionContent", resumeDTO.getIntroduction().getContent());
+            result.put(ResumeConst.FIELD_INTRODUCTION_TITLE, resumeDTO.getIntroduction().getTitle());
+            result.put(ResumeConst.FIELD_INTRODUCTION_CONTENT, resumeDTO.getIntroduction().getContent());
         }
-        result.put("applicationName", ApplicationConst.APPLICATION_NAME);
-        result.put("generatedOn", DateUtil.formatLocalDate(LocalDate.now(), DateUtil.PATTERN_DD_MM_YYYY));
-        result.put("jobTitle", resumeDTO.getJobTitle());
+        result.put(ResumeConst.FIELD_APPLICATION_NAME, ApplicationConst.APPLICATION_NAME);
+        result.put(ResumeConst.FIELD_GENERATED_ON, DateUtil.formatLocalDate(LocalDate.now(), DateUtil.PATTERN_DD_MM_YYYY));
+        result.put(ResumeConst.FIELD_JOB_TITLE, resumeDTO.getJobTitle());
 
-        result.put("mainSkills", listToString(resumeDTO.getMainSkillList()));
-        result.put("languages", listToString(resumeDTO.getLanguageList()));
+        result.put(ResumeConst.FIELD_MAIN_SKILLS, ResumeUtil.listToString(resumeDTO.getMainSkillList()));
+        result.put(ResumeConst.FIELD_LANGUAGES, ResumeUtil.listToString(resumeDTO.getLanguageList()));
 
         if (resumeDTO.getExperience() != null) {
             resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
-            result.put("experienceTitle", resumeDTO.getExperience().getTitle());
-            result.put("experienceDescription", resumeDTO.getExperience().getDescription());
-            result.put("experienceList", experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
+            result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
+            result.put(ResumeConst.FIELD_EXPERIENCE_DESCRIPTION, resumeDTO.getExperience().getDescription());
+            result.put(ResumeConst.FIELD_EXPERIENCE_LIST, experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
         }
 
         if (resumeDTO.getPersonalProjects() != null) {
             resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
-            result.put("personalProjectsDescription", resumeDTO.getPersonalProjects().getDescription());
-            result.put("personalProjectsTitle", resumeDTO.getPersonalProjects().getTitle());
-            result.put("personalProjectList", experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
+            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
+            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_TITLE, resumeDTO.getPersonalProjects().getTitle());
+            result.put(ResumeConst.FIELD_PERSONAL_PROJECT_LIST, experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
         }
 
         if (resumeDTO.getEducation() != null) {
             resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
-            result.put("educationTitle", resumeDTO.getEducation().getTitle());
-            result.put("educationDescription", resumeDTO.getEducation().getDescription());
-            result.put("educationList", educationToListMap(resumeDTO.getEducation().getEducationList()));
+            result.put(ResumeConst.FIELD_EDUCATION_TITLE, resumeDTO.getEducation().getTitle());
+            result.put(ResumeConst.FIELD_EDUCATION_DESCRIPTION, resumeDTO.getEducation().getDescription());
+            result.put(ResumeConst.FIELD_EDUCATION_LIST, educationToListMap(resumeDTO.getEducation().getEducationList()));
         }
 
         if (resumeDTO.getOtherSkills() != null) {
-            result.put("otherSkillsTitle", resumeDTO.getOtherSkills().getTitle());
-            result.put("otherSkillsDescription", resumeDTO.getOtherSkills().getDescription());
-            result.put("otherSkillSocialList", listToString(resumeDTO.getOtherSkills().getSocialList()));
-            result.put("otherSkillOrganizationalList", listToString(resumeDTO.getOtherSkills().getOrganizationalList()));
-            result.put("otherSkillOtherList", listToString(resumeDTO.getOtherSkills().getOtherList()));
+            result.put(ResumeConst.FIELD_OTHER_SKILLS_TITLE, resumeDTO.getOtherSkills().getTitle());
+            result.put(ResumeConst.FIELD_OTHER_SKILLS_DESCRIPTION, resumeDTO.getOtherSkills().getDescription());
+            result.put(ResumeConst.FIELD_OTHER_SKILL_SOCIAL_LIST, ResumeUtil.listToString(resumeDTO.getOtherSkills().getSocialList()));
+            result.put(ResumeConst.FIELD_OTHER_SKILL_ORGANIZATIONAL_LIST, ResumeUtil.listToString(resumeDTO.getOtherSkills().getOrganizationalList()));
+            result.put(ResumeConst.FIELD_OTHER_SKILL_OTHER_LIST, ResumeUtil.listToString(resumeDTO.getOtherSkills().getOtherList()));
         }
 
         if (resumeDTO.getSkillsMatrix() != null) {
-            result.put("skillsMatrixTitle", resumeDTO.getSkillsMatrix().getTitle());
-            result.put("skillsMatrixDescription", resumeDTO.getSkillsMatrix().getDescription());
-            result.put("skillsMatrixList", skillsMatrixListToListMap(resumeDTO.getSkillsMatrix().getSkillsMatrixList()));
+            result.put(ResumeConst.FIELD_SKILLS_MATRIX_TITLE, resumeDTO.getSkillsMatrix().getTitle());
+            result.put(ResumeConst.FIELD_SKILLS_MATRIX_DESCRIPTION, resumeDTO.getSkillsMatrix().getDescription());
+            result.put(ResumeConst.FIELD_SKILLS_MATRIX_LIST, skillsMatrixListToListMap(resumeDTO.getSkillsMatrix().getSkillsMatrixList()));
 
         }
 
@@ -88,8 +89,8 @@ public class ResumeServiceImpl implements ResumeService {
 
             item.getValues().sort(String::compareTo);
 
-            result.put("key", item.getName());
-            result.put("value", listToString(item.getValues()));
+            result.put(ResumeConst.FIELD_KEY, item.getName());
+            result.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(item.getValues()));
 
             return result;
         }).toList();
@@ -100,10 +101,10 @@ public class ResumeServiceImpl implements ResumeService {
         return educationItemDTOList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
-            result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
-            result.put("dateTo", calculateDateTo(item.getDateTo()));
-            result.put("name", item.getName());
-            result.put("description", item.getDescription());
+            result.put(ResumeConst.FIELD_DATE_FROM, DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
+            result.put(ResumeConst.FIELD_DATE_TO, DateUtil.calculateDateTo(item.getDateTo()));
+            result.put(ResumeConst.FIELD_NAME, item.getName());
+            result.put(ResumeConst.FIELD_DESCRIPTION, item.getDescription());
 
             return result;
         }).toList();
@@ -113,20 +114,20 @@ public class ResumeServiceImpl implements ResumeService {
         return experienceList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
-            result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
-            result.put("dateTo", calculateDateTo(item.getDateTo()));
-            result.put("jobTitle", item.getJobTitle());
-            result.put("name", item.getName());
-            result.put("url", item.getUrl());
-            result.put("description", item.getDescription());
-            result.put("mainActivities", item.getMainActivities());
-            result.put("customer", item.getCustomer());
-            result.put("sector", item.getSector());
-            result.put("backEndTechnologyList", listToString(item.getBackEndTechnologyList()));
-            result.put("frontEndTechnologyList", listToString(item.getFrontEndTechnologyList()));
-            result.put("toolList", listToString(item.getToolList()));
+            result.put(ResumeConst.FIELD_DATE_FROM, DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
+            result.put(ResumeConst.FIELD_DATE_TO, DateUtil.calculateDateTo(item.getDateTo()));
+            result.put(ResumeConst.FIELD_JOB_TITLE, item.getJobTitle());
+            result.put(ResumeConst.FIELD_NAME, item.getName());
+            result.put(ResumeConst.FIELD_URL, item.getUrl());
+            result.put(ResumeConst.FIELD_DESCRIPTION, item.getDescription());
+            result.put(ResumeConst.FIELD_MAIN_ACTIVITIES, item.getMainActivities());
+            result.put(ResumeConst.FIELD_CUSTOMER, item.getCustomer());
+            result.put(ResumeConst.FIELD_SECTOR, item.getSector());
+            result.put(ResumeConst.FIELD_BACK_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getBackEndTechnologyList()));
+            result.put(ResumeConst.FIELD_FRONT_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getFrontEndTechnologyList()));
+            result.put(ResumeConst.FIELD_TOOL_LIST, ResumeUtil.listToString(item.getToolList()));
             if (item.getUrlList() != null && !item.getUrlList().isEmpty()) {
-                result.put("urlList", urlListToListMap(item.getUrlList()));
+                result.put(ResumeConst.FIELD_URL_LIST, urlListToListMap(item.getUrlList()));
             }
 
             return result;
@@ -137,56 +138,10 @@ public class ResumeServiceImpl implements ResumeService {
 
         return urlList.stream().map(item -> {
             Map<String, String> result = new HashMap<>();
-            result.put("url", item.getUrl());
-            result.put("description", item.getDescription());
+            result.put(ResumeConst.FIELD_URL, item.getUrl());
+            result.put(ResumeConst.FIELD_DESCRIPTION, item.getDescription());
             return result;
         }).toList();
     }
-
-    private String calculateDateTo(LocalDate dateTo) {
-        if (dateTo == null) {
-            return "oggi";
-        }
-        return DateUtil.formatLocalDate(dateTo, DateUtil.PATTERN_MMM_YYYY);
-    }
-
-    private List<Map<String, Object>> listToListMap(Map<String, String> listOfMap) {
-        List<Map<String, Object>> result = new ArrayList<>();
-
-        for (String key : listOfMap.keySet()) {
-            Map<String, Object> map = new HashMap<>();
-            map.put(ResumeConst.FIELD_NAME, key);
-            map.put(ResumeConst.FIELD_VALUE, listOfMap.get(key));
-            result.add(map);
-        }
-
-        return result;
-    }
-
-    private List<Map<String, Object>> listToList(List<String> list) {
-        List<Map<String, Object>> result = new ArrayList<>();
-
-        for (String item : list) {
-            Map<String, Object> map = new HashMap<>();
-            map.put(ResumeConst.FIELD_VALUE, item);
-            result.add(map);
-        }
-
-        return result;
-    }
-
-    private String listToString(List<String> list) {
-        if (list.isEmpty()) {
-            return null;
-        }
-        return StringUtils.join(list, '•')
-                .replace("•", " • ");
-    }
-
-    private int calculateYearsOld(LocalDate from, LocalDate to) {
-        return from.until(to)
-                .getYears();
-    }
-
 
 }
