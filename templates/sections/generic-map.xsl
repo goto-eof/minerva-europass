@@ -32,7 +32,7 @@
                             <fo:table-cell number-columns-spanned="2">
                                 <fo:block padding-top="4px">
                                     <xsl:if test="$isLink = 'true'">
-                                        <fo:basic-link external-destination="value">
+                                        <fo:basic-link color="royalblue" external-destination="value">
                                             <xsl:value-of select="value"/>
                                         </fo:basic-link>
                                     </xsl:if>
