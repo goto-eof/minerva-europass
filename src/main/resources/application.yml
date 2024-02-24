@@ -1,5 +1,5 @@
 com:
   andreidodu:
-    iteuropass:
+    minerva-europass:
       templates-directory: "templates"
       resume-template-name: "resume-document.xsl"

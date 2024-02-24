@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class TemplateConfiguration {
 
-    @Value("${com.andreidodu.iteuropass.templates-directory}")
+    @Value("${com.andreidodu.minerva-europass.templates-directory}")
     private String templatesDirectory;
 
-    @Value("${com.andreidodu.iteuropass.resume-template-name}")
+    @Value("${com.andreidodu.minerva-europass.resume-template-name}")
     private String resumeTemplateName;
 }
