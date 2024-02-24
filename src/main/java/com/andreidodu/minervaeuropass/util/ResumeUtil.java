@@ -37,7 +37,7 @@ public class ResumeUtil {
                 .map((ExperienceItemDTO::getFrontEndTechnologyList))
                 .toList();
         Map<String, Integer> countFrontEndTechnologies = calculateMap(allFrontEndTechnologies);
-        return calculateTopXTechnologies(countFrontEndTechnologies, 5);
+        return calculateTopXTechnologies(countFrontEndTechnologies, ResumeConst.TOP_X_TECHNOLOGIES);
     }
 
     public static List<String> calculateTopXBackEndPersonalProjectsTechnologies(ResumeDTO resumeDTO) {
@@ -48,7 +48,7 @@ public class ResumeUtil {
                 .map((ExperienceItemDTO::getBackEndTechnologyList))
                 .toList();
         Map<String, Integer> countBackEndTechnologies = calculateMap(allBackEndTechnologies);
-        return calculateTopXTechnologies(countBackEndTechnologies, 5);
+        return calculateTopXTechnologies(countBackEndTechnologies, ResumeConst.TOP_X_TECHNOLOGIES);
     }
 
 
@@ -60,7 +60,7 @@ public class ResumeUtil {
                 .map((ExperienceItemDTO::getFrontEndTechnologyList))
                 .toList();
         Map<String, Integer> countFrontEndTechnologies = calculateMap(allFrontEndTechnologies);
-        return calculateTopXTechnologies(countFrontEndTechnologies, 5);
+        return calculateTopXTechnologies(countFrontEndTechnologies, ResumeConst.TOP_X_TECHNOLOGIES);
     }
 
     public static List<String> calculateTopXBackEndExperienceTechnologies(ResumeDTO resumeDTO) {
@@ -71,7 +71,7 @@ public class ResumeUtil {
                 .map((ExperienceItemDTO::getBackEndTechnologyList))
                 .toList();
         Map<String, Integer> countBackEndTechnologies = calculateMap(allBackEndTechnologies);
-        return calculateTopXTechnologies(countBackEndTechnologies, 5);
+        return calculateTopXTechnologies(countBackEndTechnologies, ResumeConst.TOP_X_TECHNOLOGIES);
     }
 
     private static List<String> calculateTopXTechnologies(Map<String, Integer> countBackEndTechnologies, int limit) {
