@@ -8,6 +8,7 @@
     <xsl:include href="sections/resume.xsl"/>
     <xsl:include href="sections/experience.xsl"/>
     <xsl:include href="sections/education.xsl"/>
+    <xsl:include href="sections/skills-matrix.xsl"/>
     <xsl:include href="sections/other-skills.xsl"/>
     <xsl:include href="sections/personal-projects.xsl"/>
 
@@ -94,6 +95,11 @@
                     </fo:block-container>
                     <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                         <xsl:call-template name="other-skills">
+                            <xsl:with-param name="root" select="root"/>
+                        </xsl:call-template>
+                    </fo:block-container>
+                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                        <xsl:call-template name="skills-matrix">
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>

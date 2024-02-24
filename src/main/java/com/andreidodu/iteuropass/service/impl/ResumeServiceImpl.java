@@ -2,10 +2,7 @@ package com.andreidodu.iteuropass.service.impl;
 
 import com.andreidodu.iteuropass.constants.ApplicationConst;
 import com.andreidodu.iteuropass.constants.ResumeConst;
-import com.andreidodu.iteuropass.dto.EducationItemDTO;
-import com.andreidodu.iteuropass.dto.ExperienceItemDTO;
-import com.andreidodu.iteuropass.dto.ResumeDTO;
-import com.andreidodu.iteuropass.dto.UrlDTO;
+import com.andreidodu.iteuropass.dto.*;
 import com.andreidodu.iteuropass.service.ResumeService;
 import com.andreidodu.iteuropass.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -75,7 +72,27 @@ public class ResumeServiceImpl implements ResumeService {
             result.put("otherSkillOtherList", listToString(resumeDTO.getOtherSkills().getOtherList()));
         }
 
+        if (resumeDTO.getSkillsMatrix() != null) {
+            result.put("skillsMatrixTitle", resumeDTO.getSkillsMatrix().getTitle());
+            result.put("skillsMatrixDescription", resumeDTO.getSkillsMatrix().getDescription());
+            result.put("skillsMatrixList", skillsMatrixListToListMap(resumeDTO.getSkillsMatrix().getSkillsMatrixList()));
+
+        }
+
         return result;
+    }
+
+    private List<Map<String, Object>> skillsMatrixListToListMap(List<SkillMatrixItemDTO> skillsMatrixList) {
+        return skillsMatrixList.stream().map(item -> {
+            Map<String, Object> result = new HashMap<>();
+
+            item.getValues().sort(String::compareTo);
+
+            result.put("key", item.getName());
+            result.put("value", listToString(item.getValues()));
+
+            return result;
+        }).toList();
     }
 
 
