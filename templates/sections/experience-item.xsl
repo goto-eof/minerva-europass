@@ -76,7 +76,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Nome progetto'"/>
+                                    <xsl:value-of select="'Nome'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
