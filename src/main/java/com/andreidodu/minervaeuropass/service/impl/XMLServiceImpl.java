@@ -1,6 +1,7 @@
 package com.andreidodu.minervaeuropass.service.impl;
 
 
+import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.service.XMLService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class XMLServiceImpl implements XMLService {
 
+
     @Override
     public InputStream createXMLFromMap(Map<String, Object> map) {
         try {
@@ -36,7 +38,7 @@ public class XMLServiceImpl implements XMLService {
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
             Document document = documentBuilder.newDocument();
 
-            Element root = createAndAppendNode(document, document, "root");
+            Element root = createAndAppendNode(document, document, ResumeConst.FIELD_GLOBAL_ROOT);
             createNodesFromMapRecursively(map, root, document);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -62,7 +64,7 @@ public class XMLServiceImpl implements XMLService {
                 Element items = createAndAppendNode(root, document, key);
                 List<Map<String, Object>> itemsMap = (List<Map<String, Object>>) map.get(key);
                 for (Map<String, Object> nestedMap : itemsMap) {
-                    Element item = createAndAppendNode(items, document, "item");
+                    Element item = createAndAppendNode(items, document, ResumeConst.FIELD_GLOBAL_ITEM);
                     createNodesFromMapRecursively(nestedMap, item, document);
                 }
             } else if (map.get(key) instanceof Map<?, ?>) {
