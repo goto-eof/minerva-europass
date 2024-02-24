@@ -4,6 +4,7 @@
 
     <xsl:template name="generic-map">
         <xsl:param name="items" select="'default-value'"/>
+        <xsl:param name="isLink" select="'false'"/>
         <xsl:param name="title" select="'default-value'"/>
         <fo:block text-align="left" font-size="10pt">
 
@@ -30,7 +31,14 @@
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="2">
                                 <fo:block padding-top="4px">
-                                    <xsl:value-of select="value"/>
+                                    <xsl:if test="$isLink = 'true'">
+                                        <fo:basic-link external-destination="value">
+                                            <xsl:value-of select="value"/>
+                                        </fo:basic-link>
+                                    </xsl:if>
+                                    <xsl:if test="$isLink = 'false'">
+                                        <xsl:value-of select="value"/>
+                                    </xsl:if>
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>

@@ -49,6 +49,8 @@ public class ResumeServiceImpl implements ResumeService {
 
         result.put("experienceTitle", resumeDTO.getExperience().getTitle());
         result.put("experienceList", experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
+        result.put("personalProjectsTitle", resumeDTO.getPersonalProjects().getTitle());
+        result.put("personalProjectList", experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
 
         return result;
     }
@@ -60,6 +62,7 @@ public class ResumeServiceImpl implements ResumeService {
             result.put("dateFrom", DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
             result.put("dateTo", DateUtil.formatLocalDate(item.getDateTo(), DateUtil.PATTERN_MMM_YYYY));
             result.put("jobTitle", item.getJobTitle());
+            result.put("name", item.getName());
             result.put("description", item.getDescription());
             result.put("mainActivities", item.getMainActivities());
             result.put("customer", item.getCustomer());

@@ -2,9 +2,8 @@
 <xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
-    <xsl:include href="experience-item.xsl"/>
 
-    <xsl:template name="experience">
+    <xsl:template name="personal-projects">
         <xsl:param name="root" select="'default-value'"/>
         <fo:block font-size="10pt">
             <fo:table>
@@ -20,12 +19,12 @@
                                                          content-width="32px"/>
                                 </fo:block>
                                 <fo:block font-size="16pt" padding-bottom="10px" text-align="center">
-                                    <xsl:value-of select="$root/experienceTitle"/>
+                                    <xsl:value-of select="$root/personalProjectsTitle"/>
                                 </fo:block>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
-                    <xsl:for-each select="$root/experienceList/item">
+                    <xsl:for-each select="$root/personalProjectList/item">
                         <fo:table-row>
                             <fo:table-cell>
                                 <fo:block wrap-option="wrap" text-align="justify">

@@ -12,6 +12,7 @@ public class ExperienceItemDTO {
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private String jobTitle;
+    private String name;
     private String description;
     private String mainActivities;
     private String customer;

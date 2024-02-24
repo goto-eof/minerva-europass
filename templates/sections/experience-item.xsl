@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
-    <xsl:template name="job-experience">
+    <xsl:template name="experience-item">
         <xsl:param name="item" select="'default-value'"/>
         <xsl:param name="title" select="'default-value'"/>
         <fo:block text-align="left" font-size="10pt">
@@ -51,6 +51,22 @@
                         </fo:table-cell>
                     </fo:table-row>
 
+
+                    <xsl:if test="$item/name">
+                        <fo:table-row>
+                            <fo:table-cell margin-left="5px" number-columns-spanned="1"
+                                           background-color="rgb(240,240,240)">
+                                <fo:block padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="'Name'"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell number-columns-spanned="4">
+                                <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="$item/name"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
 
                     <fo:table-row>
                         <fo:table-cell margin-left="5px" number-columns-spanned="1" background-color="rgb(240,240,240)">
@@ -120,31 +136,37 @@
                     </fo:table-row>
 
 
-                    <fo:table-row>
-                        <fo:table-cell margin-left="5px" number-columns-spanned="1" background-color="rgb(240,240,240)">
-                            <fo:block padding-top="4px" padding-bottom="4px">
-                                <xsl:value-of select="'Customer'"/>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell number-columns-spanned="4">
-                            <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
-                                <xsl:value-of select="$item/customer"/>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
+                    <xsl:if test="$item/customer">
+                        <fo:table-row>
+                            <fo:table-cell margin-left="5px" number-columns-spanned="1"
+                                           background-color="rgb(240,240,240)">
+                                <fo:block padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="'Customer'"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell number-columns-spanned="4">
+                                <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="$item/customer"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
 
-                    <fo:table-row>
-                        <fo:table-cell margin-left="5px" number-columns-spanned="1" background-color="rgb(240,240,240)">
-                            <fo:block padding-top="4px" padding-bottom="4px">
-                                <xsl:value-of select="'Sector'"/>
-                            </fo:block>
-                        </fo:table-cell>
-                        <fo:table-cell number-columns-spanned="4">
-                            <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
-                                <xsl:value-of select="$item/sector"/>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
+                    <xsl:if test="$item/sector">
+                        <fo:table-row>
+                            <fo:table-cell margin-left="5px" number-columns-spanned="1"
+                                           background-color="rgb(240,240,240)">
+                                <fo:block padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="'Sector'"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell number-columns-spanned="4">
+                                <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="$item/sector"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
 
                 </fo:table-body>
             </fo:table>

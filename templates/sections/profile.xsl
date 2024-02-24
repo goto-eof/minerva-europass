@@ -141,6 +141,7 @@
                                 <xsl:call-template name="generic-map">
                                     <xsl:with-param name="items" select="$root/urlList/item"/>
                                     <xsl:with-param name="title" select="'URLs'"/>
+                                    <xsl:with-param name="isLink" select="'true'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
