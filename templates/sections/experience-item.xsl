@@ -26,7 +26,7 @@
                     <fo:table-row background-color="rgb(240,240,240)">
                         <fo:table-cell number-columns-spanned="1">
                             <fo:block padding-top="4px" padding-bottom="4px" margin-left="5px">
-                                <xsl:value-of select="'Dates'"/>
+                                <xsl:value-of select="'Date'"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell number-columns-spanned="4">
@@ -43,7 +43,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Job title'"/>
+                                    <xsl:value-of select="'Posizioni ricoperte'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -59,7 +59,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Main activities'"/>
+                                    <xsl:value-of select="'Principali attività'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -76,7 +76,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Name'"/>
+                                    <xsl:value-of select="'Nome progetto'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -90,7 +90,7 @@
                     <fo:table-row>
                         <fo:table-cell margin-left="5px" number-columns-spanned="1" background-color="rgb(240,240,240)">
                             <fo:block padding-top="4px" padding-bottom="4px">
-                                <xsl:value-of select="'Description'"/>
+                                <xsl:value-of select="'Descrizione'"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell number-columns-spanned="4">
@@ -105,7 +105,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Front-end technologies'"/>
+                                    <xsl:value-of select="'Tecnologie (front-end)'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -121,7 +121,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Back-end technologies'"/>
+                                    <xsl:value-of select="'Tecnologie (back-end)'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -137,7 +137,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Tools'"/>
+                                    <xsl:value-of select="'Strumenti'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -154,7 +154,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Customer'"/>
+                                    <xsl:value-of select="'Cliente'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -170,7 +170,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Sector'"/>
+                                    <xsl:value-of select="'Settore'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
