@@ -80,8 +80,49 @@ public class ResumeServiceImpl implements ResumeService {
 
         }
 
+        List<Map<String, String>> res = calculateTopXTechnologiesFromExperience(resumeDTO);
+        result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE, res);
+
+        res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
+        result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
+
         return result;
     }
+
+    private List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {
+        List<Map<String, String>> res = new ArrayList<>();
+
+        Map<String, String> topX = new HashMap<>();
+        List<String> getTopXBackEndTechnologies = ResumeUtil.calculateTopXBackEndPersonalProjectsTechnologies(resumeDTO);
+        topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_BACK_END);
+        topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXBackEndTechnologies));
+        res.add(topX);
+
+        topX = new HashMap<>();
+        List<String> getTopXFrontEndTechnologies = ResumeUtil.calculateTopXFrontEndPersonalProjectsTechnologies(resumeDTO);
+        topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_FRONT_END);
+        topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXFrontEndTechnologies));
+        res.add(topX);
+        return res;
+    }
+
+    private List<Map<String, String>> calculateTopXTechnologiesFromExperience(ResumeDTO resumeDTO) {
+        List<Map<String, String>> res = new ArrayList<>();
+
+        Map<String, String> topX = new HashMap<>();
+        List<String> getTopXBackEndTechnologies = ResumeUtil.calculateTopXBackEndExperienceTechnologies(resumeDTO);
+        topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_BACK_END);
+        topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXBackEndTechnologies));
+        res.add(topX);
+
+        topX = new HashMap<>();
+        List<String> getTopXFrontEndTechnologies = ResumeUtil.calculateTopXFrontEndExperienceTechnologies(resumeDTO);
+        topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_FRONT_END);
+        topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXFrontEndTechnologies));
+        res.add(topX);
+        return res;
+    }
+
 
     private List<Map<String, Object>> skillsMatrixListToListMap(List<SkillMatrixItemDTO> skillsMatrixList) {
         return skillsMatrixList.stream().map(item -> {

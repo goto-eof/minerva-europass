@@ -6,6 +6,7 @@
     <xsl:include href="sections/header.xsl"/>
     <xsl:include href="sections/footer.xsl"/>
     <xsl:include href="sections/resume.xsl"/>
+    <xsl:include href="sections/frequency.xsl"/>
     <xsl:include href="sections/experience.xsl"/>
     <xsl:include href="sections/education.xsl"/>
     <xsl:include href="sections/skills-matrix.xsl"/>
@@ -88,12 +89,18 @@
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
+                    <fo:block-container min-height="26cm" padding-top="0px">
+                        <xsl:call-template name="frequency">
+                            <xsl:with-param name="title" select="'Riepilogo - Frequenza tecnologie in Esperienze lavorative'"/>
+                            <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
+                        </xsl:call-template>
+                    </fo:block-container>
                     <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                         <xsl:call-template name="education">
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
-                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                    <fo:block-container min-height="26cm" padding-top="20px">
                         <xsl:call-template name="other-skills">
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
@@ -106,6 +113,12 @@
                     <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                         <xsl:call-template name="personal-projects">
                             <xsl:with-param name="root" select="root"/>
+                        </xsl:call-template>
+                    </fo:block-container>
+                    <fo:block-container min-height="26cm" padding-top="0px">
+                        <xsl:call-template name="frequency">
+                            <xsl:with-param name="title" select="'Riepilogo - Frequenza tecnologie in Progetti personali'"/>
+                            <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
                         </xsl:call-template>
                     </fo:block-container>
                 </fo:flow>

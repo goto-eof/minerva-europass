@@ -51,4 +51,8 @@ public interface ResumeConst {
     String FIELD_TOOL_LIST = "toolList";
     String FIELD_GLOBAL_ROOT = "root";
     String FIELD_GLOBAL_ITEM = "item";
+    String VALUE_BACK_END = "back-end";
+    String VALUE_FRONT_END = "front-end";
+    String KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE = "topXTechnologiesFromExperience";
+    String KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS = "topXTechnologiesFromPersonalProjects";
 }
