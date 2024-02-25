@@ -34,9 +34,9 @@
                                 <xsl:value-of select="$item/dateFrom"/>
                                 <xsl:value-of select="' - '"/>
                                 <xsl:value-of select="$item/dateTo"/>
-                                <xsl:if test="$item/timeAgo">
+                                <xsl:if test="$item/jobDuration">
                                     <xsl:value-of select="' • '"/>
-                                    <xsl:value-of select="$item/timeAgo"/>
+                                    <xsl:value-of select="$item/jobDuration"/>
                                 </xsl:if>
                             </fo:block>
                         </fo:table-cell>

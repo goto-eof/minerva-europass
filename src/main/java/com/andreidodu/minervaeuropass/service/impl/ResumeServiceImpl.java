@@ -23,7 +23,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
 
-    public static final String FIELD_TIME_AGO = "timeAgo";
+    public static final String FIELD_JOB_DURATION = "jobDuration";
     private final ImageConfiguration imageConfiguration;
     private final PdfGeneratorService pdfGeneratorService;
     private final TemplateConfiguration templateConfiguration;
@@ -207,7 +207,7 @@ public class ResumeServiceImpl implements ResumeService {
             int monthsBetween = DateUtil.calculateMonthsBetween(item.getDateFrom(), item.getDateTo());
             int yearsBetween = DateUtil.calculateYearsBetween(item.getDateFrom(), item.getDateTo());
 
-            result.put(FIELD_TIME_AGO, ResumeUtil.calculateTimeAgoString(yearsBetween, monthsBetween + 1));
+            result.put(FIELD_JOB_DURATION, ResumeUtil.calculateTimeAgoString(yearsBetween, monthsBetween + 1));
 
             return result;
         }).toList();
