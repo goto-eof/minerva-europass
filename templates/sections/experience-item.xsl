@@ -167,17 +167,17 @@
                     </xsl:if>
 
 
-                    <xsl:if test="$item/customer">
+                    <xsl:if test="$item/company">
                         <fo:table-row>
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Cliente'"/>
+                                    <xsl:value-of select="'Azienda'"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
                                 <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="$item/customer"/>
+                                    <xsl:value-of select="$item/company"/>
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>

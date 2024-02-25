@@ -107,6 +107,8 @@ public class ResumeServiceImpl implements ResumeService {
         String path = saveImage(resumeDTO.getImage());
         result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
+        result.put("yearsOfExperience", ResumeUtil.calculateYearsExperience(resumeDTO.getExperience()));
+
         return result;
     }
 
@@ -193,7 +195,7 @@ public class ResumeServiceImpl implements ResumeService {
             result.put(ResumeConst.FIELD_URL, item.getUrl());
             result.put(ResumeConst.FIELD_DESCRIPTION, item.getDescription());
             result.put(ResumeConst.FIELD_MAIN_ACTIVITIES, item.getMainActivities());
-            result.put(ResumeConst.FIELD_CUSTOMER, item.getCustomer());
+            result.put(ResumeConst.FIELD_COMPANY, item.getCustomer());
             result.put(ResumeConst.FIELD_SECTOR, item.getSector());
             result.put(ResumeConst.FIELD_IS_WORKED_AS_FRONT_END_DEVELOPER, ResumeUtil.toBooleanString(item.getIsWorkedAsFrontEndDeveloper()));
             result.put(ResumeConst.FIELD_IS_WORKED_AS_BACK_END_DEVELOPER, ResumeUtil.toBooleanString(item.getIsWorkedAsBackEndDeveloper()));

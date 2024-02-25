@@ -6,6 +6,7 @@ import com.andreidodu.minervaeuropass.dto.ExperienceItemDTO;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
 import org.apache.tomcat.util.buf.StringUtils;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class ResumeUtil {
@@ -141,5 +142,37 @@ public class ResumeUtil {
             }
         }
         return sb.toString();
+    }
+
+
+    public static String calculateYearsExperience(ExperienceDTO experienceDTO) {
+        Map<String, Boolean> map = new HashMap<>();
+        experienceDTO.getExperienceList().forEach(experienceItemDTO -> {
+            fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
+        });
+        int size = map.keySet().size();
+        int years = size / 12;
+        String result = "" + years;
+        int months = size % 12;
+        if (months > 0) {
+            result += "+";
+        }
+        if (years > 1) {
+            result += " " + ResumeConst.VALUE_YEARS;
+        } else {
+            result += " " + ResumeConst.VALUE_YEAR;
+        }
+        return result;
+    }
+
+    private static void fillMap(LocalDate dateFrom, LocalDate dateTo, Map<String, Boolean> map) {
+        LocalDate start = dateFrom;
+        if (dateTo == null) {
+            dateTo = LocalDate.now();
+        }
+        while (start.isBefore(dateTo) || (start.getYear() == dateTo.getYear() && start.getMonth() == dateTo.getMonth())) {
+            map.put(start.getYear() + "" + start.getMonth(), true);
+            start = start.plusMonths(1);
+        }
     }
 }

@@ -45,7 +45,7 @@ public interface ResumeConst {
     String FIELD_DESCRIPTION = "description";
     String FIELD_URL = "url";
     String FIELD_MAIN_ACTIVITIES = "mainActivities";
-    String FIELD_CUSTOMER = "customer";
+    String FIELD_COMPANY = "company";
     String FIELD_SECTOR = "sector";
     String FIELD_BACK_END_TECHNOLOGY_LIST = "backEndTechnologyList";
     String FIELD_FRONT_END_TECHNOLOGY_LIST = "frontEndTechnologyList";

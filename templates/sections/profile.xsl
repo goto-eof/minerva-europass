@@ -91,6 +91,7 @@
                         </fo:table-cell>
                     </fo:table-row>
 
+
                     <fo:table-row>
                         <fo:table-cell padding-top="4px">
                             <fo:block>
@@ -110,6 +111,17 @@
                                     <xsl:with-param name="value2" select="$root/yearsOld"/>
                                     <xsl:with-param name="value2Label" select="'anni'"/>
                                     <xsl:with-param name="title" select="'Data di nascita'"/>
+                                </xsl:call-template>
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+
+                    <fo:table-row>
+                        <fo:table-cell padding-top="4px">
+                            <fo:block>
+                                <xsl:call-template name="generic-item-same-row">
+                                    <xsl:with-param name="value" select="$root/yearsOfExperience"/>
+                                    <xsl:with-param name="title" select="'Esperienza nel settore'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
