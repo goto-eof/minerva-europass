@@ -37,6 +37,16 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public Map<String, Object> processResumeAndReturnMap(ResumeDTO resumeDTO) throws IOException {
         Map<String, Object> result = new HashMap<>();
+        fillUpProfile(resumeDTO, result);
+        fillUpExperience(resumeDTO, result);
+        fillUpPersonalProjects(resumeDTO, result);
+        fillUpEducation(resumeDTO, result);
+        fillUpOtherSkills(resumeDTO, result);
+        fillUpSkillsMatrix(resumeDTO, result);
+        return result;
+    }
+
+    private void fillUpProfile(ResumeDTO resumeDTO, Map<String, Object> result) throws IOException {
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
         result.put(ResumeConst.FIELD_LAST_NAME, resumeDTO.getLastName());
         result.put(ResumeConst.FIELD_CITY, resumeDTO.getCity());
@@ -60,27 +70,22 @@ public class ResumeServiceImpl implements ResumeService {
         result.put(ResumeConst.FIELD_MAIN_SKILLS, ResumeUtil.listToString(resumeDTO.getMainSkillList()));
         result.put(ResumeConst.FIELD_LANGUAGES, ResumeUtil.listToString(resumeDTO.getLanguageList()));
 
-        if (resumeDTO.getExperience() != null) {
-            resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
-            result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
-            result.put(ResumeConst.FIELD_EXPERIENCE_DESCRIPTION, resumeDTO.getExperience().getDescription());
-            result.put(ResumeConst.FIELD_EXPERIENCE_LIST, experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
-        }
+        String path = fileUtil.saveImage(resumeDTO.getImage());
+        result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
-        if (resumeDTO.getPersonalProjects() != null) {
-            resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
-            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
-            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_TITLE, resumeDTO.getPersonalProjects().getTitle());
-            result.put(ResumeConst.FIELD_PERSONAL_PROJECT_LIST, experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
-        }
+        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, ResumeUtil.calculateYearsExperience(resumeDTO.getExperience()));
+    }
 
-        if (resumeDTO.getEducation() != null) {
-            resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
-            result.put(ResumeConst.FIELD_EDUCATION_TITLE, resumeDTO.getEducation().getTitle());
-            result.put(ResumeConst.FIELD_EDUCATION_DESCRIPTION, resumeDTO.getEducation().getDescription());
-            result.put(ResumeConst.FIELD_EDUCATION_LIST, educationToListMap(resumeDTO.getEducation().getEducationList()));
-        }
+    private void fillUpSkillsMatrix(ResumeDTO resumeDTO, Map<String, Object> result) {
+        if (resumeDTO.getSkillsMatrix() != null) {
+            result.put(ResumeConst.FIELD_SKILLS_MATRIX_TITLE, resumeDTO.getSkillsMatrix().getTitle());
+            result.put(ResumeConst.FIELD_SKILLS_MATRIX_DESCRIPTION, resumeDTO.getSkillsMatrix().getDescription());
+            result.put(ResumeConst.FIELD_SKILLS_MATRIX_LIST, skillsMatrixListToListMap(resumeDTO.getSkillsMatrix().getSkillsMatrixList()));
 
+        }
+    }
+
+    private static void fillUpOtherSkills(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getOtherSkills() != null) {
             result.put(ResumeConst.FIELD_OTHER_SKILLS_TITLE, resumeDTO.getOtherSkills().getTitle());
             result.put(ResumeConst.FIELD_OTHER_SKILLS_DESCRIPTION, resumeDTO.getOtherSkills().getDescription());
@@ -88,26 +93,37 @@ public class ResumeServiceImpl implements ResumeService {
             result.put(ResumeConst.FIELD_OTHER_SKILL_ORGANIZATIONAL_LIST, ResumeUtil.listToString(resumeDTO.getOtherSkills().getOrganizationalList()));
             result.put(ResumeConst.FIELD_OTHER_SKILL_OTHER_LIST, ResumeUtil.listToString(resumeDTO.getOtherSkills().getOtherList()));
         }
+    }
 
-        if (resumeDTO.getSkillsMatrix() != null) {
-            result.put(ResumeConst.FIELD_SKILLS_MATRIX_TITLE, resumeDTO.getSkillsMatrix().getTitle());
-            result.put(ResumeConst.FIELD_SKILLS_MATRIX_DESCRIPTION, resumeDTO.getSkillsMatrix().getDescription());
-            result.put(ResumeConst.FIELD_SKILLS_MATRIX_LIST, skillsMatrixListToListMap(resumeDTO.getSkillsMatrix().getSkillsMatrixList()));
-
+    private void fillUpEducation(ResumeDTO resumeDTO, Map<String, Object> result) {
+        if (resumeDTO.getEducation() != null) {
+            resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
+            result.put(ResumeConst.FIELD_EDUCATION_TITLE, resumeDTO.getEducation().getTitle());
+            result.put(ResumeConst.FIELD_EDUCATION_DESCRIPTION, resumeDTO.getEducation().getDescription());
+            result.put(ResumeConst.FIELD_EDUCATION_LIST, educationToListMap(resumeDTO.getEducation().getEducationList()));
         }
+    }
 
-        List<Map<String, String>> res = calculateTopXTechnologiesFromExperience(resumeDTO);
-        result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE, res);
+    private void fillUpPersonalProjects(ResumeDTO resumeDTO, Map<String, Object> result) {
+        if (resumeDTO.getPersonalProjects() != null) {
+            resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
+            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_TITLE, resumeDTO.getPersonalProjects().getTitle());
+            result.put(ResumeConst.FIELD_PERSONAL_PROJECT_LIST, experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
+            List<Map<String, String>> res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
+            result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
+        }
+    }
 
-        res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
-        result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
-
-        String path = fileUtil.saveImage(resumeDTO.getImage());
-        result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
-
-        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, ResumeUtil.calculateYearsExperience(resumeDTO.getExperience()));
-
-        return result;
+    private void fillUpExperience(ResumeDTO resumeDTO, Map<String, Object> result) {
+        if (resumeDTO.getExperience() != null) {
+            resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+            result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
+            result.put(ResumeConst.FIELD_EXPERIENCE_DESCRIPTION, resumeDTO.getExperience().getDescription());
+            result.put(ResumeConst.FIELD_EXPERIENCE_LIST, experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
+            List<Map<String, String>> res = calculateTopXTechnologiesFromExperience(resumeDTO);
+            result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE, res);
+        }
     }
 
 
