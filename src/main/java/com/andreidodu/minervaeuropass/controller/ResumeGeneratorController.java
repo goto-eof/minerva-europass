@@ -1,9 +1,6 @@
 package com.andreidodu.minervaeuropass.controller;
 
-import com.andreidodu.minervaeuropass.constants.ResumeConst;
-import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
-import com.andreidodu.minervaeuropass.service.PdfGeneratorService;
 import com.andreidodu.minervaeuropass.service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -14,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/resume")
