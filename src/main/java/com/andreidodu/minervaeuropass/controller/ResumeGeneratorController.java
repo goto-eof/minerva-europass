@@ -1,5 +1,6 @@
 package com.andreidodu.minervaeuropass.controller;
 
+import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
 import com.andreidodu.minervaeuropass.service.PdfGeneratorService;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 
 @RestController
@@ -22,13 +25,10 @@ import java.util.Map;
 public class ResumeGeneratorController {
 
     final private ResumeService resumeService;
-    final private PdfGeneratorService pdfGeneratorService;
-    final private TemplateConfiguration templateConfiguration;
 
     @PostMapping("/generate")
     public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO) throws IOException {
-        Map<String, Object> resumeMap = resumeService.processResumeAndReturnMap(resumeDTO);
-        byte[] pdfBytes = this.pdfGeneratorService.generatePDF(templateConfiguration.getResumeTemplateName(), resumeMap);
+        byte[] pdfBytes = resumeService.generateBytes(resumeDTO);
         HttpHeaders headers = prepareHeadersForPDFDownload(pdfBytes);
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }

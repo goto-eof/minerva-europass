@@ -3,7 +3,9 @@ package com.andreidodu.minervaeuropass.service.impl;
 import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ImageConfiguration;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
+import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.*;
+import com.andreidodu.minervaeuropass.service.PdfGeneratorService;
 import com.andreidodu.minervaeuropass.service.ResumeService;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
@@ -21,10 +23,19 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
     private final ImageConfiguration imageConfiguration;
+    private final PdfGeneratorService pdfGeneratorService;
+    private final TemplateConfiguration templateConfiguration;
+
+    @Override
+    public byte[] generateBytes(ResumeDTO resumeDTO) throws IOException {
+        Map<String, Object> resumeMap = this.processResumeAndReturnMap(resumeDTO);
+        byte[] pdfBytes = this.pdfGeneratorService.generatePDF(templateConfiguration.getResumeTemplateName(), resumeMap);
+        Files.delete(new File((String) resumeMap.get(ResumeConst.FIELD_PROFILE_PICTURE_PATH)).toPath());
+        return pdfBytes;
+    }
 
     @Override
     public Map<String, Object> processResumeAndReturnMap(ResumeDTO resumeDTO) throws IOException {
-        saveImage(resumeDTO.getImage());
         Map<String, Object> result = new HashMap<>();
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
         result.put(ResumeConst.FIELD_LAST_NAME, resumeDTO.getLastName());
@@ -91,17 +102,20 @@ public class ResumeServiceImpl implements ResumeService {
         res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
         result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
 
-        // TODO find a solution for unique image name
-        result.put("profilePicture", this.imageConfiguration.getImagePath() + "/image.png");
+        String path = saveImage(resumeDTO.getImage());
+        result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
         return result;
     }
 
-    private void saveImage(String base64string) throws IOException {
+    private String saveImage(String base64string) throws IOException {
         String base64Image = base64string.split(",")[1];
         byte[] imageByte = Base64.getDecoder().decode(base64Image);
-        // TODO find a solution for unique image name
-        Files.write(new File(imageConfiguration.getImagePath() + "/image.png").toPath(), imageByte);
+        Date dateTime = new Date();
+        String filename = dateTime.getTime() + ".png";
+        String path = imageConfiguration.getImagePath() + "/" + filename;
+        Files.write(new File(path).toPath(), imageByte);
+        return path;
     }
 
     private List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {
