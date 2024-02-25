@@ -36,8 +36,8 @@ public class ResumeServiceImpl implements ResumeService {
         byte[] pdfBytes = templateStrategyList
                 .stream()
                 .filter(strategy -> strategy.accept(templateName))
-                .map(templateStrategy -> templateStrategy.generate(resumeMap))
                 .findFirst()
+                .map(templateStrategy -> templateStrategy.generate(resumeMap))
                 .orElseThrow(() -> new ApplicationException("Strategy not found"));
 
         Files.delete(new File((String) resumeMap.get(ResumeConst.FIELD_PROFILE_PICTURE_PATH)).toPath());
