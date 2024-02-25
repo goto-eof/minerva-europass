@@ -32,14 +32,14 @@ public class PdfGeneratorServiceImpl implements PdfGeneratorService {
     private final XMLService xmlService;
 
     @Override
-    public byte[] generatePDF(final String templateName, Map<String, Object> dataMap) {
+    public byte[] generatePDF(final String templateDirectory, final String templateName, Map<String, Object> dataMap) {
         try (ByteArrayOutputStream pdfOutput = new ByteArrayOutputStream()) {
             FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
             FOUserAgent userAgent = fopFactory.newFOUserAgent();
             Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, userAgent, pdfOutput);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            final String template = templateConfiguration.getTemplatesDirectory() + "/" + templateName;
+            final String template = templateConfiguration.getTemplatesDirectory() + "/" + templateDirectory + "/" + templateName;
             File templateFile = new File(template);
             Transformer transformer = transformerFactory.newTransformer(new StreamSource(templateFile));
 

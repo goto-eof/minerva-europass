@@ -4,8 +4,10 @@ import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.*;
+import com.andreidodu.minervaeuropass.exception.ApplicationException;
 import com.andreidodu.minervaeuropass.service.PdfGeneratorService;
 import com.andreidodu.minervaeuropass.service.ResumeService;
+import com.andreidodu.minervaeuropass.service.TemplateStrategy;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.FileUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
@@ -22,14 +24,22 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
-    private final PdfGeneratorService pdfGeneratorService;
-    private final TemplateConfiguration templateConfiguration;
+
+
     private final FileUtil fileUtil;
+    private final List<TemplateStrategy> templateStrategyList;
 
     @Override
-    public byte[] generateBytes(ResumeDTO resumeDTO) throws IOException {
+    public byte[] generateBytes(ResumeDTO resumeDTO, String templateName) throws IOException {
         Map<String, Object> resumeMap = this.processResumeAndReturnMap(resumeDTO);
-        byte[] pdfBytes = this.pdfGeneratorService.generatePDF(templateConfiguration.getResumeTemplateName(), resumeMap);
+
+        byte[] pdfBytes = templateStrategyList
+                .stream()
+                .filter(strategy -> strategy.accept(templateName))
+                .map(templateStrategy -> templateStrategy.generate(resumeMap))
+                .findFirst()
+                .orElseThrow(() -> new ApplicationException("Strategy not found"));
+
         Files.delete(new File((String) resumeMap.get(ResumeConst.FIELD_PROFILE_PICTURE_PATH)).toPath());
         return pdfBytes;
     }
@@ -48,9 +58,9 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     private void fillUpOther(ResumeDTO resumeDTO, Map<String, Object> result) {
-        result.put("otherTitle", resumeDTO.getOther().getTitle());
-        result.put("otherDescription", resumeDTO.getOther().getDescription());
-        result.put("otherList", otherListToListOfMaps(resumeDTO.getOther().getOtherList()));
+        result.put(ResumeConst.FIELD_OTHER_TITLE, resumeDTO.getOther().getTitle());
+        result.put(ResumeConst.FIELD_OTHER_DESCRIPTION, resumeDTO.getOther().getDescription());
+        result.put(ResumeConst.FIELD_OTHER_LIST, otherListToListOfMaps(resumeDTO.getOther().getOtherList()));
     }
 
     private List<Map<String, String>> otherListToListOfMaps(List<OtherItemDTO> otherList) {
@@ -238,7 +248,6 @@ public class ResumeServiceImpl implements ResumeService {
 
 
     private List<Map<String, String>> urlListToListMap(List<UrlDTO> urlList) {
-
         return urlList.stream().map(item -> {
             Map<String, String> result = new HashMap<>();
             result.put(ResumeConst.FIELD_URL, item.getUrl());

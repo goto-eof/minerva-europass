@@ -2,5 +2,6 @@ com:
   andreidodu:
     minerva-europass:
       templates-directory: "templates"
-      resume-template-name: "resume-document.xsl"
+      basic-template-directory: "basic"
+      basic-template-name: "basic-resume.xsl"
       image-path: /your/path/here

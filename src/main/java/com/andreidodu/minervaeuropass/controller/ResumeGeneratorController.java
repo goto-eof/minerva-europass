@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -20,9 +17,9 @@ public class ResumeGeneratorController {
 
     final private ResumeService resumeService;
 
-    @PostMapping("/generate")
-    public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO) throws IOException {
-        byte[] pdfBytes = resumeService.generateBytes(resumeDTO);
+    @PostMapping("/generate/{templateName}")
+    public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO, @PathVariable String templateName) throws IOException {
+        byte[] pdfBytes = resumeService.generateBytes(resumeDTO, templateName);
         HttpHeaders headers = prepareHeadersForPDFDownload(pdfBytes);
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }

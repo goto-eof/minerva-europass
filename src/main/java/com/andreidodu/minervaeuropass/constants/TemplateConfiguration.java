@@ -13,6 +13,9 @@ public class TemplateConfiguration {
     @Value("${com.andreidodu.minerva-europass.templates-directory}")
     private String templatesDirectory;
 
-    @Value("${com.andreidodu.minerva-europass.resume-template-name}")
-    private String resumeTemplateName;
+    @Value("${com.andreidodu.minerva-europass.basic-template-name}")
+    private String basicTemplateName;
+
+    @Value("${com.andreidodu.minerva-europass.basic-template-directory}")
+    private String basicTemplateDirectory;
 }
