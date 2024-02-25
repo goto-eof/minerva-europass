@@ -1,6 +1,7 @@
 package com.andreidodu.minervaeuropass.service.impl;
 
 import com.andreidodu.minervaeuropass.constants.ApplicationConst;
+import com.andreidodu.minervaeuropass.constants.ImageConfiguration;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.*;
 import com.andreidodu.minervaeuropass.service.ResumeService;
@@ -10,16 +11,23 @@ import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
-
+    private final ImageConfiguration imageConfiguration;
 
     @Override
-    public Map<String, Object> processResumeAndReturnMap(ResumeDTO resumeDTO) {
+    public Map<String, Object> processResumeAndReturnMap(ResumeDTO resumeDTO) throws IOException {
+        saveImage(resumeDTO.getImage());
         Map<String, Object> result = new HashMap<>();
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
         result.put(ResumeConst.FIELD_LAST_NAME, resumeDTO.getLastName());
@@ -86,7 +94,16 @@ public class ResumeServiceImpl implements ResumeService {
         res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
         result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
 
+        // TODO find a solution for unique image name
+        result.put("profilePicture", this.imageConfiguration.getImagePath() + "/image.png");
+
         return result;
+    }
+
+    private void saveImage(String base64string) throws IOException {
+        String base64Image = base64string.split(",")[1];
+        byte[] imageByte = Base64.getDecoder().decode(base64Image);
+        Files.write(new File(imageConfiguration.getImagePath() + "/image.png").toPath(), imageByte);
     }
 
     private List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {

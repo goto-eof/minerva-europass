@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
     <xsl:include href="sections/header.xsl"/>
@@ -16,8 +16,8 @@
     <xsl:output method="xml" version="1.0" omit-xml-declaration="no" indent="yes"/>
     <xsl:param name="version" select="'1.0'"/>
     <xsl:template match="/">
-        <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
-
+        <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                 xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="simpleA4"
                                        page-height="29.7cm" page-width="21cm" margin-top="1cm" margin-bottom="1cm"

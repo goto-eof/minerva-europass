@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -25,7 +26,7 @@ public class ResumeGeneratorController {
     final private TemplateConfiguration templateConfiguration;
 
     @PostMapping("/generate")
-    public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO) {
+    public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO) throws IOException {
         Map<String, Object> resumeMap = resumeService.processResumeAndReturnMap(resumeDTO);
         byte[] pdfBytes = this.pdfGeneratorService.generatePDF(templateConfiguration.getResumeTemplateName(), resumeMap);
         HttpHeaders headers = prepareHeadersForPDFDownload(pdfBytes);

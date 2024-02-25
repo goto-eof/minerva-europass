@@ -12,6 +12,7 @@ import java.util.Map;
 public class ResumeDTO {
     private String firstName;
     private String lastName;
+    private String image;
     private String city;
     private String county;
     private String country;

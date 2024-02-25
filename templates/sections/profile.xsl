@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo,fox"
+                xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
 
     <xsl:include href="generic-map.xsl"/>
     <xsl:include href="generic-list.xsl"/>
@@ -16,15 +17,16 @@
                 <fo:table-body margin-left="5px" margin-right="5px">
                     <fo:table-row>
                         <fo:table-cell>
-                            <fo:block font-size="15pt" padding-top="10pt" padding-bottom="10pt" text-align="center">
+                            <fo:block font-size="15pt" padding-top="0pt" padding-bottom="10pt" text-align="center">
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell>
                             <fo:block text-align="center">
-                                <fo:external-graphic content-width="128px" content-height="128px"
-                                                     src="classpath:static/user.png"/>
+                                <fo:external-graphic
+                                        content-width="162px" content-height="162px"
+                                        src="{$root/profilePicture}"/>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>

@@ -3,3 +3,4 @@ com:
     minerva-europass:
       templates-directory: "templates"
       resume-template-name: "resume-document.xsl"
+      image-path: /your/path/here
