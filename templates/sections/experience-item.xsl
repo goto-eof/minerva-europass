@@ -109,9 +109,16 @@
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
-                                <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="$item/frontEndTechnologyList"/>
-                                </fo:block>
+                                <xsl:if test="$item/isWorkedAsFrontEndDeveloper = 'true' ">
+                                    <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
+                                        <xsl:value-of select="$item/frontEndTechnologyList"/>
+                                    </fo:block>
+                                </xsl:if>
+                                <xsl:if test="$item/isWorkedAsFrontEndDeveloper = 'false' ">
+                                    <fo:block margin-left="5px" padding-top="4px" color="gray" padding-bottom="4px">
+                                        <xsl:value-of select="$item/frontEndTechnologyList"/>
+                                    </fo:block>
+                                </xsl:if>
                             </fo:table-cell>
                         </fo:table-row>
                     </xsl:if>
@@ -125,9 +132,16 @@
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
-                                <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="$item/backEndTechnologyList"/>
-                                </fo:block>
+                                <xsl:if test="$item/isWorkedAsBackEndDeveloper = 'true' ">
+                                    <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
+                                        <xsl:value-of select="$item/backEndTechnologyList"/>
+                                    </fo:block>
+                                </xsl:if>
+                                <xsl:if test="$item/isWorkedAsBackEndDeveloper = 'false'">
+                                    <fo:block margin-left="5px" padding-top="4px" color="gray" padding-bottom="4px">
+                                        <xsl:value-of select="$item/backEndTechnologyList"/>
+                                    </fo:block>
+                                </xsl:if>
                             </fo:table-cell>
                         </fo:table-row>
                     </xsl:if>

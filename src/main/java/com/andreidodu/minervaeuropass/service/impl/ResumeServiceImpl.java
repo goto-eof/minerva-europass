@@ -193,6 +193,8 @@ public class ResumeServiceImpl implements ResumeService {
             result.put(ResumeConst.FIELD_MAIN_ACTIVITIES, item.getMainActivities());
             result.put(ResumeConst.FIELD_CUSTOMER, item.getCustomer());
             result.put(ResumeConst.FIELD_SECTOR, item.getSector());
+            result.put("isWorkedAsFrontEndDeveloper", toBooleanString(item.getIsWorkedAsFrontEndDeveloper()));
+            result.put("isWorkedAsBackEndDeveloper", toBooleanString(item.getIsWorkedAsBackEndDeveloper()));
             result.put(ResumeConst.FIELD_BACK_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getBackEndTechnologyList()));
             result.put(ResumeConst.FIELD_FRONT_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getFrontEndTechnologyList()));
             result.put(ResumeConst.FIELD_TOOL_LIST, ResumeUtil.listToString(item.getToolList()));
@@ -202,6 +204,13 @@ public class ResumeServiceImpl implements ResumeService {
 
             return result;
         }).toList();
+    }
+
+    private String toBooleanString(Boolean bool) {
+        if (bool == null) {
+            return "false";
+        }
+        return bool.toString();
     }
 
     private List<Map<String, String>> urlListToListMap(List<UrlDTO> urlList) {
