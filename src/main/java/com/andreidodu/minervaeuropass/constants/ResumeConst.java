@@ -57,5 +57,8 @@ public interface ResumeConst {
     String KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE = "topXTechnologiesFromExperience";
     String KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS = "topXTechnologiesFromPersonalProjects";
     String FIELD_PROFILE_PICTURE_PATH = "profilePicture";
+    String FIELD_IS_WORKED_AS_FRONT_END_DEVELOPER = "isWorkedAsFrontEndDeveloper";
+    String FIELD_IS_WORKED_AS_BACK_END_DEVELOPER = "isWorkedAsBackEndDeveloper";
+    String VALUE_FALSE = "false";
 
 }

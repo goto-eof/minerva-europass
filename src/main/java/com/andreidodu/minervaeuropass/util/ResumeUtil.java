@@ -116,4 +116,11 @@ public class ResumeUtil {
 
         return result;
     }
+
+    public static String toBooleanString(Boolean bool) {
+        if (bool == null) {
+            return ResumeConst.VALUE_FALSE;
+        }
+        return bool.toString();
+    }
 }
