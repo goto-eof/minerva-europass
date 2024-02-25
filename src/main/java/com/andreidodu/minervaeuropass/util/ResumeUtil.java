@@ -180,9 +180,13 @@ public class ResumeUtil {
         if (dateTo == null) {
             dateTo = LocalDate.now();
         }
-        while (start.isBefore(dateTo) || (start.getYear() == dateTo.getYear() && start.getMonth() == dateTo.getMonth())) {
+        while (start.isBefore(dateTo) || isYearAndMonthEquals(dateTo, start)) {
             map.put(start.getYear() + "" + start.getMonth(), true);
             start = start.plusMonths(1);
         }
+    }
+
+    private static boolean isYearAndMonthEquals(LocalDate dateTo, LocalDate start) {
+        return start.getYear() == dateTo.getYear() && start.getMonth() == dateTo.getMonth();
     }
 }
