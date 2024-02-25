@@ -22,4 +22,6 @@ public class ExperienceItemDTO {
     private List<String> backEndTechnologyList;
     private List<String> frontEndTechnologyList;
     private List<String> toolList;
+    private Boolean isWorkedAsBackEndDeveloper;
+    private Boolean isWorkedAsFrontEndDeveloper;
 }

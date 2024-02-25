@@ -5,7 +5,7 @@
     <xsl:template name="footer">
         <xsl:param name="root" select="'default-value'"/>
 
-        <fo:table font-size="7pt" space-before="0.5em" space-after="0.5em">
+        <fo:table font-size="7pt" space-before="0.5em" space-after="0.5em" color="gray">
 
             <fo:table-column/>
             <fo:table-column/>

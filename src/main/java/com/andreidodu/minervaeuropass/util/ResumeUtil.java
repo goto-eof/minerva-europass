@@ -1,6 +1,7 @@
 package com.andreidodu.minervaeuropass.util;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
+import com.andreidodu.minervaeuropass.dto.ExperienceDTO;
 import com.andreidodu.minervaeuropass.dto.ExperienceItemDTO;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
 import org.apache.tomcat.util.buf.StringUtils;
@@ -57,6 +58,7 @@ public class ResumeUtil {
                 .getExperience()
                 .getExperienceList()
                 .stream()
+                .filter(ExperienceItemDTO::getIsWorkedAsFrontEndDeveloper)
                 .map((ExperienceItemDTO::getFrontEndTechnologyList))
                 .toList();
         Map<String, Integer> countFrontEndTechnologies = calculateMap(allFrontEndTechnologies);
@@ -68,6 +70,7 @@ public class ResumeUtil {
                 .getExperience()
                 .getExperienceList()
                 .stream()
+                .filter(ExperienceItemDTO::getIsWorkedAsBackEndDeveloper)
                 .map((ExperienceItemDTO::getBackEndTechnologyList))
                 .toList();
         Map<String, Integer> countBackEndTechnologies = calculateMap(allBackEndTechnologies);

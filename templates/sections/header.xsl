@@ -4,7 +4,7 @@
 
     <xsl:template name="header">
         <xsl:param name="root" select="'default-value'"/>
-        <fo:block text-align="right" font-size="10pt">
+        <fo:block text-align="right" font-size="10pt" color="gray">
             <fo:table>
                 <fo:table-column/>
                 <fo:table-column/>
