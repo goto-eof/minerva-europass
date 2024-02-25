@@ -2,6 +2,11 @@
 
 Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. Currently there is only one resume template.
 
+## Technologies
+- Java
+- Spring Boot
+- Apache FOP
+
 ## Configure and run the application
 - copy the `application.yml` and create `application-dev.yml`
 - set `spring.profiles.active=dev` as Environment Variable of your IDE
