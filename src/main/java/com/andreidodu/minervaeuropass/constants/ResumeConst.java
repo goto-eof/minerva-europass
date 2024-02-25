@@ -65,4 +65,5 @@ public interface ResumeConst {
     String VALUE_YEARS = "anni";
     String VALUE_MONTH = "mese";
     String VALUE_MONTHS = "mesi";
+    String FIELD_JOB_DURATION = "jobDuration";
 }
