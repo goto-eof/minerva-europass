@@ -72,4 +72,6 @@ public interface ResumeConst {
     // TODO load the translation from DB
     String VALUE_MONTHS = "mesi";
     String FIELD_JOB_DURATION = "jobDuration";
+    String FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE = "yearsAndMonthsOfExperience";
+
 }

@@ -22,8 +22,6 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
-
-
     private final ImageConfiguration imageConfiguration;
     private final PdfGeneratorService pdfGeneratorService;
     private final TemplateConfiguration templateConfiguration;
@@ -107,7 +105,7 @@ public class ResumeServiceImpl implements ResumeService {
         String path = saveImage(resumeDTO.getImage());
         result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
-        result.put("yearsOfExperience", ResumeUtil.calculateYearsExperience(resumeDTO.getExperience()));
+        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, ResumeUtil.calculateYearsExperience(resumeDTO.getExperience()));
 
         return result;
     }

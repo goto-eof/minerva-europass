@@ -120,7 +120,7 @@
                         <fo:table-cell padding-top="4px">
                             <fo:block>
                                 <xsl:call-template name="generic-item-same-row">
-                                    <xsl:with-param name="value" select="$root/yearsOfExperience"/>
+                                    <xsl:with-param name="value" select="$root/yearsAndMonthsOfExperience"/>
                                     <xsl:with-param name="title" select="'Esperienza nel settore'"/>
                                 </xsl:call-template>
                             </fo:block>
