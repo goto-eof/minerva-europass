@@ -152,15 +152,25 @@ public class ResumeUtil {
         });
         int size = map.keySet().size();
         int years = size / 12;
-        String result = "" + years;
         int months = size % 12;
-        if (months > 0) {
-            result += "+";
+        return getStringOfYearsOfExperience(years, months);
+    }
+
+    private static String getStringOfYearsOfExperience(int years, int months) {
+        String result = "";
+        if (years > 0) {
+            String yearsString = " " + years + " " + ResumeConst.VALUE_YEARS;
+            if (years == 1) {
+                yearsString = years + " " + ResumeConst.VALUE_YEAR;
+            }
+            result += yearsString;
         }
-        if (years > 1) {
-            result += " " + ResumeConst.VALUE_YEARS;
-        } else {
-            result += " " + ResumeConst.VALUE_YEAR;
+        if (months > 0) {
+            String monthsString = " " + months + " " + ResumeConst.VALUE_MONTHS;
+            if (months == 1) {
+                monthsString = months + " " + ResumeConst.VALUE_MONTH;
+            }
+            result += monthsString;
         }
         return result;
     }

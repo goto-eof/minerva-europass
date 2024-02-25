@@ -52,18 +52,24 @@ public interface ResumeConst {
     String FIELD_TOOL_LIST = "toolList";
     String FIELD_GLOBAL_ROOT = "root";
     String FIELD_GLOBAL_ITEM = "item";
+    // TODO load the translation from DB
     String VALUE_BACK_END = "back-end";
+    // TODO load the translation from DB
     String VALUE_FRONT_END = "front-end";
     String KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE = "topXTechnologiesFromExperience";
     String KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS = "topXTechnologiesFromPersonalProjects";
     String FIELD_PROFILE_PICTURE_PATH = "profilePicture";
     String FIELD_IS_WORKED_AS_FRONT_END_DEVELOPER = "isWorkedAsFrontEndDeveloper";
     String FIELD_IS_WORKED_AS_BACK_END_DEVELOPER = "isWorkedAsBackEndDeveloper";
+    // TODO load the translation from DB
     String VALUE_FALSE = "false";
-
+    // TODO load the translation from DB
     String VALUE_YEAR = "anno";
+    // TODO load the translation from DB
     String VALUE_YEARS = "anni";
+    // TODO load the translation from DB
     String VALUE_MONTH = "mese";
+    // TODO load the translation from DB
     String VALUE_MONTHS = "mesi";
     String FIELD_JOB_DURATION = "jobDuration";
 }
