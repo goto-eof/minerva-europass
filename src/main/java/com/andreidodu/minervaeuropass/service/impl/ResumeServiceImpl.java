@@ -36,9 +36,10 @@ public class ResumeServiceImpl implements ResumeService {
                 .filter(strategy -> strategy.accept(templateName))
                 .findFirst()
                 .map(templateStrategy -> templateStrategy.generate(resumeMap))
-                .orElseThrow(() -> new ApplicationException("Strategy not found"));
+                .orElseThrow(() -> new ApplicationException(String.format("Strategy [%s] not found", templateName)));
 
-        Files.delete(new File((String) resumeMap.get(ResumeConst.FIELD_PROFILE_PICTURE_PATH)).toPath());
+        String imagePathAndFilename = (String) resumeMap.get(ResumeConst.FIELD_PROFILE_PICTURE_PATH);
+        Files.delete(new File(imagePathAndFilename).toPath());
         return pdfBytes;
     }
 
@@ -55,13 +56,15 @@ public class ResumeServiceImpl implements ResumeService {
         return result;
     }
 
-    private void fillUpOther(ResumeDTO resumeDTO, Map<String, Object> result) {
-        result.put(ResumeConst.FIELD_OTHER_TITLE, resumeDTO.getOther().getTitle());
-        result.put(ResumeConst.FIELD_OTHER_DESCRIPTION, resumeDTO.getOther().getDescription());
-        result.put(ResumeConst.FIELD_OTHER_LIST, otherListToListOfMaps(resumeDTO.getOther().getOtherList()));
+    private static void fillUpOther(ResumeDTO resumeDTO, Map<String, Object> result) {
+        if (resumeDTO.getOther() != null) {
+            result.put(ResumeConst.FIELD_OTHER_TITLE, resumeDTO.getOther().getTitle());
+            result.put(ResumeConst.FIELD_OTHER_DESCRIPTION, resumeDTO.getOther().getDescription());
+            result.put(ResumeConst.FIELD_OTHER_LIST, otherListToListOfMaps(resumeDTO.getOther().getOtherList()));
+        }
     }
 
-    private List<Map<String, String>> otherListToListOfMaps(List<OtherItemDTO> otherList) {
+    private static List<Map<String, String>> otherListToListOfMaps(List<OtherItemDTO> otherList) {
         return otherList.stream().map(item -> {
             Map<String, String> result = new HashMap<>();
             result.put(ResumeConst.FIELD_KEY, item.getKey());
@@ -100,7 +103,7 @@ public class ResumeServiceImpl implements ResumeService {
         result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, ResumeUtil.calculateYearsExperience(resumeDTO.getExperience()));
     }
 
-    private void fillUpSkillsMatrix(ResumeDTO resumeDTO, Map<String, Object> result) {
+    private static void fillUpSkillsMatrix(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getSkillsMatrix() != null) {
             result.put(ResumeConst.FIELD_SKILLS_MATRIX_TITLE, resumeDTO.getSkillsMatrix().getTitle());
             result.put(ResumeConst.FIELD_SKILLS_MATRIX_DESCRIPTION, resumeDTO.getSkillsMatrix().getDescription());
@@ -119,7 +122,7 @@ public class ResumeServiceImpl implements ResumeService {
         }
     }
 
-    private void fillUpEducation(ResumeDTO resumeDTO, Map<String, Object> result) {
+    private static void fillUpEducation(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getEducation() != null) {
             resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
             result.put(ResumeConst.FIELD_EDUCATION_TITLE, resumeDTO.getEducation().getTitle());
@@ -128,7 +131,7 @@ public class ResumeServiceImpl implements ResumeService {
         }
     }
 
-    private void fillUpPersonalProjects(ResumeDTO resumeDTO, Map<String, Object> result) {
+    private static void fillUpPersonalProjects(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getPersonalProjects() != null) {
             resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
             result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
@@ -139,7 +142,7 @@ public class ResumeServiceImpl implements ResumeService {
         }
     }
 
-    private void fillUpExperience(ResumeDTO resumeDTO, Map<String, Object> result) {
+    private static void fillUpExperience(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getExperience() != null) {
             resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
             result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
@@ -151,7 +154,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
 
-    private List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {
+    private static List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {
         List<Map<String, String>> res = new ArrayList<>();
 
         Map<String, String> topX = new HashMap<>();
@@ -168,7 +171,7 @@ public class ResumeServiceImpl implements ResumeService {
         return res;
     }
 
-    private List<Map<String, String>> calculateTopXTechnologiesFromExperience(ResumeDTO resumeDTO) {
+    private static List<Map<String, String>> calculateTopXTechnologiesFromExperience(ResumeDTO resumeDTO) {
         List<Map<String, String>> res = new ArrayList<>();
 
         Map<String, String> topX = new HashMap<>();
@@ -186,7 +189,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
 
-    private List<Map<String, Object>> skillsMatrixListToListMap(List<SkillMatrixItemDTO> skillsMatrixList) {
+    private static List<Map<String, Object>> skillsMatrixListToListMap(List<SkillMatrixItemDTO> skillsMatrixList) {
         return skillsMatrixList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
@@ -200,7 +203,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
 
-    private List<Map<String, Object>> educationToListMap(List<EducationItemDTO> educationItemDTOList) {
+    private static List<Map<String, Object>> educationToListMap(List<EducationItemDTO> educationItemDTOList) {
         return educationItemDTOList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
@@ -213,7 +216,7 @@ public class ResumeServiceImpl implements ResumeService {
         }).toList();
     }
 
-    private List<Map<String, Object>> experiencesToListMap(List<ExperienceItemDTO> experienceList) {
+    private static List<Map<String, Object>> experiencesToListMap(List<ExperienceItemDTO> experienceList) {
         return experienceList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
@@ -245,7 +248,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
 
-    private List<Map<String, String>> urlListToListMap(List<UrlDTO> urlList) {
+    private static List<Map<String, String>> urlListToListMap(List<UrlDTO> urlList) {
         return urlList.stream().map(item -> {
             Map<String, String> result = new HashMap<>();
             result.put(ResumeConst.FIELD_URL, item.getUrl());
