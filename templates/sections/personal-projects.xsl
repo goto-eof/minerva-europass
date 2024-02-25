@@ -22,7 +22,7 @@
                     </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell>
-                            <fo:block>
+                            <fo:block text-align="center">
                                 <xsl:value-of select="$root/personalProjectsDescription"/>
                             </fo:block>
                         </fo:table-cell>
