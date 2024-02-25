@@ -123,4 +123,23 @@ public class ResumeUtil {
         }
         return bool.toString();
     }
+
+    public static String calculateTimeAgoString(int yearsBetween, int monthsBetween) {
+        StringBuilder sb = new StringBuilder();
+        if (yearsBetween > 0) {
+            if (yearsBetween == 1) {
+                sb.append(yearsBetween).append(" " + ResumeConst.VALUE_YEAR + " ");
+            } else {
+                sb.append(yearsBetween).append(" " + ResumeConst.VALUE_YEARS + " ");
+            }
+        }
+        if (monthsBetween > 0) {
+            if (monthsBetween == 1) {
+                sb.append(monthsBetween).append(" " + ResumeConst.VALUE_MONTH + " ");
+            } else {
+                sb.append(monthsBetween).append(" " + ResumeConst.VALUE_MONTHS + " ");
+            }
+        }
+        return sb.toString();
+    }
 }

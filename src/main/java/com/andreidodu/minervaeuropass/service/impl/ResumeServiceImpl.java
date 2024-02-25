@@ -23,6 +23,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
 
+    public static final String FIELD_TIME_AGO = "timeAgo";
     private final ImageConfiguration imageConfiguration;
     private final PdfGeneratorService pdfGeneratorService;
     private final TemplateConfiguration templateConfiguration;
@@ -202,6 +203,11 @@ public class ResumeServiceImpl implements ResumeService {
             if (item.getUrlList() != null && !item.getUrlList().isEmpty()) {
                 result.put(ResumeConst.FIELD_URL_LIST, urlListToListMap(item.getUrlList()));
             }
+
+            int monthsBetween = DateUtil.calculateMonthsBetween(item.getDateFrom(), item.getDateTo());
+            int yearsBetween = DateUtil.calculateYearsBetween(item.getDateFrom(), item.getDateTo());
+
+            result.put(FIELD_TIME_AGO, ResumeUtil.calculateTimeAgoString(yearsBetween, monthsBetween + 1));
 
             return result;
         }).toList();

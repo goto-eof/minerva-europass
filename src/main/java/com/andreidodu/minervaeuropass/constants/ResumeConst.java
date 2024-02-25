@@ -61,4 +61,8 @@ public interface ResumeConst {
     String FIELD_IS_WORKED_AS_BACK_END_DEVELOPER = "isWorkedAsBackEndDeveloper";
     String VALUE_FALSE = "false";
 
+    String VALUE_YEAR = "anno";
+    String VALUE_YEARS = "anni";
+    String VALUE_MONTH = "mese";
+    String VALUE_MONTHS = "mesi";
 }
