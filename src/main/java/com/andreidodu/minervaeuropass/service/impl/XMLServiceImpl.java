@@ -2,6 +2,7 @@ package com.andreidodu.minervaeuropass.service.impl;
 
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
+import com.andreidodu.minervaeuropass.exception.ApplicationException;
 import com.andreidodu.minervaeuropass.service.XMLService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,25 +35,29 @@ public class XMLServiceImpl implements XMLService {
     @Override
     public InputStream createXMLFromMap(Map<String, Object> map) {
         try {
-            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-            Document document = documentBuilder.newDocument();
-
-            Element root = createAndAppendNode(document, document, ResumeConst.FIELD_GLOBAL_ROOT);
-            createNodesFromMapRecursively(map, root, document);
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource domSource = new DOMSource(document);
-
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            StreamResult streamResult = new StreamResult(outputStream);
-            transformer.transform(domSource, streamResult);
-            return new ByteArrayInputStream(outputStream.toByteArray());
+            return generateByteArrayStream(map);
         } catch (ParserConfigurationException | TransformerException pce) {
             log.error("Fatal error while trying to convert the map to xml: " + pce.getMessage());
+            throw new ApplicationException("Unable to create XML");
         }
-        return null;
+    }
+
+    private ByteArrayInputStream generateByteArrayStream(Map<String, Object> map) throws ParserConfigurationException, TransformerException {
+        DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+        Document document = documentBuilder.newDocument();
+
+        Element root = createAndAppendNode(document, document, ResumeConst.FIELD_GLOBAL_ROOT);
+        createNodesFromMapRecursively(map, root, document);
+
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource domSource = new DOMSource(document);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        StreamResult streamResult = new StreamResult(outputStream);
+        transformer.transform(domSource, streamResult);
+        return new ByteArrayInputStream(outputStream.toByteArray());
     }
 
     private void createNodesFromMapRecursively(Map<String, Object> map, Node root, Document document) {
