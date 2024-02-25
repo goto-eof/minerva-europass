@@ -30,4 +30,5 @@ public class ResumeDTO {
     private EducationDTO education;
     private OtherSkillsDTO otherSkills;
     private SkillsMatrixDTO skillsMatrix;
+    private OtherDTO other;
 }

@@ -43,7 +43,23 @@ public class ResumeServiceImpl implements ResumeService {
         fillUpEducation(resumeDTO, result);
         fillUpOtherSkills(resumeDTO, result);
         fillUpSkillsMatrix(resumeDTO, result);
+        fillUpOther(resumeDTO, result);
         return result;
+    }
+
+    private void fillUpOther(ResumeDTO resumeDTO, Map<String, Object> result) {
+        result.put("otherTitle", resumeDTO.getOther().getTitle());
+        result.put("otherDescription", resumeDTO.getOther().getDescription());
+        result.put("otherList", otherListToListOfMaps(resumeDTO.getOther().getOtherList()));
+    }
+
+    private List<Map<String, String>> otherListToListOfMaps(List<OtherItemDTO> otherList) {
+        return otherList.stream().map(item -> {
+            Map<String, String> result = new HashMap<>();
+            result.put(ResumeConst.FIELD_KEY, item.getKey());
+            result.put(ResumeConst.FIELD_VALUE, item.getValue());
+            return result;
+        }).toList();
     }
 
     private void fillUpProfile(ResumeDTO resumeDTO, Map<String, Object> result) throws IOException {
