@@ -2,10 +2,8 @@ package com.andreidodu.minervaeuropass.service.impl;
 
 import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
-import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.*;
 import com.andreidodu.minervaeuropass.exception.ApplicationException;
-import com.andreidodu.minervaeuropass.service.PdfGeneratorService;
 import com.andreidodu.minervaeuropass.service.ResumeService;
 import com.andreidodu.minervaeuropass.service.TemplateStrategy;
 import com.andreidodu.minervaeuropass.util.DateUtil;
