@@ -11,9 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -103,6 +100,7 @@ public class ResumeServiceImpl implements ResumeService {
     private void saveImage(String base64string) throws IOException {
         String base64Image = base64string.split(",")[1];
         byte[] imageByte = Base64.getDecoder().decode(base64Image);
+        // TODO find a solution for unique image name
         Files.write(new File(imageConfiguration.getImagePath() + "/image.png").toPath(), imageByte);
     }
 
