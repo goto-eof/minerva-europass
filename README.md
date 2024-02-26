@@ -1,3 +1,13 @@
+```
+
+  __  __ _                         ___                              
+ |  \/  (_)_ _  ___ _ ___ ____ _  | __|  _ _ _ ___ _ __  __ _ ______
+ | |\/| | | ' \/ -_) '_\ V / _` | | _| || | '_/ _ \ '_ \/ _` (_-<_-<
+ |_|  |_|_|_||_\___|_|  \_/\__,_| |___\_,_|_| \___/ .__/\__,_/__/__/
+                                                  |_|               
+                                                            SERVER
+```
+
 # Minerva Europass (WIP)
 
 Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. Currently there is only one resume template.
