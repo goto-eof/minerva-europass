@@ -22,8 +22,6 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
-
-
     private final FileUtil fileUtil;
     private final List<TemplateStrategy> templateStrategyList;
 
