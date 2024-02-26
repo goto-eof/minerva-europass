@@ -31,4 +31,5 @@ public class ResumeDTO {
     private OtherSkillsDTO otherSkills;
     private SkillsMatrixDTO skillsMatrix;
     private OtherDTO other;
+    private CertificatesDTO certificates;
 }

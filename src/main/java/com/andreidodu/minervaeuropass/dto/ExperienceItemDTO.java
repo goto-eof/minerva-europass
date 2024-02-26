@@ -2,12 +2,14 @@ package com.andreidodu.minervaeuropass.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
+@ToString
 public class ExperienceItemDTO {
     private LocalDate dateFrom;
     private LocalDate dateTo;
@@ -24,4 +26,5 @@ public class ExperienceItemDTO {
     private List<String> toolList;
     private Boolean isWorkedAsBackEndDeveloper;
     private Boolean isWorkedAsFrontEndDeveloper;
+    private String workingMethodology;
 }

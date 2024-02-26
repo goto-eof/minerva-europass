@@ -108,9 +108,16 @@
                         <fo:table-row>
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
-                                <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Tecnologie (front-end)'"/>
-                                </fo:block>
+                                <xsl:if test="$item/isWorkedAsFrontEndDeveloper = 'true' ">
+                                    <fo:block padding-top="4px" padding-bottom="4px">
+                                        <xsl:value-of select="'Tecnologie (front-end)'"/>
+                                    </fo:block>
+                                </xsl:if>
+                                <xsl:if test="$item/isWorkedAsFrontEndDeveloper = 'false' ">
+                                    <fo:block padding-top="4px" color="gray" padding-bottom="4px">
+                                        <xsl:value-of select="'Tecnologie (front-end)'"/>
+                                    </fo:block>
+                                </xsl:if>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
                                 <xsl:if test="$item/isWorkedAsFrontEndDeveloper = 'true' ">
@@ -131,9 +138,16 @@
                         <fo:table-row>
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
-                                <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Tecnologie (back-end)'"/>
-                                </fo:block>
+                                <xsl:if test="$item/isWorkedAsBackEndDeveloper = 'true' ">
+                                    <fo:block padding-top="4px" padding-bottom="4px">
+                                        <xsl:value-of select="'Tecnologie (back-end)'"/>
+                                    </fo:block>
+                                </xsl:if>
+                                <xsl:if test="$item/isWorkedAsBackEndDeveloper = 'false' ">
+                                    <fo:block padding-top="4px" color="gray" padding-bottom="4px">
+                                        <xsl:value-of select="'Tecnologie (back-end)'"/>
+                                    </fo:block>
+                                </xsl:if>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
                                 <xsl:if test="$item/isWorkedAsBackEndDeveloper = 'true' ">
@@ -161,6 +175,22 @@
                             <fo:table-cell number-columns-spanned="4">
                                 <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
                                     <xsl:value-of select="$item/toolList"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
+
+                    <xsl:if test="$item/workingMethodology">
+                        <fo:table-row>
+                            <fo:table-cell margin-left="5px" number-columns-spanned="1"
+                                           background-color="rgb(240,240,240)">
+                                <fo:block padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="'Metodologia di lavoro'"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell number-columns-spanned="4">
+                                <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
+                                    <xsl:value-of select="$item/workingMethodology"/>
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>

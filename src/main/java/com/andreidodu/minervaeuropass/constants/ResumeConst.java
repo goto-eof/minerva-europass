@@ -1,7 +1,7 @@
 package com.andreidodu.minervaeuropass.constants;
 
 public interface ResumeConst {
-    int TOP_X_TECHNOLOGIES = 10;
+    int TOP_X_TECHNOLOGIES = 100;
     String FIELD_FIRST_NAME = "firstName";
     String FIELD_LAST_NAME = "lastName";
     String FIELD_CITY = "city";
@@ -53,9 +53,9 @@ public interface ResumeConst {
     String FIELD_GLOBAL_ROOT = "root";
     String FIELD_GLOBAL_ITEM = "item";
     // TODO load the translation from DB
-    String VALUE_BACK_END = "back-end";
+    String VALUE_BACK_END = "Back-end";
     // TODO load the translation from DB
-    String VALUE_FRONT_END = "front-end";
+    String VALUE_FRONT_END = "Front-end";
     String KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE = "topXTechnologiesFromExperience";
     String KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS = "topXTechnologiesFromPersonalProjects";
     String FIELD_PROFILE_PICTURE_PATH = "profilePicture";
@@ -76,5 +76,24 @@ public interface ResumeConst {
     String FIELD_OTHER_TITLE = "otherTitle";
     String FIELD_OTHER_DESCRIPTION = "otherDescription";
     String FIELD_OTHER_LIST = "otherList";
-
+    // TODO load the translation from DB
+    String VALUE_MATCH = "corrispondenza";
+    // TODO load the translation from DB
+    String VALUE_MATCHES = "corrispondenze";
+    // TODO load the translation from DB
+    String VALUE_BACK_END_TECHNOLOGIES = "Frequenza tecnologie lato back-end";
+    // TODO load the translation from DB
+    String VALUE_FRONT_END_TECHNOLOGIES = "Frequenza Tecnologie lato front-end";
+    String FIELD_INTRODUCTION_FOOTER = "introductionFooter";
+    String FIELD_TOP_ROLES_BY_EXPERIENCE = "topRolesByExperience";
+    String FIELD_TOP_ROLES_BY_PERSONAL_PROJECTS = "topRolesByPersonalProjects";
+    String FIELD_YEARS_EXPERIENCE_BY_PERSONAL_PROJECTS = "yearsExperienceByPersonalProjects";
+    String FIELD_YEARS_EXPERIENCE_BY_EXPERIENCE = "yearsExperienceByExperience";
+    String FIELD_WORKING_METHODOLOGY = "workingMethodology";
+    String FIELD_CERTIFICATES_TITLE = "certificatesTitle";
+    String FIELD_CERTIFICATES_DESCRIPTION = "certificatesDescription";
+    String FIELD_CERTIFICATES_LIST = "certificateList";
+    String FIELD_DATE = "date";
+    String FIELD_LINK = "link";
+    String FIELD_TECHNOLOGIES = "technologies";
 }

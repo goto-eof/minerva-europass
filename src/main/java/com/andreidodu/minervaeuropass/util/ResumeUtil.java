@@ -8,10 +8,11 @@ import org.apache.tomcat.util.buf.StringUtils;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ResumeUtil {
     public static String listToString(List<String> list) {
-        if (list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             return null;
         }
         return StringUtils.join(list, '•')
@@ -29,6 +30,85 @@ public class ResumeUtil {
         }
 
         return result;
+    }
+
+    public static Map<String, String> calculateTopRolesByExperience(ResumeDTO resumeDTO) {
+        long frontEndRoleCount = resumeDTO
+                .getExperience()
+                .getExperienceList()
+                .stream()
+                .filter(ExperienceItemDTO::getIsWorkedAsFrontEndDeveloper)
+                .count();
+        long backEndRoleCount = resumeDTO
+                .getExperience()
+                .getExperienceList()
+                .stream()
+                .filter(ExperienceItemDTO::getIsWorkedAsBackEndDeveloper)
+                .count();
+
+        Map<String, Long> countFrontEndTechnologies = new HashMap<>();
+        countFrontEndTechnologies.put("Ruolo da front-end developer", frontEndRoleCount);
+        countFrontEndTechnologies.put("Ruolo da back-end developer", backEndRoleCount);
+        final Map<String, Long> sortedCountFrontEndTechnologies = sortByValue(countFrontEndTechnologies);
+        return sortedCountFrontEndTechnologies
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, ResumeUtil::calculateRoleValue));
+    }
+
+    public static Map<String, String> calculateTopRolesByPersonalProjects(ResumeDTO resumeDTO) {
+        long frontEndRoleCount = resumeDTO
+                .getPersonalProjects()
+                .getExperienceList()
+                .stream()
+                .filter(item -> Boolean.TRUE.equals(item.getIsWorkedAsFrontEndDeveloper()))
+                .peek((m) -> System.out.println(m.toString()))
+                .count();
+
+        long backEndRoleCount = resumeDTO
+                .getPersonalProjects()
+                .getExperienceList()
+                .stream()
+                .filter(item -> Boolean.TRUE.equals(item.getIsWorkedAsBackEndDeveloper()))
+                .peek((m) -> System.out.println(m.toString()))
+                .count();
+
+        Map<String, Long> countRolesMap = new HashMap<>();
+        countRolesMap.put("Ruolo da front-end developer", frontEndRoleCount);
+        countRolesMap.put("Ruolo da back-end developer", backEndRoleCount);
+        final Map<String, Long> sortedCountFrontEndTechnologies = sortByValue(countRolesMap);
+        return sortedCountFrontEndTechnologies
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, ResumeUtil::calculateRoleValue));
+    }
+
+    private static String calculateRoleValue(Map.Entry<String, Long> entry) {
+        long value = entry.getValue();
+        if (value == 0 || value == 1) {
+            return value + " " + ResumeConst.VALUE_MATCH;
+        }
+        return value + " " + ResumeConst.VALUE_MATCHES;
+
+    }
+
+
+    public static Map<String, String> calculateYearsExperienceByPersonalProjects(ResumeDTO resumeDTO) {
+        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getPersonalProjects().getExperienceList());
+        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getPersonalProjects().getExperienceList());
+        Map<String, String> experienceMap = new HashMap<>();
+        experienceMap.put("Esperienza con il front-end", frontEndExperience);
+        experienceMap.put("Esperienza con il back-end", backEndExperience);
+        return experienceMap;
+    }
+
+    public static Map<String, String> calculateYearsExperienceByExperience(ResumeDTO resumeDTO) {
+        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getExperience().getExperienceList());
+        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getExperience().getExperienceList());
+        Map<String, String> experienceMap = new HashMap<>();
+        experienceMap.put("Esperienza con il front-end", frontEndExperience);
+        experienceMap.put("Esperienza con il back-end", backEndExperience);
+        return experienceMap;
     }
 
     public static List<String> calculateTopXFrontEndPersonalProjectsTechnologies(ResumeDTO resumeDTO) {
@@ -145,11 +225,31 @@ public class ResumeUtil {
     }
 
 
-    public static String calculateYearsExperience(ExperienceDTO experienceDTO) {
+    public static String calculateYearsExperienceFrontEndAndBackEnd(ExperienceDTO experienceDTO) {
         Map<String, Boolean> map = new HashMap<>();
         experienceDTO.getExperienceList().forEach(experienceItemDTO -> {
             fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
         });
+        return calculateTimeExperience(map);
+    }
+
+    public static String calculateYearsExperienceFrontEnd(List<ExperienceItemDTO> list) {
+        Map<String, Boolean> map = new HashMap<>();
+        list.stream().filter(ExperienceItemDTO::getIsWorkedAsFrontEndDeveloper).forEach(experienceItemDTO -> {
+            fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
+        });
+        return calculateTimeExperience(map);
+    }
+
+    public static String calculateYearsExperienceBackEnd(List<ExperienceItemDTO> list) {
+        Map<String, Boolean> map = new HashMap<>();
+        list.stream().filter(ExperienceItemDTO::getIsWorkedAsBackEndDeveloper).forEach(experienceItemDTO -> {
+            fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
+        });
+        return calculateTimeExperience(map);
+    }
+
+    private static String calculateTimeExperience(Map<String, Boolean> map) {
         int size = map.keySet().size();
         int years = size / 12;
         int months = size % 12;

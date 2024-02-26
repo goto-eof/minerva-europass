@@ -15,7 +15,7 @@
                             <fo:block text-align="left">
                                 <fo:block font-size="7pt">
                                     <xsl:value-of select="$root/applicationName"/> |
-                                    <xsl:value-of select="'generated on '"/>
+                                    <xsl:value-of select="'generato il '"/>
                                     <xsl:value-of select="$root/generatedOn"/>
                                 </fo:block>
                             </fo:block>

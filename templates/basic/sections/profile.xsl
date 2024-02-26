@@ -121,7 +121,7 @@
                             <fo:block>
                                 <xsl:call-template name="generic-item-same-row">
                                     <xsl:with-param name="value" select="$root/yearsAndMonthsOfExperience"/>
-                                    <xsl:with-param name="title" select="'Esperienza nel settore'"/>
+                                    <xsl:with-param name="title" select="'Esperienza nel settore IT'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>
@@ -155,7 +155,7 @@
                                 <xsl:call-template name="generic-map">
                                     <xsl:with-param name="items" select="$root/urlList/item"/>
                                     <xsl:with-param name="title" select="'Siti internet'"/>
-                                    <xsl:with-param name="isLink" select="'true'"/>
+                                    <xsl:with-param name="isLink" select="'false'"/>
                                 </xsl:call-template>
                             </fo:block>
                         </fo:table-cell>

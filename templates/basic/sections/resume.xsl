@@ -33,7 +33,7 @@
                             </fo:block-container>
                         </fo:table-cell>
                         <fo:table-cell number-columns-spanned="4">
-                            <fo:block-container height="25cm"  margin-left="3px" margin-right="3px">
+                            <fo:block-container min-height="25cm"  margin-left="3px" margin-right="3px">
                                 <xsl:call-template name="introduction">
                                     <xsl:with-param name="root" select="root"/>
                                 </xsl:call-template>

@@ -21,13 +21,21 @@
                     </fo:table-row>
                     <fo:table-row>
                         <fo:table-cell>
+                            <fo:block text-align="center" color="gray" font-size="7pt">
+                                Il seguente elenco è ordinato per data inizio esperienza in modo decrescente.
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell>
                             <fo:block>
-                                <fo:block text-align="center">
+                                <fo:block text-align="justify">
                                     <xsl:value-of select="$root/experienceDescription"/>
                                 </fo:block>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
+
                     <xsl:for-each select="$root/experienceList/item">
                         <fo:table-row>
                             <fo:table-cell>

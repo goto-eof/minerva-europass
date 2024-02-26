@@ -6,7 +6,8 @@
     <xsl:include href="sections/header.xsl"/>
     <xsl:include href="sections/footer.xsl"/>
     <xsl:include href="sections/resume.xsl"/>
-    <xsl:include href="sections/frequency.xsl"/>
+    <xsl:include href="sections/certificates.xsl"/>
+    <xsl:include href="sections/summary.xsl"/>
     <xsl:include href="sections/experience.xsl"/>
     <xsl:include href="sections/other.xsl"/>
     <xsl:include href="sections/education.xsl"/>
@@ -91,10 +92,15 @@
                         </xsl:call-template>
                     </fo:block-container>
                     <fo:block-container min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="frequency">
+                        <xsl:call-template name="summary">
+                            <xsl:with-param name="root"
+                                            select="root"/>
                             <xsl:with-param name="title"
-                                            select="'Riepilogo - Frequenza tecnologie in Esperienze lavorative'"/>
+                                            select="'Riepilogo Esperienze lavorative'"/>
                             <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
+                            <xsl:with-param name="topRoles" select="root/topRolesByExperience"/>
+                            <xsl:with-param name="yearsExperienceByField"
+                                            select="root/yearsExperienceByExperience"/>
                         </xsl:call-template>
                     </fo:block-container>
                     <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
@@ -123,10 +129,20 @@
                         </xsl:call-template>
                     </fo:block-container>
                     <fo:block-container min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="frequency">
+                        <xsl:call-template name="summary">
+                            <xsl:with-param name="root"
+                                            select="root"/>
                             <xsl:with-param name="title"
-                                            select="'Riepilogo - Frequenza tecnologie in Progetti personali'"/>
+                                            select="'Riepilogo Progetti personali'"/>
                             <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
+                            <xsl:with-param name="topRoles" select="root/topRolesByPersonalProjects"/>
+                            <xsl:with-param name="yearsExperienceByField"
+                                            select="root/yearsExperienceByPersonalProjects"/>
+                        </xsl:call-template>
+                    </fo:block-container>
+                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                        <xsl:call-template name="certificates">
+                            <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
                 </fo:flow>

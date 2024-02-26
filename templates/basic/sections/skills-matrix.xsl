@@ -20,7 +20,7 @@
                     <fo:table-row>
                         <fo:table-cell>
                             <fo:block>
-                                <fo:block padding-bottom="10px" text-align="center">
+                                <fo:block padding-bottom="10px" text-align="justify">
                                     <xsl:value-of select="$root/skillsMatrixDescription"/>
                                 </fo:block>
                             </fo:block>

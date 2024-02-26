@@ -20,7 +20,7 @@
                     <fo:table-row>
                         <fo:table-cell>
                             <fo:block>
-                                <fo:block>
+                                <fo:block text-align="justify">
                                     <xsl:value-of select="$root/educationDescription"/>
                                 </fo:block>
                             </fo:block>
