@@ -18,8 +18,8 @@ public class ResumeUtil {
         if (list == null || list.isEmpty()) {
             return null;
         }
-        return StringUtils.join(list, '•')
-                .replace("•", " • ");
+        return StringUtils.join(list, ResumeConst.LIST_SEPARATOR.charAt(0))
+                .replace(ResumeConst.LIST_SEPARATOR, " " + ResumeConst.LIST_SEPARATOR + " ");
     }
 
     public static List<Map<String, Object>> listToListMap(Map<String, String> listOfMap) {
@@ -296,8 +296,8 @@ public class ResumeUtil {
 
     public static List<String> technologiesToYearsOfExperience(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit) {
         return experienceItemList.stream()
-                .filter(item -> ExperienceType.BACK_END.equals(type) ? item.getIsWorkedAsBackEndDeveloper() : item.getIsWorkedAsFrontEndDeveloper())
-                .map(item -> ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList() : item.getFrontEndTechnologyList())
+                .filter(item -> isWorkedAsType(type, item))
+                .map(item -> chooseListByDevType(type, item))
                 .flatMap(List::stream)
                 .collect(Collectors.toSet())
                 .stream()
@@ -308,11 +308,15 @@ public class ResumeUtil {
                 .collect(Collectors.toList());
     }
 
+    private static List<String> chooseListByDevType(ExperienceType type, ExperienceItemDTO item) {
+        return ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList() : item.getFrontEndTechnologyList();
+    }
+
     private static TechExperienceDTO calculateYearsOfExperienceByTechnology(String technology, List<ExperienceItemDTO> experienceItemList, ExperienceType type) {
         Map<String, Boolean> map = new HashMap<>();
         experienceItemList.stream()
-                .filter(item -> ExperienceType.BACK_END.equals(type) ? item.getIsWorkedAsBackEndDeveloper() : item.getIsWorkedAsFrontEndDeveloper())
-                .filter(item -> ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList().contains(technology) : item.getFrontEndTechnologyList().contains(technology))
+                .filter(item -> isWorkedAsType(type, item))
+                .filter(item -> chooseListByDevType(technology, type, item))
                 .forEach(experienceItemDTO -> {
                     fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
                 });
@@ -320,5 +324,13 @@ public class ResumeUtil {
         int years = size / 12;
         int months = size % 12;
         return new TechExperienceDTO(technology, years, months, size);
+    }
+
+    private static boolean chooseListByDevType(String technology, ExperienceType type, ExperienceItemDTO item) {
+        return ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList().contains(technology) : item.getFrontEndTechnologyList().contains(technology);
+    }
+
+    private static Boolean isWorkedAsType(ExperienceType type, ExperienceItemDTO item) {
+        return ExperienceType.BACK_END.equals(type) ? item.getIsWorkedAsBackEndDeveloper() : item.getIsWorkedAsFrontEndDeveloper();
     }
 }

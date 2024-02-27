@@ -1,6 +1,7 @@
 package com.andreidodu.minervaeuropass.constants;
 
 public interface ResumeConst {
+    String LIST_SEPARATOR = "•";
     String FIELD_FIRST_NAME = "firstName";
     String FIELD_LAST_NAME = "lastName";
     String FIELD_CITY = "city";
