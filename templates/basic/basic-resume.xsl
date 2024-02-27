@@ -101,7 +101,7 @@
                                 <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
                                                 select="root/yearsOfExperiencePerSingleFrontEndTechnologyInExperience"/>
                                 <xsl:with-param name="title"
-                                                select="'Riepilogo Esperienze lavorative'"/>
+                                                select="root/translationSummaryJobExperiences"/>
                                 <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
                                 <xsl:with-param name="topRoles" select="root/topRolesByExperience"/>
                                 <xsl:with-param name="yearsExperienceByField"
@@ -144,7 +144,7 @@
                                 <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
                                                 select="root/yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects"/>
                                 <xsl:with-param name="title"
-                                                select="'Riepilogo Progetti personali'"/>
+                                                select="root/translationSummaryPersonalProjects"/>
                                 <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
                                 <xsl:with-param name="topRoles" select="root/topRolesByPersonalProjects"/>
                                 <xsl:with-param name="yearsExperienceByField"
@@ -163,7 +163,7 @@
                                 <xsl:with-param name="root"
                                                 select="root"/>
                                 <xsl:with-param name="title"
-                                                select="'Riepilogo Certificati'"/>
+                                                select="root/translateSummaryCertificates"/>
                                 <xsl:with-param name="topX" select="root/topXTechnologiesFromCertificates"/>
                             </xsl:call-template>
                         </fo:block-container>

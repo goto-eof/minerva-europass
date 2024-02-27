@@ -87,4 +87,11 @@ public interface ResumeConst {
     String FIELD_TOP_X_MAIN_BACK_END_TECHNOLOGIES = "topXMainBackEndTechnologies";
     String FIELD_TOP_X_MAIN_FRONT_END_TECHNOLOGIES = "topXMainFrontEndTechnologies";
     String KEY_TOP_X_TECHNOLOGIES_FROM_CERTIFICATES = "topXTechnologiesFromCertificates";
+    String TRANSLATION_SUMMARY_JOB_EXPERIENCES = "translationSummaryJobExperiences";
+    String TRANSLATION_SUMMARY_PERSONAL_PROJECTS = "translationSummaryPersonalProjects";
+    String TRANSLATION_SUMMARY_CERTIFICATES = "translateSummaryCertificates";
+    String TRANSLATION_SUMMARY_YEARS_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY = "translateSummaryYearsExperiencePerSingleBackEndTechnology";
+    String TRANSLATION_SUMMARY_YEARS_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY = "translateSummaryYearsExperiencePerSingleFrontEndTechnology";
+    String TRANSLATION_SUMMARY_NOTE_1 = "translateSummaryNote1";
+    String TRANSLATION_SUMMARY_NOTE_2 = "translateSummaryNote2";
 }

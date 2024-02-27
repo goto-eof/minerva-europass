@@ -27,6 +27,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final OtherFillerUtil otherFillerUtil;
     private final CertificateFillerUtil certificateFillerUtil;
     private final TemplateSettingFillerUtil templateSettingFillerUtil;
+    private final TranslationFillerUtil translationFillerUtil;
 
     private final List<TemplateStrategy> templateStrategyList;
 
@@ -58,6 +59,7 @@ public class ResumeServiceImpl implements ResumeService {
         otherFillerUtil.fillUpOther(resumeDTO, result);
         certificateFillerUtil.fillUppCertificate(resumeDTO, result);
         templateSettingFillerUtil.fillUpTemplateSetting(resumeDTO, result);
+        translationFillerUtil.fillUp(resumeDTO, result);
         return result;
     }
 

@@ -56,7 +56,7 @@
                                 <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
                                     <fo:block padding="4px" margin-left="2px">
                                         <xsl:value-of
-                                                select="'Anni di esperienza relativi alla singola tecnologia del back-end'"/>
+                                                select="$root/translateSummaryYearsExperiencePerSingleBackEndTechnology"/>
                                     </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell padding="4px" number-columns-spanned="6">
@@ -70,7 +70,7 @@
                                 <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
                                     <fo:block padding="4px" margin-left="2px">
                                         <xsl:value-of
-                                                select="'Anni de esperienza relativi alla singola tecnologia del front-end'"/>
+                                                select="$root/translateSummaryYearsExperiencePerSingleFrontEndTechnology"/>
                                     </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell padding="4px" number-columns-spanned="6">
@@ -139,18 +139,19 @@
 
                 <fo:table-row>
                     <fo:table-cell number-columns-spanned="7">
-                        <fo:block color="gray" margin-left="4px" padding="4px" font-size="7pt">*questo riepilogo
-                            potrebbe tenere conto della data di generazione del
-                            documento in
-                            questione, la quale è
+                        <fo:block color="gray" margin-left="4px" padding="4px" font-size="7pt">
+
+                            <xsl:value-of select="$root/translateSummaryNote1"/>
+
+
                             <xsl:value-of select="' '"/>
                             <xsl:value-of select="$root/generatedOn"/>
                         </fo:block>
-                        <fo:block color="gray" margin-left="4px" padding="4px" font-size="7pt">**Il numero degli anni
-                            associato alla tecnologia non è sinonimo di livello di conoscenza di tale tecnologia. In un
-                            ambiente lavorativo spesso ci si concentra su determinate tecnologie piuttosto che su altre,
-                            in base alle necessità del progetto. La tabella in questione serve solo a dare una visione
-                            globale.
+                        <fo:block color="gray" margin-left="4px" padding="4px" font-size="7pt">
+
+                            <xsl:value-of select="$root/translateSummaryNote2"/>
+
+
                         </fo:block>
                     </fo:table-cell>
                 </fo:table-row>

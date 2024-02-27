@@ -1,5 +1,6 @@
 package com.andreidodu.minervaeuropass.util;
 
+import com.andreidodu.minervaeuropass.constants.LocaleConst;
 import com.andreidodu.minervaeuropass.constants.TranslationConst;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Component
 @RequiredArgsConstructor
@@ -19,8 +21,16 @@ public class DateUtil {
 
 
     public static String formatLocalDate(LocalDate date, String stringPattern) {
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern(stringPattern);
+        Locale locale = calculateLocale(ThreadContext.getRequestContext().getLocale());
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern(stringPattern, locale);
         return date.format(pattern);
+    }
+
+    private static Locale calculateLocale(String locale) {
+        if (LocaleConst.LOCALE_IT_IT.equalsIgnoreCase(locale)) {
+            return Locale.ITALY;
+        }
+        return Locale.US;
     }
 
     public static int calculateYearsOld(LocalDate from, LocalDate to) {

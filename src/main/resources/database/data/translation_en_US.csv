@@ -1,0 +1,21 @@
+translation_code_id,language_id,translation,version
+1,1,"year",0
+2,1,"years",0
+3,1,"month",0
+4,1,"months",0
+5,1,"match",0
+6,1,"matches",0
+7,1,"Back-end technologies frequency",0
+8,1,"Front-end technologies frequency",0
+9,1,"Front-end experience",0
+10,1,"Back-end experience",0
+11,1,"Back-end developer role",0
+12,1,"Front-end developer role",0
+13,1,"today",0
+14,1,"Summary of Job experiences",0
+15,1,"Summary of Personal Projects",0
+16,1,"Summary of Certificates",0
+17,1,"Years of experience per single back-end technology",0
+18,1,"Years of experience per single front-end technology",0
+19,1,"*this summary may take into account the generation date of the document in question, which is",0
+20,1,"**The number of years associated with the technology is not synonymous with the level of knowledge of that technology. In a work environment we often focus on certain technologies rather than others, based on the needs of the project. The table in question serves only to give an overall view.",0

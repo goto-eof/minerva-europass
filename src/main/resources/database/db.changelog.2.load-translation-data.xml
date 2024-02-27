@@ -13,7 +13,11 @@
     </changeSet>
 
     <changeSet author="Andrei Dodu" id="2024-02-27-006">
-        <loadData file="database/data/translation.csv" tableName="${tablePrefix}translation"/>
+        <loadData file="database/data/translation_en_US.csv" tableName="${tablePrefix}translation"/>
+    </changeSet>
+
+    <changeSet author="Andrei Dodu" id="2024-02-27-007">
+        <loadData file="database/data/translation_it_IT.csv" tableName="${tablePrefix}translation"/>
     </changeSet>
 
 </databaseChangeLog>
