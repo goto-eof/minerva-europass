@@ -105,4 +105,7 @@ public interface ResumeConst {
     String VALUE_BACK_END_ROLE = "Ruolo da back-end developer";
     // TODO load the translation from DB
     String VALUE_TODAY = "oggi";
+    String FIELD_ENABLE_SUMMARY_RESULTS_TECH_FREQUENCY = "enableSummaryResultsTechFrequency";
+    String FIELD_ENABLE_SUMMARY_RESULTS_TECH_YEARS_EXPERIENCE = "enableSummaryResultsTechYearsExperience";
+    String FIELD_ENABLE_SUMMARY = "enableSummary";
 }
