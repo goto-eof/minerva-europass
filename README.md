@@ -21,6 +21,14 @@ one resume template.
 
 # Features
 
+- resume sections:
+  - profile (picture, emails, phone numbers, languages, location etc.)
+  - introduction
+  - job experience
+  - education
+  - skill matrix
+  - personal projects
+  - certificates
 - calculate years of experience for every job/personal project
 - calculate total years of experience
 - calculate years of experience for every single technology
