@@ -5,5 +5,8 @@ com:
       basic-template-directory: "basic"
       basic-template-name: "basic-resume.xsl"
       image-path: /your/path/here
+      enable-summary: true
+      enable-summary-results-tech-years-experience: true
+      enable-summary-results-tech-frequency: true
       max-summary-results-tech-years-experience: 10
       max-summary-results-tech-frequency: 10

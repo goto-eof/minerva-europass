@@ -91,22 +91,24 @@
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
-                    <fo:block-container min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="summary">
-                            <xsl:with-param name="root"
-                                            select="root"/>
-                            <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
-                                            select="root/yearsOfExperiencePerSingleBackEndTechnologyInExperience"/>
-                            <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
-                                            select="root/yearsOfExperiencePerSingleFrontEndTechnologyInExperience"/>
-                            <xsl:with-param name="title"
-                                            select="'Riepilogo Esperienze lavorative'"/>
-                            <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
-                            <xsl:with-param name="topRoles" select="root/topRolesByExperience"/>
-                            <xsl:with-param name="yearsExperienceByField"
-                                            select="root/yearsExperienceByExperience"/>
-                        </xsl:call-template>
-                    </fo:block-container>
+                    <xsl:if test="root/enableSummary = 'true'">
+                        <fo:block-container min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="summary">
+                                <xsl:with-param name="root"
+                                                select="root"/>
+                                <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
+                                                select="root/yearsOfExperiencePerSingleBackEndTechnologyInExperience"/>
+                                <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
+                                                select="root/yearsOfExperiencePerSingleFrontEndTechnologyInExperience"/>
+                                <xsl:with-param name="title"
+                                                select="'Riepilogo Esperienze lavorative'"/>
+                                <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
+                                <xsl:with-param name="topRoles" select="root/topRolesByExperience"/>
+                                <xsl:with-param name="yearsExperienceByField"
+                                                select="root/yearsExperienceByExperience"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
                     <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                         <xsl:call-template name="education">
                             <xsl:with-param name="root" select="root"/>
@@ -132,22 +134,24 @@
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
-                    <fo:block-container min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="summary">
-                            <xsl:with-param name="root"
-                                            select="root"/>
-                            <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
-                                            select="root/yearsOfExperiencePerSingleBackEndTechnologyInPersonalProjects"/>
-                            <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
-                                            select="root/yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects"/>
-                            <xsl:with-param name="title"
-                                            select="'Riepilogo Progetti personali'"/>
-                            <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
-                            <xsl:with-param name="topRoles" select="root/topRolesByPersonalProjects"/>
-                            <xsl:with-param name="yearsExperienceByField"
-                                            select="root/yearsExperienceByPersonalProjects"/>
-                        </xsl:call-template>
-                    </fo:block-container>
+                    <xsl:if test="root/enableSummary = 'true'">
+                        <fo:block-container min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="summary">
+                                <xsl:with-param name="root"
+                                                select="root"/>
+                                <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
+                                                select="root/yearsOfExperiencePerSingleBackEndTechnologyInPersonalProjects"/>
+                                <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
+                                                select="root/yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects"/>
+                                <xsl:with-param name="title"
+                                                select="'Riepilogo Progetti personali'"/>
+                                <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
+                                <xsl:with-param name="topRoles" select="root/topRolesByPersonalProjects"/>
+                                <xsl:with-param name="yearsExperienceByField"
+                                                select="root/yearsExperienceByPersonalProjects"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
                     <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                         <xsl:call-template name="certificates">
                             <xsl:with-param name="root" select="root"/>

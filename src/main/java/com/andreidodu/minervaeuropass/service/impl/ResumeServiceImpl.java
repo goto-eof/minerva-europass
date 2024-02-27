@@ -26,6 +26,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final SkillMatrixFilleUtil skillMatrixFilleUtil;
     private final OtherFillerUtil otherFillerUtil;
     private final CertificateFillerUtil certificateFillerUtil;
+    private final TemplateSettingFillerUtil templateSettingFillerUtil;
 
     private final List<TemplateStrategy> templateStrategyList;
 
@@ -56,6 +57,7 @@ public class ResumeServiceImpl implements ResumeService {
         skillMatrixFilleUtil.fillUpSkillsMatrix(resumeDTO, result);
         otherFillerUtil.fillUpOther(resumeDTO, result);
         certificateFillerUtil.fillUppCertificate(resumeDTO, result);
+        templateSettingFillerUtil.fillUpTemplateSetting(resumeDTO, result);
         return result;
     }
 

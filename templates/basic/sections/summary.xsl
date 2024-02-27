@@ -30,47 +30,52 @@
                     </fo:table-cell>
                 </fo:table-row>
 
-                <xsl:for-each select="$topX/item">
+                <xsl:if test="$root/enableSummaryResultsTechFrequency = 'true'">
+                    <xsl:for-each select="$topX/item">
+                        <fo:table-row>
+                            <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
+                                <fo:block padding="4px" margin-left="2px">
+                                    <xsl:value-of select="key"/>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell padding="4px" number-columns-spanned="6">
+                                <fo:block margin-left="10px" text-align="left">
+                                    <xsl:value-of select="value"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:for-each>
+                </xsl:if>
+
+                <xsl:if test="$root/enableSummaryResultsTechYearsExperience = 'true'">
                     <fo:table-row>
                         <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
                             <fo:block padding="4px" margin-left="2px">
-                                <xsl:value-of select="key"/>
+                                <xsl:value-of
+                                        select="'Anni di esperienza relativi alla singola tecnologia del back-end'"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell padding="4px" number-columns-spanned="6">
                             <fo:block margin-left="10px" text-align="left">
-                                <xsl:value-of select="value"/>
+                                <xsl:value-of select="$yearsOfExperiencePerTechBackEnd"/>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>
-                </xsl:for-each>
 
-                <fo:table-row>
-                    <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
-                        <fo:block padding="4px" margin-left="2px">
-                            <xsl:value-of select="'Anni di esperienza relativi alla singola tecnologia del back-end'"/>
-                        </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell padding="4px" number-columns-spanned="6">
-                        <fo:block margin-left="10px" text-align="left">
-                            <xsl:value-of select="$yearsOfExperiencePerTechBackEnd"/>
-                        </fo:block>
-                    </fo:table-cell>
-                </fo:table-row>
-
-                <fo:table-row>
-                    <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
-                        <fo:block padding="4px" margin-left="2px">
-                            <xsl:value-of select="'Anni de esperienza relativi alla singola tecnologia del front-end'"/>
-                        </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell padding="4px" number-columns-spanned="6">
-                        <fo:block margin-left="10px" text-align="left">
-                            <xsl:value-of select="$yearsOfExperiencePerTechFrontEnd"/>
-                        </fo:block>
-                    </fo:table-cell>
-                </fo:table-row>
-
+                    <fo:table-row>
+                        <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
+                            <fo:block padding="4px" margin-left="2px">
+                                <xsl:value-of
+                                        select="'Anni de esperienza relativi alla singola tecnologia del front-end'"/>
+                            </fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell padding="4px" number-columns-spanned="6">
+                            <fo:block margin-left="10px" text-align="left">
+                                <xsl:value-of select="$yearsOfExperiencePerTechFrontEnd"/>
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </xsl:if>
 
                 <fo:table-row>
                     <fo:table-cell number-columns-spanned="7" border-top="1px solid gray"
@@ -119,10 +124,12 @@
                 </fo:table-row>
                 <fo:table-row>
                     <fo:table-cell number-columns-spanned="7">
-                        <fo:block color="gray" margin-left="4px" padding="4px" font-size="7pt">* questo riepilogo
+                        <fo:block color="gray" margin-left="4px" padding="4px" font-size="7pt">*questo riepilogo
                             potrebbe tenere conto della data di generazione del
                             documento in
-                            questione, la quale è<xsl:value-of select="$root/generatedOn"/>.
+                            questione, la quale è
+                            <xsl:value-of select="' '"/>
+                            <xsl:value-of select="$root/generatedOn"/>
                         </fo:block>
                     </fo:table-cell>
                 </fo:table-row>

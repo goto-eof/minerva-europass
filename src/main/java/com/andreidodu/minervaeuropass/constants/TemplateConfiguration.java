@@ -24,4 +24,13 @@ public class TemplateConfiguration {
 
     @Value("${com.andreidodu.minerva-europass.max-summary-results-tech-frequency}")
     private Integer maxSummaryResultsTechFrequency;
+
+    @Value("${com.andreidodu.minerva-europass.enable-summary-results-tech-years-experience}")
+    private Boolean enableSummaryResultsTechYearsExperience;
+
+    @Value("${com.andreidodu.minerva-europass.enable-summary-results-tech-frequency}")
+    private Boolean enableSummaryResultsTechFrequency;
+
+    @Value("${com.andreidodu.minerva-europass.enable-summary}")
+    private Boolean enableSummary;
 }

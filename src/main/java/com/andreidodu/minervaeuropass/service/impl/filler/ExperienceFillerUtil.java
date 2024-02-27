@@ -17,7 +17,6 @@ public class ExperienceFillerUtil {
 
     private final TemplateConfiguration templateConfiguration;
 
-
     public void fillUpExperience(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getExperience() != null) {
             resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
