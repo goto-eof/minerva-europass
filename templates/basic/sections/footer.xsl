@@ -26,7 +26,7 @@
                     </fo:table-cell>
                     <fo:table-cell>
                         <fo:block text-align="right">
-                            <fo:page-number/>/
+                            <fo:page-number/> di
                             <fo:page-number-citation-last ref-id="end"/>
                         </fo:block>
                     </fo:table-cell>
