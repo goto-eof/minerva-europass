@@ -18,6 +18,9 @@ one resume template.
 - Java
 - Spring Boot
 - Apache FOP
+- Hibernate
+- Postgresql
+- Docker
 
 ## Features
 
