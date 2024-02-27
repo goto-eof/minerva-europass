@@ -18,4 +18,10 @@ public class TemplateConfiguration {
 
     @Value("${com.andreidodu.minerva-europass.basic-template-directory}")
     private String basicTemplateDirectory;
+
+    @Value("${com.andreidodu.minerva-europass.max-summary-results-tech-years-experience}")
+    private Integer maxSummaryResultsTechYearsExperience;
+
+    @Value("${com.andreidodu.minerva-europass.max-summary-results-tech-frequency}")
+    private Integer maxSummaryResultsTechFrequency;
 }

@@ -2,10 +2,12 @@ package com.andreidodu.minervaeuropass.service.impl;
 
 import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
+import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.*;
 import com.andreidodu.minervaeuropass.exception.ApplicationException;
 import com.andreidodu.minervaeuropass.service.ResumeService;
 import com.andreidodu.minervaeuropass.service.TemplateStrategy;
+import com.andreidodu.minervaeuropass.types.ExperienceType;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.FileUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
@@ -25,6 +27,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     private final FileUtil fileUtil;
     private final List<TemplateStrategy> templateStrategyList;
+    private final TemplateConfiguration templateConfiguration;
 
     @Override
     public byte[] generateBytes(ResumeDTO resumeDTO, String templateName) throws IOException {
@@ -158,7 +161,7 @@ public class ResumeServiceImpl implements ResumeService {
         }
     }
 
-    private static void fillUpPersonalProjects(ResumeDTO resumeDTO, Map<String, Object> result) {
+    private void fillUpPersonalProjects(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getPersonalProjects() != null) {
             resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
             result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
@@ -168,11 +171,13 @@ public class ResumeServiceImpl implements ResumeService {
             result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
             result.put(ResumeConst.FIELD_TOP_ROLES_BY_PERSONAL_PROJECTS, ResumeUtil.listToListMap(ResumeUtil.calculateTopRolesByPersonalProjects(resumeDTO)));
             result.put(ResumeConst.FIELD_YEARS_EXPERIENCE_BY_PERSONAL_PROJECTS, ResumeUtil.listToListMap(ResumeUtil.calculateYearsExperienceByPersonalProjects(resumeDTO)));
+            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_PERSONAL_PROJECTS, ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getPersonalProjects().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
+            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_PERSONAL_PROJECTS, ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getPersonalProjects().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
 
         }
     }
 
-    private static void fillUpExperience(ResumeDTO resumeDTO, Map<String, Object> result) {
+    private void fillUpExperience(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getExperience() != null) {
             resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
             result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
@@ -182,39 +187,40 @@ public class ResumeServiceImpl implements ResumeService {
             result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE, res);
             result.put(ResumeConst.FIELD_TOP_ROLES_BY_EXPERIENCE, ResumeUtil.listToListMap(ResumeUtil.calculateTopRolesByExperience(resumeDTO)));
             result.put(ResumeConst.FIELD_YEARS_EXPERIENCE_BY_EXPERIENCE, ResumeUtil.listToListMap(ResumeUtil.calculateYearsExperienceByExperience(resumeDTO)));
-
+            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_EXPERIENCE, ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
+            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_EXPERIENCE, ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
         }
     }
 
 
-    private static List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {
+    private List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {
         List<Map<String, String>> res = new ArrayList<>();
 
         Map<String, String> topX = new HashMap<>();
-        List<String> getTopXBackEndTechnologies = ResumeUtil.calculateTopXBackEndPersonalProjectsTechnologies(resumeDTO);
+        List<String> getTopXBackEndTechnologies = ResumeUtil.calculateTopXBackEndPersonalProjectsTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
         topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_BACK_END_TECHNOLOGIES);
         topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXBackEndTechnologies));
         res.add(topX);
 
         topX = new HashMap<>();
-        List<String> getTopXFrontEndTechnologies = ResumeUtil.calculateTopXFrontEndPersonalProjectsTechnologies(resumeDTO);
+        List<String> getTopXFrontEndTechnologies = ResumeUtil.calculateTopXFrontEndPersonalProjectsTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
         topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_FRONT_END_TECHNOLOGIES);
         topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXFrontEndTechnologies));
         res.add(topX);
         return res;
     }
 
-    private static List<Map<String, String>> calculateTopXTechnologiesFromExperience(ResumeDTO resumeDTO) {
+    private List<Map<String, String>> calculateTopXTechnologiesFromExperience(ResumeDTO resumeDTO) {
         List<Map<String, String>> res = new ArrayList<>();
 
         Map<String, String> topX = new HashMap<>();
-        List<String> getTopXBackEndTechnologies = ResumeUtil.calculateTopXBackEndExperienceTechnologies(resumeDTO);
+        List<String> getTopXBackEndTechnologies = ResumeUtil.calculateTopXBackEndExperienceTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
         topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_BACK_END_TECHNOLOGIES);
         topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXBackEndTechnologies));
         res.add(topX);
 
         topX = new HashMap<>();
-        List<String> getTopXFrontEndTechnologies = ResumeUtil.calculateTopXFrontEndExperienceTechnologies(resumeDTO);
+        List<String> getTopXFrontEndTechnologies = ResumeUtil.calculateTopXFrontEndExperienceTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
         topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_FRONT_END_TECHNOLOGIES);
         topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXFrontEndTechnologies));
         res.add(topX);

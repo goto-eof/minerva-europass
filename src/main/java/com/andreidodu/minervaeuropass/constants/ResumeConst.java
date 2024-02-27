@@ -1,7 +1,6 @@
 package com.andreidodu.minervaeuropass.constants;
 
 public interface ResumeConst {
-    int TOP_X_TECHNOLOGIES = 100;
     String FIELD_FIRST_NAME = "firstName";
     String FIELD_LAST_NAME = "lastName";
     String FIELD_CITY = "city";
@@ -52,10 +51,6 @@ public interface ResumeConst {
     String FIELD_TOOL_LIST = "toolList";
     String FIELD_GLOBAL_ROOT = "root";
     String FIELD_GLOBAL_ITEM = "item";
-    // TODO load the translation from DB
-    String VALUE_BACK_END = "Back-end";
-    // TODO load the translation from DB
-    String VALUE_FRONT_END = "Front-end";
     String KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE = "topXTechnologiesFromExperience";
     String KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS = "topXTechnologiesFromPersonalProjects";
     String FIELD_PROFILE_PICTURE_PATH = "profilePicture";
@@ -95,5 +90,16 @@ public interface ResumeConst {
     String FIELD_CERTIFICATES_LIST = "certificateList";
     String FIELD_DATE = "date";
     String FIELD_LINK = "link";
-    String FIELD_TECHNOLOGIES = "technologies";
+    String FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_PERSONAL_PROJECTS = "yearsOfExperiencePerSingleBackEndTechnologyInPersonalProjects";
+    String FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_PERSONAL_PROJECTS = "yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects";
+    String FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_EXPERIENCE = "yearsOfExperiencePerSingleBackEndTechnologyInExperience";
+    String FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_EXPERIENCE = "yearsOfExperiencePerSingleFrontEndTechnologyInExperience";
+    // TODO load the translation from DB
+    String VALUE_FRONT_END_EXPERIENCE = "Esperienza con il front-end";
+    // TODO load the translation from DB
+    String VALUE_BACK_END_EXPERIENCE = "Esperienza con il back-end";
+    // TODO load the translation from DB
+    String VALUE_FRONT_END_ROLE = "Ruolo da front-end developer";
+    // TODO load the translation from DB
+    String VALUE_BACK_END_ROLE = "Ruolo da back-end developer";
 }

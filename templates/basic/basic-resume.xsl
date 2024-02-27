@@ -95,6 +95,10 @@
                         <xsl:call-template name="summary">
                             <xsl:with-param name="root"
                                             select="root"/>
+                            <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
+                                            select="root/yearsOfExperiencePerSingleBackEndTechnologyInExperience"/>
+                            <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
+                                            select="root/yearsOfExperiencePerSingleFrontEndTechnologyInExperience"/>
                             <xsl:with-param name="title"
                                             select="'Riepilogo Esperienze lavorative'"/>
                             <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
@@ -132,6 +136,10 @@
                         <xsl:call-template name="summary">
                             <xsl:with-param name="root"
                                             select="root"/>
+                            <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
+                                            select="root/yearsOfExperiencePerSingleBackEndTechnologyInPersonalProjects"/>
+                            <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
+                                            select="root/yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects"/>
                             <xsl:with-param name="title"
                                             select="'Riepilogo Progetti personali'"/>
                             <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
