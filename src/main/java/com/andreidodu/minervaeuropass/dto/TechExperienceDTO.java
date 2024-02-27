@@ -16,8 +16,4 @@ public class TechExperienceDTO {
     private int months;
     private int totalMonths;
 
-    public String toString() {
-        return technology + " (" + ResumeUtil.getStringOfYearsOfExperience(years, months) + ")";
-    }
-
 }

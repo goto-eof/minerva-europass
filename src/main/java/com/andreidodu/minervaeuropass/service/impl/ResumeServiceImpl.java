@@ -23,7 +23,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final PersonalProjectsFillerUtil personalProjectsFillerUtil;
     private final EducationFillerUtil educationFillerUtil;
     private final OtherSkillsFillerUtil otherSkillsFillerUtil;
-    private final SkillMatrixFilleUtil skillMatrixFilleUtil;
+    private final SkillMatrixFillerUtil skillMatrixFilleUtil;
     private final OtherFillerUtil otherFillerUtil;
     private final CertificateFillerUtil certificateFillerUtil;
     private final TemplateSettingFillerUtil templateSettingFillerUtil;

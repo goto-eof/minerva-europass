@@ -17,8 +17,9 @@ public class ResumeGeneratorController {
 
     final private ResumeService resumeService;
 
-    @PostMapping("/generate/{templateName}")
-    public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO, @PathVariable String templateName) throws IOException {
+    @PostMapping("/generate/{templateName}/{locale}")
+    public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO, @PathVariable String templateName, @PathVariable String locale) throws IOException {
+        resumeDTO.setLocaleName(locale);
         byte[] pdfBytes = resumeService.generateBytes(resumeDTO, templateName);
         HttpHeaders headers = prepareHeadersForPDFDownload(pdfBytes);
         return ResponseEntity.ok().headers(headers).body(pdfBytes);

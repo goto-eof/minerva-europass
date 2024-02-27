@@ -13,7 +13,8 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class SkillMatrixFilleUtil {
+public class SkillMatrixFillerUtil {
+    private final ResumeUtil resumeUtil;
 
     public void fillUpSkillsMatrix(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getSkillsMatrix() != null) {
@@ -24,14 +25,14 @@ public class SkillMatrixFilleUtil {
         }
     }
 
-    private static List<Map<String, Object>> skillsMatrixListToListMap(List<SkillMatrixItemDTO> skillsMatrixList) {
+    private List<Map<String, Object>> skillsMatrixListToListMap(List<SkillMatrixItemDTO> skillsMatrixList) {
         return skillsMatrixList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
             item.getValues().sort(String::compareTo);
 
             result.put(ResumeConst.FIELD_KEY, item.getName());
-            result.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(item.getValues()));
+            result.put(ResumeConst.FIELD_VALUE, resumeUtil.listToString(item.getValues()));
 
             return result;
         }).toList();

@@ -15,22 +15,23 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class EducationFillerUtil {
+    private final DateUtil dateUtil;
 
     public void fillUpEducation(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getEducation() != null) {
             resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
             result.put(ResumeConst.FIELD_EDUCATION_TITLE, resumeDTO.getEducation().getTitle());
             result.put(ResumeConst.FIELD_EDUCATION_DESCRIPTION, resumeDTO.getEducation().getDescription());
-            result.put(ResumeConst.FIELD_EDUCATION_LIST, educationToListMap(resumeDTO.getEducation().getEducationList()));
+            result.put(ResumeConst.FIELD_EDUCATION_LIST, educationToListMap(resumeDTO.getEducation().getEducationList(), resumeDTO.getLocaleName()));
         }
     }
 
-    private static List<Map<String, Object>> educationToListMap(List<EducationItemDTO> educationItemDTOList) {
+    private List<Map<String, Object>> educationToListMap(List<EducationItemDTO> educationItemDTOList, String locale) {
         return educationItemDTOList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
             result.put(ResumeConst.FIELD_DATE_FROM, DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
-            result.put(ResumeConst.FIELD_DATE_TO, DateUtil.calculateDateTo(item.getDateTo()));
+            result.put(ResumeConst.FIELD_DATE_TO, dateUtil.calculateDateTo(item.getDateTo(), locale));
             result.put(ResumeConst.FIELD_NAME, item.getName());
             result.put(ResumeConst.FIELD_DESCRIPTION, item.getDescription());
 

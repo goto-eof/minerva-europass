@@ -1,20 +1,27 @@
 package com.andreidodu.minervaeuropass.util;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
+import com.andreidodu.minervaeuropass.constants.TranslationConst;
 import com.andreidodu.minervaeuropass.dto.*;
+import com.andreidodu.minervaeuropass.service.TranslationService;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
+import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.buf.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Component
+@RequiredArgsConstructor
 public class ResumeUtil {
 
-    public static final int MONTHS_IN_YEAR = 12;
+    final private TranslationService translationService;
+    public final int MONTHS_IN_YEAR = 12;
 
-    public static String listToString(List<String> list) {
+    public String listToString(List<String> list) {
         if (list == null || list.isEmpty()) {
             return null;
         }
@@ -22,7 +29,7 @@ public class ResumeUtil {
                 .replace(ResumeConst.LIST_SEPARATOR, " " + ResumeConst.LIST_SEPARATOR + " ");
     }
 
-    public static List<Map<String, Object>> listToListMap(Map<String, String> listOfMap) {
+    public List<Map<String, Object>> listToListMap(Map<String, String> listOfMap) {
         List<Map<String, Object>> result = new ArrayList<>();
 
         for (String key : listOfMap.keySet()) {
@@ -35,7 +42,7 @@ public class ResumeUtil {
         return result;
     }
 
-    public static Map<String, String> calculateTopRolesByExperience(ResumeDTO resumeDTO) {
+    public Map<String, String> calculateTopRolesByExperience(ResumeDTO resumeDTO) {
         long frontEndRoleCount = resumeDTO
                 .getExperience()
                 .getExperienceList()
@@ -50,16 +57,18 @@ public class ResumeUtil {
                 .count();
 
         Map<String, Long> countFrontEndTechnologies = new HashMap<>();
-        countFrontEndTechnologies.put(ResumeConst.VALUE_FRONT_END_ROLE, frontEndRoleCount);
-        countFrontEndTechnologies.put(ResumeConst.VALUE_BACK_END_ROLE, backEndRoleCount);
+        countFrontEndTechnologies.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_ROLE, resumeDTO.getLocaleName())
+                , frontEndRoleCount);
+        countFrontEndTechnologies.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_ROLE, resumeDTO.getLocaleName())
+                , backEndRoleCount);
         final Map<String, Long> sortedCountFrontEndTechnologies = sortByValue(countFrontEndTechnologies);
         return sortedCountFrontEndTechnologies
                 .entrySet()
                 .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, ResumeUtil::calculateRoleValue));
+                .collect(Collectors.toMap(Map.Entry::getKey, (entry) -> this.calculateRoleValue(entry, resumeDTO.getLocaleName())));
     }
 
-    public static Map<String, String> calculateTopRolesByPersonalProjects(ResumeDTO resumeDTO) {
+    public Map<String, String> calculateTopRolesByPersonalProjects(ResumeDTO resumeDTO) {
         long frontEndRoleCount = resumeDTO
                 .getPersonalProjects()
                 .getExperienceList()
@@ -75,44 +84,46 @@ public class ResumeUtil {
                 .count();
 
         Map<String, Long> countRolesMap = new HashMap<>();
-        countRolesMap.put(ResumeConst.VALUE_FRONT_END_ROLE, frontEndRoleCount);
-        countRolesMap.put(ResumeConst.VALUE_BACK_END_ROLE, backEndRoleCount);
+        countRolesMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_ROLE, resumeDTO.getLocaleName())
+                , frontEndRoleCount);
+        countRolesMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_ROLE, resumeDTO.getLocaleName())
+                , backEndRoleCount);
         final Map<String, Long> sortedCountFrontEndTechnologies = sortByValue(countRolesMap);
         return sortedCountFrontEndTechnologies
                 .entrySet()
                 .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, ResumeUtil::calculateRoleValue));
+                .collect(Collectors.toMap(Map.Entry::getKey, (entry) -> this.calculateRoleValue(entry, resumeDTO.getLocaleName())));
     }
 
-    private static String calculateRoleValue(Map.Entry<String, Long> entry) {
+    private String calculateRoleValue(Map.Entry<String, Long> entry, String locale) {
         long value = entry.getValue();
         if (value == 0 || value == 1) {
-            return value + " " + ResumeConst.VALUE_MATCH;
+            return value + " " + translationService.retrieveTranslation(TranslationConst.KEY_MATCH, locale);
         }
-        return value + " " + ResumeConst.VALUE_MATCHES;
+        return value + " " + translationService.retrieveTranslation(TranslationConst.KEY_MATCHES, locale);
 
     }
 
 
-    public static Map<String, String> calculateYearsExperienceByPersonalProjects(ResumeDTO resumeDTO) {
-        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getPersonalProjects().getExperienceList());
-        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getPersonalProjects().getExperienceList());
+    public Map<String, String> calculateYearsExperienceByPersonalProjects(ResumeDTO resumeDTO) {
+        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getPersonalProjects().getExperienceList(), resumeDTO.getLocaleName());
+        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getPersonalProjects().getExperienceList(), resumeDTO.getLocaleName());
         Map<String, String> experienceMap = new HashMap<>();
-        experienceMap.put(ResumeConst.VALUE_FRONT_END_EXPERIENCE, frontEndExperience);
-        experienceMap.put(ResumeConst.VALUE_BACK_END_EXPERIENCE, backEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_EXPERIENCE, resumeDTO.getLocaleName()), frontEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_EXPERIENCE, resumeDTO.getLocaleName()), backEndExperience);
         return experienceMap;
     }
 
-    public static Map<String, String> calculateYearsExperienceByExperience(ResumeDTO resumeDTO) {
-        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getExperience().getExperienceList());
-        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getExperience().getExperienceList());
+    public Map<String, String> calculateYearsExperienceByExperience(ResumeDTO resumeDTO) {
+        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getExperience().getExperienceList(), resumeDTO.getLocaleName());
+        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getExperience().getExperienceList(), resumeDTO.getLocaleName());
         Map<String, String> experienceMap = new HashMap<>();
-        experienceMap.put(ResumeConst.VALUE_FRONT_END_EXPERIENCE, frontEndExperience);
-        experienceMap.put(ResumeConst.VALUE_BACK_END_EXPERIENCE, backEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_EXPERIENCE, resumeDTO.getLocaleName()), frontEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_EXPERIENCE, resumeDTO.getLocaleName()), backEndExperience);
         return experienceMap;
     }
 
-    public static List<String> calculateTopXFrequencyFrontEndPersonalProjectsTechnologies(ResumeDTO resumeDTO, int limit) {
+    public List<String> calculateTopXFrequencyFrontEndPersonalProjectsTechnologies(ResumeDTO resumeDTO, int limit) {
         List<List<String>> allFrontEndTechnologies = resumeDTO
                 .getPersonalProjects()
                 .getExperienceList()
@@ -125,7 +136,7 @@ public class ResumeUtil {
     }
 
 
-    public static List<String> calculateTopXFrequencyBackEndPersonalProjectsTechnologies(ResumeDTO resumeDTO, int limit) {
+    public List<String> calculateTopXFrequencyBackEndPersonalProjectsTechnologies(ResumeDTO resumeDTO, int limit) {
         List<List<String>> techList = resumeDTO
                 .getPersonalProjects()
                 .getExperienceList()
@@ -137,7 +148,7 @@ public class ResumeUtil {
         return calculateFrequency(techList, limit);
     }
 
-    public static List<String> calculateTopXFrequencyBackEndCertificatesTechnologies(ResumeDTO resumeDTO, int limit) {
+    public List<String> calculateTopXFrequencyBackEndCertificatesTechnologies(ResumeDTO resumeDTO, int limit) {
         List<List<String>> techList = resumeDTO
                 .getCertificates()
                 .getCertificateList()
@@ -147,7 +158,7 @@ public class ResumeUtil {
         return calculateFrequency(techList, limit);
     }
 
-    public static List<String> calculateTopXFrequencyFrontEndCertificatesTechnologies(ResumeDTO resumeDTO, int limit) {
+    public List<String> calculateTopXFrequencyFrontEndCertificatesTechnologies(ResumeDTO resumeDTO, int limit) {
         List<List<String>> techList = resumeDTO
                 .getCertificates()
                 .getCertificateList()
@@ -158,12 +169,12 @@ public class ResumeUtil {
     }
 
 
-    public static List<String> calculateFrequency(List<List<String>> techList, int limit) {
+    public List<String> calculateFrequency(List<List<String>> techList, int limit) {
         Map<String, Integer> countTechnologies = calculateMap(techList);
         return calculateTopXTechnologies(countTechnologies, limit);
     }
 
-    public static List<String> calculateTopXFrontEndExperienceTechnologies(ResumeDTO resumeDTO, int limit) {
+    public List<String> calculateTopXFrontEndExperienceTechnologies(ResumeDTO resumeDTO, int limit) {
         List<List<String>> allFrontEndTechnologies = resumeDTO
                 .getExperience()
                 .getExperienceList()
@@ -174,7 +185,7 @@ public class ResumeUtil {
         return calculateFrequency(allFrontEndTechnologies, limit);
     }
 
-    public static List<String> calculateTopXBackEndExperienceTechnologies(ResumeDTO resumeDTO, int limit) {
+    public List<String> calculateTopXBackEndExperienceTechnologies(ResumeDTO resumeDTO, int limit) {
         List<List<String>> allBackEndTechnologies = resumeDTO
                 .getExperience()
                 .getExperienceList()
@@ -186,7 +197,7 @@ public class ResumeUtil {
         return calculateTopXTechnologies(countBackEndTechnologies, limit);
     }
 
-    private static List<String> calculateTopXTechnologies(Map<String, Integer> countBackEndTechnologies, int limit) {
+    private List<String> calculateTopXTechnologies(Map<String, Integer> countBackEndTechnologies, int limit) {
         Map<String, Integer> sortedMap = sortByValue(countBackEndTechnologies);
         return sortedMap.keySet().stream().map(s -> s + " (" + sortedMap.get(s) + ")")
                 .limit(limit)
@@ -194,7 +205,7 @@ public class ResumeUtil {
     }
 
 
-    private static Map<String, Integer> calculateMap(List<List<String>> items) {
+    private Map<String, Integer> calculateMap(List<List<String>> items) {
         Map<String, Integer> result = new HashMap<>();
 
         items.forEach(list -> {
@@ -209,7 +220,7 @@ public class ResumeUtil {
         return result;
     }
 
-    private static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+    private <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
         list.sort(Map.Entry.comparingByValue());
         Collections.reverse(list);
@@ -221,84 +232,84 @@ public class ResumeUtil {
         return result;
     }
 
-    public static String toBooleanString(Boolean bool) {
+    public String toBooleanString(Boolean bool) {
         if (bool == null) {
             return ResumeConst.VALUE_FALSE;
         }
         return bool.toString();
     }
 
-    public static String calculateTimeAgoString(int yearsBetween, int monthsBetween) {
+    public String calculateTimeAgoString(int yearsBetween, int monthsBetween, String locale) {
         StringBuilder sb = new StringBuilder();
         if (yearsBetween > 0) {
             if (yearsBetween == 1) {
-                sb.append(yearsBetween).append(" " + ResumeConst.VALUE_YEAR + " ");
+                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, locale) + " ");
             } else {
-                sb.append(yearsBetween).append(" " + ResumeConst.VALUE_YEARS + " ");
+                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, locale) + " ");
             }
         }
         if (monthsBetween > 0) {
             if (monthsBetween == 1) {
-                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(ResumeConst.VALUE_MONTH).append(" ");
+                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTH, locale)).append(" ");
             } else {
-                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(ResumeConst.VALUE_MONTHS).append(" ");
+                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, locale)).append(" ");
             }
         }
         return sb.toString();
     }
 
 
-    public static String calculateYearsExperienceFrontEndAndBackEnd(ExperienceDTO experienceDTO) {
+    public String calculateYearsExperienceFrontEndAndBackEnd(ExperienceDTO experienceDTO, String locale) {
         Map<String, Boolean> map = new HashMap<>();
         experienceDTO.getExperienceList().forEach(experienceItemDTO -> {
             fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
         });
-        return calculateTimeExperience(map);
+        return calculateTimeExperience(map, locale);
     }
 
-    public static String calculateYearsExperienceFrontEnd(List<ExperienceItemDTO> list) {
+    public String calculateYearsExperienceFrontEnd(List<ExperienceItemDTO> list, String locale) {
         Map<String, Boolean> map = new HashMap<>();
         list.stream().filter(ExperienceItemDTO::getIsWorkedAsFrontEndDeveloper).forEach(experienceItemDTO -> {
             fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
         });
-        return calculateTimeExperience(map);
+        return calculateTimeExperience(map, locale);
     }
 
-    public static String calculateYearsExperienceBackEnd(List<ExperienceItemDTO> list) {
+    public String calculateYearsExperienceBackEnd(List<ExperienceItemDTO> list, String locale) {
         Map<String, Boolean> map = new HashMap<>();
         list.stream().filter(ExperienceItemDTO::getIsWorkedAsBackEndDeveloper).forEach(experienceItemDTO -> {
             fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
         });
-        return calculateTimeExperience(map);
+        return calculateTimeExperience(map, locale);
     }
 
-    private static String calculateTimeExperience(Map<String, Boolean> map) {
+    private String calculateTimeExperience(Map<String, Boolean> map, String locale) {
         int size = map.keySet().size();
         int years = size / MONTHS_IN_YEAR;
         int months = size % MONTHS_IN_YEAR;
-        return getStringOfYearsOfExperience(years, months);
+        return getStringOfYearsOfExperience(years, months, locale);
     }
 
-    public static String getStringOfYearsOfExperience(int years, int months) {
+    public String getStringOfYearsOfExperience(int years, int months, String locale) {
         String result = "";
         if (years > 0) {
-            String yearsString = years + " " + ResumeConst.VALUE_YEARS;
+            String yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, locale);
             if (years == 1) {
-                yearsString = years + " " + ResumeConst.VALUE_YEAR;
+                yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, locale);
             }
             result += yearsString;
         }
         if (months > 0) {
-            String monthsString = (!result.isEmpty() ? " " : "") + months + " " + ResumeConst.VALUE_MONTHS;
+            String monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, locale);
             if (months == 1) {
-                monthsString = (!result.isEmpty() ? " " : "") + months + " " + ResumeConst.VALUE_MONTH;
+                monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTH, locale);
             }
             result += monthsString;
         }
         return result;
     }
 
-    private static void fillMap(LocalDate dateFrom, LocalDate dateTo, Map<String, Boolean> map) {
+    private void fillMap(LocalDate dateFrom, LocalDate dateTo, Map<String, Boolean> map) {
         LocalDate start = dateFrom;
         if (dateTo == null) {
             dateTo = LocalDate.now();
@@ -309,24 +320,24 @@ public class ResumeUtil {
         }
     }
 
-    private static boolean isYearAndMonthEquals(LocalDate dateTo, LocalDate start) {
+    private boolean isYearAndMonthEquals(LocalDate dateTo, LocalDate start) {
         return start.getYear() == dateTo.getYear() && start.getMonth() == dateTo.getMonth();
     }
 
 
-    public static List<String> technologiesToYearsOfExperience(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit) {
+    public List<String> technologiesToYearsOfExperience(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit, String locale) {
         return calculateYearsOfExperiencePerTechnology(experienceItemList, type, limit)
-                .map(Object::toString)
+                .map(item -> item.getTechnology() + " (" + this.getStringOfYearsOfExperience(item.getYears(), item.getMonths(), locale) + ")")
                 .collect(Collectors.toList());
     }
 
-    public static List<String> technologiesToYearsOfExperienceLight(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit) {
+    public List<String> technologiesToYearsOfExperienceLight(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit) {
         return calculateYearsOfExperiencePerTechnology(experienceItemList, type, limit)
                 .map(TechExperienceDTO::getTechnology)
                 .collect(Collectors.toList());
     }
 
-    private static Stream<TechExperienceDTO> calculateYearsOfExperiencePerTechnology(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit) {
+    private Stream<TechExperienceDTO> calculateYearsOfExperiencePerTechnology(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit) {
         return experienceItemList
                 .stream()
                 .filter(item -> isWorkedAsType(type, item))
@@ -339,11 +350,11 @@ public class ResumeUtil {
                 .limit(limit);
     }
 
-    private static List<String> chooseListByDevType(ExperienceType type, ExperienceItemDTO item) {
+    private List<String> chooseListByDevType(ExperienceType type, ExperienceItemDTO item) {
         return ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList() : item.getFrontEndTechnologyList();
     }
 
-    private static TechExperienceDTO calculateYearsOfExperienceByTechnology(String technology, List<ExperienceItemDTO> experienceItemList, ExperienceType type) {
+    private TechExperienceDTO calculateYearsOfExperienceByTechnology(String technology, List<ExperienceItemDTO> experienceItemList, ExperienceType type) {
         Map<String, Boolean> map = new HashMap<>();
         experienceItemList.stream()
                 .filter(item -> isWorkedAsType(type, item))
@@ -357,11 +368,11 @@ public class ResumeUtil {
         return new TechExperienceDTO(technology, years, months, size);
     }
 
-    private static boolean chooseListByDevType(String technology, ExperienceType type, ExperienceItemDTO item) {
+    private boolean chooseListByDevType(String technology, ExperienceType type, ExperienceItemDTO item) {
         return ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList().contains(technology) : item.getFrontEndTechnologyList().contains(technology);
     }
 
-    private static Boolean isWorkedAsType(ExperienceType type, ExperienceItemDTO item) {
+    private Boolean isWorkedAsType(ExperienceType type, ExperienceItemDTO item) {
         return ExperienceType.BACK_END.equals(type) ? item.getIsWorkedAsBackEndDeveloper() : item.getIsWorkedAsFrontEndDeveloper();
     }
 }

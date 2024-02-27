@@ -32,4 +32,5 @@ public class ResumeDTO {
     private SkillsMatrixDTO skillsMatrix;
     private OtherDTO other;
     private CertificatesDTO certificates;
+    private String localeName;
 }

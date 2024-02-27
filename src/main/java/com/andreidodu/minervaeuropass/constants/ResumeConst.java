@@ -60,26 +60,12 @@ public interface ResumeConst {
     // TODO load the translation from DB
     String VALUE_FALSE = "false";
     // TODO load the translation from DB
-    String VALUE_YEAR = "anno";
-    // TODO load the translation from DB
-    String VALUE_YEARS = "anni";
-    // TODO load the translation from DB
-    String VALUE_MONTH = "mese";
-    // TODO load the translation from DB
-    String VALUE_MONTHS = "mesi";
+
     String FIELD_JOB_DURATION = "jobDuration";
     String FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE = "yearsAndMonthsOfExperience";
     String FIELD_OTHER_TITLE = "otherTitle";
     String FIELD_OTHER_DESCRIPTION = "otherDescription";
     String FIELD_OTHER_LIST = "otherList";
-    // TODO load the translation from DB
-    String VALUE_MATCH = "corrispondenza";
-    // TODO load the translation from DB
-    String VALUE_MATCHES = "corrispondenze";
-    // TODO load the translation from DB
-    String VALUE_BACK_END_TECHNOLOGIES = "Frequenza tecnologie lato back-end";
-    // TODO load the translation from DB
-    String VALUE_FRONT_END_TECHNOLOGIES = "Frequenza Tecnologie lato front-end";
     String FIELD_INTRODUCTION_FOOTER = "introductionFooter";
     String FIELD_TOP_ROLES_BY_EXPERIENCE = "topRolesByExperience";
     String FIELD_TOP_ROLES_BY_PERSONAL_PROJECTS = "topRolesByPersonalProjects";
@@ -95,16 +81,6 @@ public interface ResumeConst {
     String FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_PERSONAL_PROJECTS = "yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects";
     String FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_EXPERIENCE = "yearsOfExperiencePerSingleBackEndTechnologyInExperience";
     String FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_EXPERIENCE = "yearsOfExperiencePerSingleFrontEndTechnologyInExperience";
-    // TODO load the translation from DB
-    String VALUE_FRONT_END_EXPERIENCE = "Esperienza con il front-end";
-    // TODO load the translation from DB
-    String VALUE_BACK_END_EXPERIENCE = "Esperienza con il back-end";
-    // TODO load the translation from DB
-    String VALUE_FRONT_END_ROLE = "Ruolo da front-end developer";
-    // TODO load the translation from DB
-    String VALUE_BACK_END_ROLE = "Ruolo da back-end developer";
-    // TODO load the translation from DB
-    String VALUE_TODAY = "oggi";
     String FIELD_ENABLE_SUMMARY_RESULTS_TECH_FREQUENCY = "enableSummaryResultsTechFrequency";
     String FIELD_ENABLE_SUMMARY_RESULTS_TECH_YEARS_EXPERIENCE = "enableSummaryResultsTechYearsExperience";
     String FIELD_ENABLE_SUMMARY = "enableSummary";

@@ -5,19 +5,26 @@ import com.andreidodu.minervaeuropass.dto.ExperienceItemDTO;
 import com.andreidodu.minervaeuropass.dto.UrlDTO;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
+@RequiredArgsConstructor
 public class ExperienceCommonFillerUtil {
+    private final ResumeUtil resumeUtil;
+    private final DateUtil dateUtil;
 
-    public static List<Map<String, Object>> experiencesToListMap(List<ExperienceItemDTO> experienceList) {
+
+    public List<Map<String, Object>> experiencesToListMap(List<ExperienceItemDTO> experienceList, String locale) {
         return experienceList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
             result.put(ResumeConst.FIELD_DATE_FROM, DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
-            result.put(ResumeConst.FIELD_DATE_TO, DateUtil.calculateDateTo(item.getDateTo()));
+            result.put(ResumeConst.FIELD_DATE_TO, dateUtil.calculateDateTo(item.getDateTo(), locale));
             result.put(ResumeConst.FIELD_JOB_TITLE, item.getJobTitle());
             result.put(ResumeConst.FIELD_WORKING_METHODOLOGY, item.getWorkingMethodology());
             result.put(ResumeConst.FIELD_NAME, item.getName());
@@ -26,11 +33,11 @@ public class ExperienceCommonFillerUtil {
             result.put(ResumeConst.FIELD_MAIN_ACTIVITIES, item.getMainActivities());
             result.put(ResumeConst.FIELD_COMPANY, item.getCustomer());
             result.put(ResumeConst.FIELD_SECTOR, item.getSector());
-            result.put(ResumeConst.FIELD_IS_WORKED_AS_FRONT_END_DEVELOPER, ResumeUtil.toBooleanString(item.getIsWorkedAsFrontEndDeveloper()));
-            result.put(ResumeConst.FIELD_IS_WORKED_AS_BACK_END_DEVELOPER, ResumeUtil.toBooleanString(item.getIsWorkedAsBackEndDeveloper()));
-            result.put(ResumeConst.FIELD_BACK_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getBackEndTechnologyList()));
-            result.put(ResumeConst.FIELD_FRONT_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getFrontEndTechnologyList()));
-            result.put(ResumeConst.FIELD_TOOL_LIST, ResumeUtil.listToString(item.getToolList()));
+            result.put(ResumeConst.FIELD_IS_WORKED_AS_FRONT_END_DEVELOPER, resumeUtil.toBooleanString(item.getIsWorkedAsFrontEndDeveloper()));
+            result.put(ResumeConst.FIELD_IS_WORKED_AS_BACK_END_DEVELOPER, resumeUtil.toBooleanString(item.getIsWorkedAsBackEndDeveloper()));
+            result.put(ResumeConst.FIELD_BACK_END_TECHNOLOGY_LIST, resumeUtil.listToString(item.getBackEndTechnologyList()));
+            result.put(ResumeConst.FIELD_FRONT_END_TECHNOLOGY_LIST, resumeUtil.listToString(item.getFrontEndTechnologyList()));
+            result.put(ResumeConst.FIELD_TOOL_LIST, resumeUtil.listToString(item.getToolList()));
             if (item.getUrlList() != null && !item.getUrlList().isEmpty()) {
                 result.put(ResumeConst.FIELD_URL_LIST, urlListToListMap(item.getUrlList()));
             }
@@ -38,7 +45,7 @@ public class ExperienceCommonFillerUtil {
             int monthsBetween = DateUtil.calculateMonthsBetween(item.getDateFrom(), item.getDateTo());
             int yearsBetween = DateUtil.calculateYearsBetween(item.getDateFrom(), item.getDateTo());
 
-            result.put(ResumeConst.FIELD_JOB_DURATION, ResumeUtil.calculateTimeAgoString(yearsBetween, monthsBetween + 1));
+            result.put(ResumeConst.FIELD_JOB_DURATION, resumeUtil.calculateTimeAgoString(yearsBetween, monthsBetween + 1, locale));
 
             return result;
         }).toList();

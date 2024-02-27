@@ -2,8 +2,10 @@ package com.andreidodu.minervaeuropass.service.impl.filler;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
+import com.andreidodu.minervaeuropass.constants.TranslationConst;
 import com.andreidodu.minervaeuropass.dto.CertificateItemDTO;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
+import com.andreidodu.minervaeuropass.service.TranslationService;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,9 @@ import java.util.*;
 public class CertificateFillerUtil {
 
     private final TemplateConfiguration templateConfiguration;
+    private final ResumeUtil resumeUtil;
+    private final TranslationService translationService;
+
 
     public void fillUppCertificate(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getCertificates() != null) {
@@ -37,8 +42,8 @@ public class CertificateFillerUtil {
             result.put(ResumeConst.FIELD_DESCRIPTION, item.getDescription());
             result.put(ResumeConst.FIELD_DATE, DateUtil.formatLocalDate(item.getDate(), DateUtil.PATTERN_MMM_YYYY));
             result.put(ResumeConst.FIELD_LINK, item.getLink());
-            result.put(ResumeConst.FIELD_BACK_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getBackEndTechnologyList()));
-            result.put(ResumeConst.FIELD_FRONT_END_TECHNOLOGY_LIST, ResumeUtil.listToString(item.getFrontEndTechnologyList()));
+            result.put(ResumeConst.FIELD_BACK_END_TECHNOLOGY_LIST, resumeUtil.listToString(item.getBackEndTechnologyList()));
+            result.put(ResumeConst.FIELD_FRONT_END_TECHNOLOGY_LIST, resumeUtil.listToString(item.getFrontEndTechnologyList()));
 
             return result;
         }).toList();
@@ -48,15 +53,17 @@ public class CertificateFillerUtil {
         List<Map<String, String>> res = new ArrayList<>();
 
         Map<String, String> topX = new HashMap<>();
-        List<String> getTopXBackEndTechnologies = ResumeUtil.calculateTopXFrequencyBackEndCertificatesTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
-        topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_BACK_END_TECHNOLOGIES);
-        topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXBackEndTechnologies));
+        List<String> getTopXBackEndTechnologies = resumeUtil.calculateTopXFrequencyBackEndCertificatesTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
+        topX.put(ResumeConst.FIELD_KEY,
+                this.translationService.retrieveTranslation(TranslationConst.KEY_FREQUENCY_BACK_END_TECHNOLOGY, resumeDTO.getLocaleName())
+        );
+        topX.put(ResumeConst.FIELD_VALUE, resumeUtil.listToString(getTopXBackEndTechnologies));
         res.add(topX);
 
         topX = new HashMap<>();
-        List<String> getTopXFrontEndTechnologies = ResumeUtil.calculateTopXFrequencyFrontEndCertificatesTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
-        topX.put(ResumeConst.FIELD_KEY, ResumeConst.VALUE_FRONT_END_TECHNOLOGIES);
-        topX.put(ResumeConst.FIELD_VALUE, ResumeUtil.listToString(getTopXFrontEndTechnologies));
+        List<String> getTopXFrontEndTechnologies = resumeUtil.calculateTopXFrequencyFrontEndCertificatesTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
+        topX.put(ResumeConst.FIELD_KEY, this.translationService.retrieveTranslation(TranslationConst.KEY_FREQUENCY_FRONT_END_TECHNOLOGY, resumeDTO.getLocaleName()));
+        topX.put(ResumeConst.FIELD_VALUE, resumeUtil.listToString(getTopXFrontEndTechnologies));
         res.add(topX);
         return res;
     }

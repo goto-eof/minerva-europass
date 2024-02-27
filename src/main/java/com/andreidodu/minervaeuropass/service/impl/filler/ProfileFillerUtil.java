@@ -21,6 +21,7 @@ public class ProfileFillerUtil {
 
     private final FileUtil fileUtil;
     private final TemplateConfiguration templateConfiguration;
+    private final ResumeUtil resumeUtil;
 
     public void fillUpProfile(ResumeDTO resumeDTO, Map<String, Object> result) throws IOException {
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
@@ -28,10 +29,10 @@ public class ProfileFillerUtil {
         result.put(ResumeConst.FIELD_CITY, resumeDTO.getCity());
         result.put(ResumeConst.FIELD_COUNTY, resumeDTO.getCounty());
         result.put(ResumeConst.FIELD_COUNTRY, resumeDTO.getCountry());
-        result.put(ResumeConst.FIELD_CITIZENSHIP, ResumeUtil.listToString(resumeDTO.getCitizenshipList()));
-        result.put(ResumeConst.FIELD_EMAIL_LIST, ResumeUtil.listToListMap(resumeDTO.getEmailMap()));
-        result.put(ResumeConst.FIELD_URL_LIST, ResumeUtil.listToListMap(resumeDTO.getUrlMap()));
-        result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, ResumeUtil.listToListMap(resumeDTO.getPhoneNumberMap()));
+        result.put(ResumeConst.FIELD_CITIZENSHIP, resumeUtil.listToString(resumeDTO.getCitizenshipList()));
+        result.put(ResumeConst.FIELD_EMAIL_LIST, resumeUtil.listToListMap(resumeDTO.getEmailMap()));
+        result.put(ResumeConst.FIELD_URL_LIST, resumeUtil.listToListMap(resumeDTO.getUrlMap()));
+        result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, resumeUtil.listToListMap(resumeDTO.getPhoneNumberMap()));
         result.put(ResumeConst.FIELD_BIRTH_DATE, DateUtil.formatLocalDate(resumeDTO.getBirthDate(), DateUtil.PATTERN_DD_MM_YYYY));
         result.put(ResumeConst.FIELD_YEARS_OLD, String.valueOf(DateUtil.calculateYearsOld(resumeDTO.getBirthDate(), LocalDate.now())));
 
@@ -44,20 +45,20 @@ public class ProfileFillerUtil {
         result.put(ResumeConst.FIELD_GENERATED_ON, DateUtil.formatLocalDate(LocalDate.now(), DateUtil.PATTERN_DD_MM_YYYY));
         result.put(ResumeConst.FIELD_JOB_TITLE, resumeDTO.getJobTitle());
 
-        result.put(ResumeConst.FIELD_MAIN_SKILLS, ResumeUtil.listToString(resumeDTO.getMainSkillList()));
-        result.put(ResumeConst.FIELD_LANGUAGES, ResumeUtil.listToString(resumeDTO.getLanguageList()));
+        result.put(ResumeConst.FIELD_MAIN_SKILLS, resumeUtil.listToString(resumeDTO.getMainSkillList()));
+        result.put(ResumeConst.FIELD_LANGUAGES, resumeUtil.listToString(resumeDTO.getLanguageList()));
 
         String path = fileUtil.saveImage(resumeDTO.getImage());
         result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
-        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, ResumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience()));
+        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, resumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience(), resumeDTO.getLocaleName()));
 
         if (templateConfiguration.getShowTopBackEndTechnologies()) {
-            String topXMainBackEndTechnologies = ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxNumberTopBackEndTechnologies()));
+            String topXMainBackEndTechnologies = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxNumberTopBackEndTechnologies()));
             result.put(ResumeConst.FIELD_TOP_X_MAIN_BACK_END_TECHNOLOGIES, topXMainBackEndTechnologies);
         }
         if (templateConfiguration.getShowTopFrontEndTechnologies()) {
-            String topXMainFrontEndTechnologies = ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxNumberTopFrontEndTechnologies()));
+            String topXMainFrontEndTechnologies = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxNumberTopFrontEndTechnologies()));
             result.put(ResumeConst.FIELD_TOP_X_MAIN_FRONT_END_TECHNOLOGIES, topXMainFrontEndTechnologies);
         }
 
