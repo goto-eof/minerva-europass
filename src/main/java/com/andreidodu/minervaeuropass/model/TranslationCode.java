@@ -17,10 +17,8 @@ public class TranslationCode extends ModelCommon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "code")
     private String code;
 
     @OneToMany(mappedBy = "translationCode", fetch = FetchType.LAZY,

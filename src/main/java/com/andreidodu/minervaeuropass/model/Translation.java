@@ -14,10 +14,8 @@ public class Translation extends ModelCommon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "translation")
     private String translation;
 
     @ManyToOne(fetch = FetchType.LAZY)

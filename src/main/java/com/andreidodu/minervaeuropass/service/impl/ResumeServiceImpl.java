@@ -23,7 +23,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final PersonalProjectsFillerUtil personalProjectsFillerUtil;
     private final EducationFillerUtil educationFillerUtil;
     private final OtherSkillsFillerUtil otherSkillsFillerUtil;
-    private final SkillMatrixFillerUtil skillMatrixFilleUtil;
+    private final SkillMatrixFillerUtil skillMatrixFillerUtil;
     private final OtherFillerUtil otherFillerUtil;
     private final CertificateFillerUtil certificateFillerUtil;
     private final TemplateSettingFillerUtil templateSettingFillerUtil;
@@ -54,7 +54,7 @@ public class ResumeServiceImpl implements ResumeService {
         personalProjectsFillerUtil.fillUpPersonalProjects(resumeDTO, result);
         educationFillerUtil.fillUpEducation(resumeDTO, result);
         otherSkillsFillerUtil.fillUpOtherSkills(resumeDTO, result);
-        skillMatrixFilleUtil.fillUpSkillsMatrix(resumeDTO, result);
+        skillMatrixFillerUtil.fillUpSkillsMatrix(resumeDTO, result);
         otherFillerUtil.fillUpOther(resumeDTO, result);
         certificateFillerUtil.fillUppCertificate(resumeDTO, result);
         templateSettingFillerUtil.fillUpTemplateSetting(resumeDTO, result);
