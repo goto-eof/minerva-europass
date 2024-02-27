@@ -4,6 +4,7 @@ import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
+import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.FileUtil;
@@ -51,7 +52,7 @@ public class ProfileFillerUtil {
         String path = fileUtil.saveImage(resumeDTO.getImage());
         result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
-        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, resumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience(), resumeDTO.getLocaleName()));
+        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, resumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience()));
 
         if (templateConfiguration.getShowTopBackEndTechnologies()) {
             String topXMainBackEndTechnologies = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxNumberTopBackEndTechnologies()));

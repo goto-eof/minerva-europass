@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApplicationDTO {
+public class RequestContextDTO {
 
     private String locale;
 

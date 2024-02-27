@@ -3,6 +3,7 @@ package com.andreidodu.minervaeuropass.service.impl.filler;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.ExperienceItemDTO;
 import com.andreidodu.minervaeuropass.dto.UrlDTO;
+import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +20,12 @@ public class ExperienceCommonFillerUtil {
     private final DateUtil dateUtil;
 
 
-    public List<Map<String, Object>> experiencesToListMap(List<ExperienceItemDTO> experienceList, String locale) {
+    public List<Map<String, Object>> experiencesToListMap(List<ExperienceItemDTO> experienceList) {
         return experienceList.stream().map(item -> {
             Map<String, Object> result = new HashMap<>();
 
             result.put(ResumeConst.FIELD_DATE_FROM, DateUtil.formatLocalDate(item.getDateFrom(), DateUtil.PATTERN_MMM_YYYY));
-            result.put(ResumeConst.FIELD_DATE_TO, dateUtil.calculateDateTo(item.getDateTo(), locale));
+            result.put(ResumeConst.FIELD_DATE_TO, dateUtil.calculateDateTo(item.getDateTo()));
             result.put(ResumeConst.FIELD_JOB_TITLE, item.getJobTitle());
             result.put(ResumeConst.FIELD_WORKING_METHODOLOGY, item.getWorkingMethodology());
             result.put(ResumeConst.FIELD_NAME, item.getName());
@@ -45,7 +46,7 @@ public class ExperienceCommonFillerUtil {
             int monthsBetween = DateUtil.calculateMonthsBetween(item.getDateFrom(), item.getDateTo());
             int yearsBetween = DateUtil.calculateYearsBetween(item.getDateFrom(), item.getDateTo());
 
-            result.put(ResumeConst.FIELD_JOB_DURATION, resumeUtil.calculateTimeAgoString(yearsBetween, monthsBetween + 1, locale));
+            result.put(ResumeConst.FIELD_JOB_DURATION, resumeUtil.calculateTimeAgoString(yearsBetween, monthsBetween + 1));
 
             return result;
         }).toList();

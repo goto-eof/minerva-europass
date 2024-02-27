@@ -23,7 +23,7 @@ one resume template.
 
 - resume sections:
   - profile (picture, emails, phone numbers, languages, location etc.)
-  - introduction
+  - introductionw
   - job experience
   - education
   - skill matrix

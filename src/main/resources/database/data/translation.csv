@@ -1,39 +1,39 @@
-translation_code_id,locale_name,translation,version
-1,"en_US","year",0
-1,"it_IT","anno",0
+translation_code_id,language_id,translation,version
+1,1,"year",0
+1,2,"anno",0
 
-2,"en_US","years",0
-2,"it_IT","anni",0
+2,1,"years",0
+2,2,"anni",0
 
-3,"en_US","month",0
-3,"it_IT","mese",0
+3,1,"month",0
+3,2,"mese",0
 
-4,"en_US","months",0
-4,"it_IT","mesi",0
+4,1,"months",0
+4,2,"mesi",0
 
-5,"en_US","match",0
-5,"it_IT","corrispondenza",0
+5,1,"match",0
+5,2,"corrispondenza",0
 
-6,"en_US","matches",0
-6,"it_IT","corrispondenze",0
+6,1,"matches",0
+6,2,"corrispondenze",0
 
-7,"en_US","Back-end technologies frequency",0
-7,"it_IT","Frequenza tecnologie lato back-end",0
+7,1,"Back-end technologies frequency",0
+7,2,"Frequenza tecnologie lato back-end",0
 
-8,"en_US","Front-end technologies frequency",0
-8,"it_IT","Frequenza Tecnologie lato front-end",0
+8,1,"Front-end technologies frequency",0
+8,2,"Frequenza Tecnologie lato front-end",0
 
-9,"en_US","Front-end experience",0
-9,"it_IT","Esperienza con il front-end",0
+9,1,"Front-end experience",0
+9,2,"Esperienza con il front-end",0
 
-10,"en_US","Back-end experience",0
-10,"it_IT","Esperienza con il back-end",0
+10,1,"Back-end experience",0
+10,2,"Esperienza con il back-end",0
 
-11,"en_US","Back-end developer role",0
-11,"it_IT","Ruolo da back-end developer",0
+11,1,"Back-end developer role",0
+11,2,"Ruolo da back-end developer",0
 
-12,"en_US","Front-end develoepr role",0
-12,"it_IT","Ruolo da front-end developer",0
+12,1,"Front-end develoepr role",0
+12,2,"Ruolo da front-end developer",0
 
-13,"en_US","today",0
-13,"it_IT","oggi",0
+13,1,"today",0
+13,2,"oggi",0

@@ -19,7 +19,7 @@ public class TranslationServiceImpl implements TranslationService {
     @Override
     public String retrieveTranslation(final String code, final String language) {
         return this.translationRepository
-                .findByLocaleNameAndTranslationCode_Code(language, code)
+                .findByLanguage_LocalNameAndTranslationCode_Code(language, code)
                 .orElseThrow(() -> new ApplicationException("translation not found"))
                 .getTranslation();
     }

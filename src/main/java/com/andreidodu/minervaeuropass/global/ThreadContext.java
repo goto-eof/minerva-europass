@@ -1,14 +1,18 @@
-package com.andreidodu.minervaeuropass;
+package com.andreidodu.minervaeuropass.global;
+
+import com.andreidodu.minervaeuropass.constants.ApplicationConst;
+import com.andreidodu.minervaeuropass.dto.RequestContextDTO;
 
 public class ThreadContext {
 
-    private static final ThreadLocal<String> CONTEXT = new ThreadLocal<>();
+    private static final ThreadLocal<RequestContextDTO> CONTEXT = (new ThreadLocal<>())
+            .withInitial(() -> new RequestContextDTO(ApplicationConst.DEFAULT_LOCALE));
 
-    public static void setLocale(String locale) {
-        CONTEXT.set(locale);
+    public static void setRequestContext(RequestContextDTO requestContextDTO) {
+        CONTEXT.set(requestContextDTO);
     }
 
-    public static String getLocale() {
+    public static RequestContextDTO getRequestContext() {
         return CONTEXT.get();
     }
 

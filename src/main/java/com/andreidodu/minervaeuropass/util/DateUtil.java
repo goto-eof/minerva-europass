@@ -1,7 +1,7 @@
 package com.andreidodu.minervaeuropass.util;
 
-import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TranslationConst;
+import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,9 +28,9 @@ public class DateUtil {
                 .getYears();
     }
 
-    public String calculateDateTo(LocalDate dateTo, String locale) {
+    public String calculateDateTo(LocalDate dateTo) {
         if (dateTo == null) {
-            return translationService.retrieveTranslation(TranslationConst.KEY_TODAY, locale);
+            return translationService.retrieveTranslation(TranslationConst.KEY_TODAY, ThreadContext.getRequestContext().getLocale());
         }
         return DateUtil.formatLocalDate(dateTo, DateUtil.PATTERN_MMM_YYYY);
     }

@@ -5,6 +5,7 @@ import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.constants.TranslationConst;
 import com.andreidodu.minervaeuropass.dto.CertificateItemDTO;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
+import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
@@ -55,14 +56,14 @@ public class CertificateFillerUtil {
         Map<String, String> topX = new HashMap<>();
         List<String> getTopXBackEndTechnologies = resumeUtil.calculateTopXFrequencyBackEndCertificatesTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
         topX.put(ResumeConst.FIELD_KEY,
-                this.translationService.retrieveTranslation(TranslationConst.KEY_FREQUENCY_BACK_END_TECHNOLOGY, resumeDTO.getLocaleName())
+                this.translationService.retrieveTranslation(TranslationConst.KEY_FREQUENCY_BACK_END_TECHNOLOGY, ThreadContext.getRequestContext().getLocale())
         );
         topX.put(ResumeConst.FIELD_VALUE, resumeUtil.listToString(getTopXBackEndTechnologies));
         res.add(topX);
 
         topX = new HashMap<>();
         List<String> getTopXFrontEndTechnologies = resumeUtil.calculateTopXFrequencyFrontEndCertificatesTechnologies(resumeDTO, templateConfiguration.getMaxSummaryResultsTechFrequency());
-        topX.put(ResumeConst.FIELD_KEY, this.translationService.retrieveTranslation(TranslationConst.KEY_FREQUENCY_FRONT_END_TECHNOLOGY, resumeDTO.getLocaleName()));
+        topX.put(ResumeConst.FIELD_KEY, this.translationService.retrieveTranslation(TranslationConst.KEY_FREQUENCY_FRONT_END_TECHNOLOGY, ThreadContext.getRequestContext().getLocale()));
         topX.put(ResumeConst.FIELD_VALUE, resumeUtil.listToString(getTopXFrontEndTechnologies));
         res.add(topX);
         return res;

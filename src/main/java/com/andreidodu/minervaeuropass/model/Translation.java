@@ -20,8 +20,9 @@ public class Translation extends ModelCommon {
     @Column(name = "translation")
     private String translation;
 
-    @Column(name = "locale_name")
-    private String localeName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_id", nullable = false)
+    private Language language;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "translation_code_id", nullable = false)

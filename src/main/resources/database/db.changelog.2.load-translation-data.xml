@@ -4,11 +4,15 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <changeSet author="Andrei Dodu" id="2024-02-27-003">
+    <changeSet author="Andrei Dodu" id="2024-02-27-004">
         <loadData file="database/data/translation-code.csv" tableName="${tablePrefix}translation_code"/>
     </changeSet>
 
-    <changeSet author="Andrei Dodu" id="2024-02-27-004">
+    <changeSet author="Andrei Dodu" id="2024-02-27-005">
+        <loadData file="database/data/language.csv" tableName="${tablePrefix}language"/>
+    </changeSet>
+
+    <changeSet author="Andrei Dodu" id="2024-02-27-006">
         <loadData file="database/data/translation.csv" tableName="${tablePrefix}translation"/>
     </changeSet>
 

@@ -16,10 +16,39 @@
             <column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimestamp}"/>
             <column name="version" type="INT"/>
         </createTable>
+
+        <addUniqueConstraint
+                columnNames="code"
+                constraintName="u_tra_code"
+                tableName="${tablePrefix}translation_code"
+                validate="true"/>
     </changeSet>
 
 
     <changeSet id="2024-02-27-002" author="Andrei Dodu">
+        <createTable tableName="${tablePrefix}language">
+            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_language"/>
+            </column>
+            <column name="language" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locale_name" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="insert_date" type="DATETIME" defaultValueComputed="${defaultTimestamp}"/>
+            <column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimestamp}"/>
+            <column name="version" type="INT"/>
+        </createTable>
+
+        <addUniqueConstraint
+                columnNames="locale_name"
+                constraintName="u_locale_name"
+                tableName="${tablePrefix}language"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet id="2024-02-27-003" author="Andrei Dodu">
         <createTable tableName="${tablePrefix}translation">
             <column autoIncrement="${autoIncrement}" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_translation"/>
@@ -27,8 +56,9 @@
             <column name="translation" type="VARCHAR(512)">
                 <constraints nullable="false"/>
             </column>
-            <column name="locale_name" type="VARCHAR(10)">
-                <constraints nullable="false"/>
+            <column name="language_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_translation_language"
+                             references="${tablePrefix}language(id)"/>
             </column>
             <column name="translation_code_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_translation_translation_code"
@@ -38,6 +68,12 @@
             <column name="update_date" type="DATETIME" defaultValueComputed="${defaultTimestamp}"/>
             <column name="version" type="INT"/>
         </createTable>
+
+        <addUniqueConstraint
+                columnNames="language_id, translation_code_id"
+                constraintName="u_lan_id_tra_id"
+                tableName="${tablePrefix}translation"
+                validate="true"/>
     </changeSet>
 
 

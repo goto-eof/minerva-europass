@@ -3,6 +3,7 @@ package com.andreidodu.minervaeuropass.util;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TranslationConst;
 import com.andreidodu.minervaeuropass.dto.*;
+import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
 import lombok.RequiredArgsConstructor;
@@ -57,15 +58,15 @@ public class ResumeUtil {
                 .count();
 
         Map<String, Long> countFrontEndTechnologies = new HashMap<>();
-        countFrontEndTechnologies.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_ROLE, resumeDTO.getLocaleName())
+        countFrontEndTechnologies.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_ROLE, ThreadContext.getRequestContext().getLocale())
                 , frontEndRoleCount);
-        countFrontEndTechnologies.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_ROLE, resumeDTO.getLocaleName())
+        countFrontEndTechnologies.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_ROLE, ThreadContext.getRequestContext().getLocale())
                 , backEndRoleCount);
         final Map<String, Long> sortedCountFrontEndTechnologies = sortByValue(countFrontEndTechnologies);
         return sortedCountFrontEndTechnologies
                 .entrySet()
                 .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, (entry) -> this.calculateRoleValue(entry, resumeDTO.getLocaleName())));
+                .collect(Collectors.toMap(Map.Entry::getKey, this::calculateRoleValue));
     }
 
     public Map<String, String> calculateTopRolesByPersonalProjects(ResumeDTO resumeDTO) {
@@ -84,42 +85,42 @@ public class ResumeUtil {
                 .count();
 
         Map<String, Long> countRolesMap = new HashMap<>();
-        countRolesMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_ROLE, resumeDTO.getLocaleName())
+        countRolesMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_ROLE, ThreadContext.getRequestContext().getLocale())
                 , frontEndRoleCount);
-        countRolesMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_ROLE, resumeDTO.getLocaleName())
+        countRolesMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_ROLE, ThreadContext.getRequestContext().getLocale())
                 , backEndRoleCount);
         final Map<String, Long> sortedCountFrontEndTechnologies = sortByValue(countRolesMap);
         return sortedCountFrontEndTechnologies
                 .entrySet()
                 .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, (entry) -> this.calculateRoleValue(entry, resumeDTO.getLocaleName())));
+                .collect(Collectors.toMap(Map.Entry::getKey, this::calculateRoleValue));
     }
 
-    private String calculateRoleValue(Map.Entry<String, Long> entry, String locale) {
+    private String calculateRoleValue(Map.Entry<String, Long> entry) {
         long value = entry.getValue();
         if (value == 0 || value == 1) {
-            return value + " " + translationService.retrieveTranslation(TranslationConst.KEY_MATCH, locale);
+            return value + " " + translationService.retrieveTranslation(TranslationConst.KEY_MATCH, ThreadContext.getRequestContext().getLocale());
         }
-        return value + " " + translationService.retrieveTranslation(TranslationConst.KEY_MATCHES, locale);
+        return value + " " + translationService.retrieveTranslation(TranslationConst.KEY_MATCHES, ThreadContext.getRequestContext().getLocale());
 
     }
 
 
     public Map<String, String> calculateYearsExperienceByPersonalProjects(ResumeDTO resumeDTO) {
-        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getPersonalProjects().getExperienceList(), resumeDTO.getLocaleName());
-        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getPersonalProjects().getExperienceList(), resumeDTO.getLocaleName());
+        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getPersonalProjects().getExperienceList());
+        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getPersonalProjects().getExperienceList());
         Map<String, String> experienceMap = new HashMap<>();
-        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_EXPERIENCE, resumeDTO.getLocaleName()), frontEndExperience);
-        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_EXPERIENCE, resumeDTO.getLocaleName()), backEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_EXPERIENCE, ThreadContext.getRequestContext().getLocale()), frontEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_EXPERIENCE, ThreadContext.getRequestContext().getLocale()), backEndExperience);
         return experienceMap;
     }
 
     public Map<String, String> calculateYearsExperienceByExperience(ResumeDTO resumeDTO) {
-        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getExperience().getExperienceList(), resumeDTO.getLocaleName());
-        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getExperience().getExperienceList(), resumeDTO.getLocaleName());
+        String frontEndExperience = calculateYearsExperienceFrontEnd(resumeDTO.getExperience().getExperienceList());
+        String backEndExperience = calculateYearsExperienceBackEnd(resumeDTO.getExperience().getExperienceList());
         Map<String, String> experienceMap = new HashMap<>();
-        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_EXPERIENCE, resumeDTO.getLocaleName()), frontEndExperience);
-        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_EXPERIENCE, resumeDTO.getLocaleName()), backEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_FRONT_END_EXPERIENCE, ThreadContext.getRequestContext().getLocale()), frontEndExperience);
+        experienceMap.put(translationService.retrieveTranslation(TranslationConst.KEY_BACK_END_EXPERIENCE, ThreadContext.getRequestContext().getLocale()), backEndExperience);
         return experienceMap;
     }
 
@@ -239,70 +240,70 @@ public class ResumeUtil {
         return bool.toString();
     }
 
-    public String calculateTimeAgoString(int yearsBetween, int monthsBetween, String locale) {
+    public String calculateTimeAgoString(int yearsBetween, int monthsBetween) {
         StringBuilder sb = new StringBuilder();
         if (yearsBetween > 0) {
             if (yearsBetween == 1) {
-                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, locale) + " ");
+                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, ThreadContext.getRequestContext().getLocale()) + " ");
             } else {
-                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, locale) + " ");
+                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, ThreadContext.getRequestContext().getLocale()) + " ");
             }
         }
         if (monthsBetween > 0) {
             if (monthsBetween == 1) {
-                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTH, locale)).append(" ");
+                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTH, ThreadContext.getRequestContext().getLocale())).append(" ");
             } else {
-                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, locale)).append(" ");
+                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, ThreadContext.getRequestContext().getLocale())).append(" ");
             }
         }
         return sb.toString();
     }
 
 
-    public String calculateYearsExperienceFrontEndAndBackEnd(ExperienceDTO experienceDTO, String locale) {
+    public String calculateYearsExperienceFrontEndAndBackEnd(ExperienceDTO experienceDTO) {
         Map<String, Boolean> map = new HashMap<>();
         experienceDTO.getExperienceList().forEach(experienceItemDTO -> {
             fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
         });
-        return calculateTimeExperience(map, locale);
+        return calculateTimeExperience(map);
     }
 
-    public String calculateYearsExperienceFrontEnd(List<ExperienceItemDTO> list, String locale) {
+    public String calculateYearsExperienceFrontEnd(List<ExperienceItemDTO> list) {
         Map<String, Boolean> map = new HashMap<>();
         list.stream().filter(ExperienceItemDTO::getIsWorkedAsFrontEndDeveloper).forEach(experienceItemDTO -> {
             fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
         });
-        return calculateTimeExperience(map, locale);
+        return calculateTimeExperience(map);
     }
 
-    public String calculateYearsExperienceBackEnd(List<ExperienceItemDTO> list, String locale) {
+    public String calculateYearsExperienceBackEnd(List<ExperienceItemDTO> list) {
         Map<String, Boolean> map = new HashMap<>();
         list.stream().filter(ExperienceItemDTO::getIsWorkedAsBackEndDeveloper).forEach(experienceItemDTO -> {
             fillMap(experienceItemDTO.getDateFrom(), experienceItemDTO.getDateTo(), map);
         });
-        return calculateTimeExperience(map, locale);
+        return calculateTimeExperience(map);
     }
 
-    private String calculateTimeExperience(Map<String, Boolean> map, String locale) {
+    private String calculateTimeExperience(Map<String, Boolean> map) {
         int size = map.keySet().size();
         int years = size / MONTHS_IN_YEAR;
         int months = size % MONTHS_IN_YEAR;
-        return getStringOfYearsOfExperience(years, months, locale);
+        return getStringOfYearsOfExperience(years, months);
     }
 
-    public String getStringOfYearsOfExperience(int years, int months, String locale) {
+    public String getStringOfYearsOfExperience(int years, int months) {
         String result = "";
         if (years > 0) {
-            String yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, locale);
+            String yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, ThreadContext.getRequestContext().getLocale());
             if (years == 1) {
-                yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, locale);
+                yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, ThreadContext.getRequestContext().getLocale());
             }
             result += yearsString;
         }
         if (months > 0) {
-            String monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, locale);
+            String monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, ThreadContext.getRequestContext().getLocale());
             if (months == 1) {
-                monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTH, locale);
+                monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTH, ThreadContext.getRequestContext().getLocale());
             }
             result += monthsString;
         }
@@ -325,9 +326,9 @@ public class ResumeUtil {
     }
 
 
-    public List<String> technologiesToYearsOfExperience(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit, String locale) {
+    public List<String> technologiesToYearsOfExperience(List<ExperienceItemDTO> experienceItemList, ExperienceType type, int limit) {
         return calculateYearsOfExperiencePerTechnology(experienceItemList, type, limit)
-                .map(item -> item.getTechnology() + " (" + this.getStringOfYearsOfExperience(item.getYears(), item.getMonths(), locale) + ")")
+                .map(item -> item.getTechnology() + " (" + this.getStringOfYearsOfExperience(item.getYears(), item.getMonths()) + ")")
                 .collect(Collectors.toList());
     }
 
