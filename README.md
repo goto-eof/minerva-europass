@@ -19,7 +19,7 @@ one resume template.
 - Spring Boot
 - Apache FOP
 
-# Features
+## Features
 
 - resume sections:
   - profile (picture, emails, phone numbers, languages, location etc.)
