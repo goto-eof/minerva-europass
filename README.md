@@ -24,7 +24,7 @@ one resume template.
 - calculate years of experience for every job/personal project
 - calculate total years of experience
 - calculate years of experience for every single technology
-- calculate years of experience for front-end/back-end
+- calculate years of experience as front-end/back-end developer
 - calculate technology frequency
 
 ## Configure and run the application
