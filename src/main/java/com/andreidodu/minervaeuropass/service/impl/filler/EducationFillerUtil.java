@@ -1,9 +1,8 @@
 package com.andreidodu.minervaeuropass.service.impl.filler;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
-import com.andreidodu.minervaeuropass.dto.EducationItemDTO;
-import com.andreidodu.minervaeuropass.dto.ResumeDTO;
-import com.andreidodu.minervaeuropass.global.ThreadContext;
+import com.andreidodu.minervaeuropass.dto.resume.EducationItemDTO;
+import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

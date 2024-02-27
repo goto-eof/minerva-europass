@@ -2,7 +2,7 @@ package com.andreidodu.minervaeuropass.util;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TranslationConst;
-import com.andreidodu.minervaeuropass.dto.*;
+import com.andreidodu.minervaeuropass.dto.resume.*;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
 import com.andreidodu.minervaeuropass.types.ExperienceType;

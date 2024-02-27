@@ -1,6 +1,6 @@
 package com.andreidodu.minervaeuropass.controller;
 
-import com.andreidodu.minervaeuropass.dto.ResumeDTO;
+import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.ResumeService;
 import lombok.RequiredArgsConstructor;

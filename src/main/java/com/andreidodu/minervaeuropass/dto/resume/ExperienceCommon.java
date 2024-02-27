@@ -1,4 +1,4 @@
-package com.andreidodu.minervaeuropass.dto;
+package com.andreidodu.minervaeuropass.dto.resume;
 
 import java.util.List;
 

@@ -1,9 +1,8 @@
 package com.andreidodu.minervaeuropass.service.impl.filler;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
-import com.andreidodu.minervaeuropass.dto.ExperienceItemDTO;
-import com.andreidodu.minervaeuropass.dto.UrlDTO;
-import com.andreidodu.minervaeuropass.global.ThreadContext;
+import com.andreidodu.minervaeuropass.dto.resume.ExperienceItemDTO;
+import com.andreidodu.minervaeuropass.dto.resume.UrlDTO;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;

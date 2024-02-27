@@ -1,6 +1,6 @@
 package com.andreidodu.minervaeuropass.service;
 
-import com.andreidodu.minervaeuropass.dto.ResumeDTO;
+import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 
 import java.io.IOException;
 import java.util.Map;
