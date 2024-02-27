@@ -10,3 +10,7 @@ com:
       enable-summary-results-tech-frequency: true
       max-summary-results-tech-years-experience: 10
       max-summary-results-tech-frequency: 10
+      max-number-top-back-end-technologies: 5
+      show-top-back-end-technologies: false
+      max-number-top-front-end-technologies: 5
+      show-top-front-end-technologies: false

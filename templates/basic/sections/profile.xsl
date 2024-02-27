@@ -161,16 +161,44 @@
                         </fo:table-cell>
                     </fo:table-row>
 
-                    <fo:table-row>
-                        <fo:table-cell>
-                            <fo:block padding-top="10px">
-                                <xsl:call-template name="generic-item">
-                                    <xsl:with-param name="value" select="$root/mainSkills"/>
-                                    <xsl:with-param name="title" select="'Competenze principali'"/>
-                                </xsl:call-template>
-                            </fo:block>
-                        </fo:table-cell>
-                    </fo:table-row>
+                    <xsl:if test="$root/mainSkills">
+                        <fo:table-row>
+                            <fo:table-cell>
+                                <fo:block padding-top="10px">
+                                    <xsl:call-template name="generic-item">
+                                        <xsl:with-param name="value" select="$root/mainSkills"/>
+                                        <xsl:with-param name="title" select="'Competenze principali'"/>
+                                    </xsl:call-template>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
+
+                    <xsl:if test="$root/topXMainBackEndTechnologies">
+                        <fo:table-row>
+                            <fo:table-cell>
+                                <fo:block padding-top="10px">
+                                    <fo:inline font-weight="bold">
+                                        <xsl:value-of select="'Competenze principali back-end: '"/>
+                                    </fo:inline>
+                                    <xsl:value-of select="$root/topXMainBackEndTechnologies"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
+
+                    <xsl:if test="$root/topXMainFrontEndTechnologies">
+                        <fo:table-row>
+                            <fo:table-cell>
+                                <fo:block padding-top="10px">
+                                    <fo:inline font-weight="bold">
+                                        <xsl:value-of select="'Competenze principali front-end: '"/>
+                                    </fo:inline>
+                                    <xsl:value-of select="$root/topXMainFrontEndTechnologies"/>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </xsl:if>
 
                     <fo:table-row>
                         <fo:table-cell>

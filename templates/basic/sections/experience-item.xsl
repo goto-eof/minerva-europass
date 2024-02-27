@@ -32,7 +32,7 @@
                         <fo:table-cell number-columns-spanned="4">
                             <fo:block margin-left="5px" padding-top="4px" padding-bottom="4px">
                                 <xsl:value-of select="$item/dateFrom"/>
-                                <xsl:value-of select="' - '"/>
+                                <xsl:value-of select="' ➔ '"/>
                                 <xsl:value-of select="$item/dateTo"/>
                                 <xsl:if test="$item/jobDuration">
                                     <xsl:value-of select="' • '"/>

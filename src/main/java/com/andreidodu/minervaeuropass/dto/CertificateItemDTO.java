@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CertificateItemDTO {
+public class CertificateItemDTO implements ExperienceCommon {
     private String name;
     private String description;
     private LocalDate date;

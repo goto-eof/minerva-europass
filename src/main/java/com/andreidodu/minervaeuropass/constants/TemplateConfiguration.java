@@ -33,4 +33,16 @@ public class TemplateConfiguration {
 
     @Value("${com.andreidodu.minerva-europass.enable-summary}")
     private Boolean enableSummary;
+
+    @Value("${com.andreidodu.minerva-europass.show-top-back-end-technologies}")
+    private Boolean showTopBackEndTechnologies;
+
+    @Value("${com.andreidodu.minerva-europass.max-number-top-back-end-technologies}")
+    private Integer maxNumberTopBackEndTechnologies;
+
+    @Value("${com.andreidodu.minerva-europass.show-top-front-end-technologies}")
+    private Boolean showTopFrontEndTechnologies;
+
+    @Value("${com.andreidodu.minerva-europass.max-number-top-front-end-technologies}")
+    private Integer maxNumberTopFrontEndTechnologies;
 }

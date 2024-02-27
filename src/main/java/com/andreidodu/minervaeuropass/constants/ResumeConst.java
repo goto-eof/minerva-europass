@@ -108,4 +108,7 @@ public interface ResumeConst {
     String FIELD_ENABLE_SUMMARY_RESULTS_TECH_FREQUENCY = "enableSummaryResultsTechFrequency";
     String FIELD_ENABLE_SUMMARY_RESULTS_TECH_YEARS_EXPERIENCE = "enableSummaryResultsTechYearsExperience";
     String FIELD_ENABLE_SUMMARY = "enableSummary";
+    String FIELD_TOP_X_MAIN_BACK_END_TECHNOLOGIES = "topXMainBackEndTechnologies";
+    String FIELD_TOP_X_MAIN_FRONT_END_TECHNOLOGIES = "topXMainFrontEndTechnologies";
+    String KEY_TOP_X_TECHNOLOGIES_FROM_CERTIFICATES = "topXTechnologiesFromCertificates";
 }

@@ -27,8 +27,10 @@ public class ExperienceFillerUtil {
             result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE, res);
             result.put(ResumeConst.FIELD_TOP_ROLES_BY_EXPERIENCE, ResumeUtil.listToListMap(ResumeUtil.calculateTopRolesByExperience(resumeDTO)));
             result.put(ResumeConst.FIELD_YEARS_EXPERIENCE_BY_EXPERIENCE, ResumeUtil.listToListMap(ResumeUtil.calculateYearsExperienceByExperience(resumeDTO)));
-            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_EXPERIENCE, ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
-            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_EXPERIENCE, ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
+            String yearsOfExperiencePerSingleBackEndTechnology = ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience()));
+            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_EXPERIENCE, yearsOfExperiencePerSingleBackEndTechnology);
+            String yearsOfExperiencePerSingleFrontEndTechnology = ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience()));
+            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_EXPERIENCE, yearsOfExperiencePerSingleFrontEndTechnology);
         }
     }
 

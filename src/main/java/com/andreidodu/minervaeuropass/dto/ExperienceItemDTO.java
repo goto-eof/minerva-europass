@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ExperienceItemDTO {
+public class ExperienceItemDTO implements ExperienceCommon {
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private String jobTitle;

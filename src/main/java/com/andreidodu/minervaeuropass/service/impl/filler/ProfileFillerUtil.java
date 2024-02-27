@@ -2,7 +2,9 @@ package com.andreidodu.minervaeuropass.service.impl.filler;
 
 import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
+import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.ResumeDTO;
+import com.andreidodu.minervaeuropass.types.ExperienceType;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.FileUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
@@ -16,7 +18,9 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class ProfileFillerUtil {
+
     private final FileUtil fileUtil;
+    private final TemplateConfiguration templateConfiguration;
 
     public void fillUpProfile(ResumeDTO resumeDTO, Map<String, Object> result) throws IOException {
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
@@ -47,5 +51,15 @@ public class ProfileFillerUtil {
         result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
         result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, ResumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience()));
+
+        if (templateConfiguration.getShowTopBackEndTechnologies()) {
+            String topXMainBackEndTechnologies = ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxNumberTopBackEndTechnologies()));
+            result.put(ResumeConst.FIELD_TOP_X_MAIN_BACK_END_TECHNOLOGIES, topXMainBackEndTechnologies);
+        }
+        if (templateConfiguration.getShowTopFrontEndTechnologies()) {
+            String topXMainFrontEndTechnologies = ResumeUtil.listToString(ResumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxNumberTopFrontEndTechnologies()));
+            result.put(ResumeConst.FIELD_TOP_X_MAIN_FRONT_END_TECHNOLOGIES, topXMainFrontEndTechnologies);
+        }
+
     }
 }

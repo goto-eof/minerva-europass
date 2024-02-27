@@ -157,6 +157,17 @@
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
+                    <xsl:if test="root/enableSummary = 'true'">
+                        <fo:block-container min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="summary">
+                                <xsl:with-param name="root"
+                                                select="root"/>
+                                <xsl:with-param name="title"
+                                                select="'Riepilogo Certificati'"/>
+                                <xsl:with-param name="topX" select="root/topXTechnologiesFromCertificates"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
                 </fo:flow>
             </fo:page-sequence>
 
