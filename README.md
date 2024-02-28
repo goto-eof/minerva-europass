@@ -10,8 +10,8 @@
 
 # Minerva Europass (WIP)
 
-Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. Currently there is only
-one resume template ([demo.pdf](demo.pdf)).
+Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. Currently, there is only
+one resume template. Here is a [demo.pdf](demo.pdf) file and here is the [postman collection](Minerva Europass.postman_collection.json).
 
 ## Technologies
 
