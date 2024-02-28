@@ -109,7 +109,7 @@
                                 <xsl:call-template name="generic-item-same-row-bi-value">
                                     <xsl:with-param name="value1" select="$root/birthDate"/>
                                     <xsl:with-param name="value2" select="$root/yearsOld"/>
-                                    <xsl:with-param name="value2Label" select="'anni'"/>
+                                    <xsl:with-param name="value2Label" select="$root/translateYears"/>
                                     <xsl:with-param name="title" select="$root/translateDateOfBirth"/>
                                 </xsl:call-template>
                             </fo:block>

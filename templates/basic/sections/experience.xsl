@@ -22,7 +22,7 @@
                     <fo:table-row>
                         <fo:table-cell>
                             <fo:block text-align="center" color="gray" font-size="7pt">
-                                Il seguente elenco è ordinato per data inizio esperienza in modo decrescente.
+                                <xsl:value-of select="$root/translateListOrderDescription"/>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>

@@ -7,6 +7,14 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class allows to check the presence for duplicates
+ *
+ * TODO use it!
+ *
+ * @param <K>
+ * @param <V>
+ */
 @Getter
 public class AwareMap<K, V> {
     private final Map<K, V> map = new HashMap<>();

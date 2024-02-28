@@ -123,4 +123,6 @@ public interface ResumeConst {
     String TRANSLATION_GENERATED_ON = "translateGeneratedOn";
     String TRANSLATION_PAGE_OF = "translateOf";
     String TRANSLATION_CONSENT_PROCESSING_DATA = "translateConsentProcessingData";
+    String TRANSLATION_YEARS = "translateYears";
+    String TRANSLATION_LIST_ORDER_DESCRIPTION = "translateListOrderDescription";
 }

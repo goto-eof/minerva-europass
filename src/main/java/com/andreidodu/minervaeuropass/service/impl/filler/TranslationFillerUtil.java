@@ -53,5 +53,7 @@ public class TranslationFillerUtil {
         result.put(ResumeConst.TRANSLATION_GENERATED_ON, translationService.retrieveTranslation(TranslationConst.KEY_GENERATED_ON, locale));
         result.put(ResumeConst.TRANSLATION_PAGE_OF, translationService.retrieveTranslation(TranslationConst.KEY_PAGE_OF, locale));
         result.put(ResumeConst.TRANSLATION_CONSENT_PROCESSING_DATA, translationService.retrieveTranslation(TranslationConst.KEY_CONSENT_PROCESSING_DATA, locale));
+        result.put(ResumeConst.TRANSLATION_YEARS, translationService.retrieveTranslation(TranslationConst.KEY_YEARS, locale));
+        result.put(ResumeConst.TRANSLATION_LIST_ORDER_DESCRIPTION, translationService.retrieveTranslation(TranslationConst.KEY_LIST_ORDER_DESCRIPTION, locale));
     }
 }

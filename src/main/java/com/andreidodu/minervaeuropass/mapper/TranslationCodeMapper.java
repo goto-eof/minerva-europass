@@ -1,4 +1,4 @@
-package mapper;
+package com.andreidodu.minervaeuropass.mapper;
 
 import org.mapstruct.Mapper;
 

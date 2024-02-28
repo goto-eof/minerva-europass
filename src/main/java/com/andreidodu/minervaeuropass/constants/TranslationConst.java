@@ -49,4 +49,5 @@ public interface TranslationConst {
     String KEY_GENERATED_ON = "com.me.generated.on";
     String KEY_PAGE_OF = "com.me.of";
     String KEY_CONSENT_PROCESSING_DATA = "com.me.consent.processing.data";
+    String KEY_LIST_ORDER_DESCRIPTION = "com.me.list.order.description";
 }

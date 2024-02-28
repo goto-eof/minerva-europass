@@ -26,7 +26,7 @@ one resume template. Here is a [demo.pdf](demo.pdf) file.
 
 - resume sections:
   - profile (picture, emails, phone numbers, languages, location etc.)
-  - introductionw
+  - introduction
   - job experience
   - education
   - skill matrix
