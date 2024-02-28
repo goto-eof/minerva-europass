@@ -19,6 +19,7 @@ one resume template. Here is a [demo.pdf](demo.pdf) file.
 - Spring Boot
 - Apache FOP
 - Hibernate
+- Liquibase
 - Postgresql
 - Docker
 
