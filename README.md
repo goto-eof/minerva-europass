@@ -32,6 +32,7 @@ one resume template. Here is a [demo.pdf](demo.pdf) file.
   - skills matrix
   - personal projects list
   - certificates list
+  - configurable
 - calculate years of experience for every job/personal project
 - calculate total years of experience
 - calculate years of experience for every single technology
