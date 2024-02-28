@@ -32,3 +32,17 @@ translation_code_id,language_id,translation,version
 30,1,"Company",0
 31,1,"Sector",0
 32,1,"URL",0
+
+
+33,1,"First name",0
+34,1,"Last name",0
+35,1,"Nationality",0
+36,1,"Date of birth",0
+37,1,"Years of experience in IT sector",0
+38,1,"Phone numbers",0
+39,1,"Emails",0
+40,1,"Websites",0
+41,1,"Main skills",0
+42,1,"Main back-end skills",0
+43,1,"Main front-end skills",0
+44,1,"Languages",0

@@ -32,3 +32,16 @@ translation_code_id,language_id,translation,version
 30,2,"Azienda",0
 31,2,"Settore",0
 32,2,"URL",0
+
+33,2,"Nome",0
+34,2,"Cognome",0
+35,2,"Cittadinanza",0
+36,2,"Data di nascita",0
+37,2,"Esperienza nel settore IT",0
+38,2,"Numeri di telefono",0
+39,2,"Email",0
+40,2,"Siti internet",0
+41,2,"Competenze principali",0
+42,2,"Competenze back-end principali",0
+43,2,"Competenze front-end principali",0
+44,2,"Lingue",0

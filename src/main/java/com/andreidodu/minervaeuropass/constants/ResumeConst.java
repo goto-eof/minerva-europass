@@ -107,4 +107,16 @@ public interface ResumeConst {
     String TRANSLATION_EXPERIENCE_SECTOR = "translateExperienceSector";
     String TRANSLATION_EXPERIENCE_URL = "translateExperienceUrl";
 
+    String TRANSLATION_PROFILE_FIRST_NAME = "translateFirstName";
+    String TRANSLATION_PROFILE_LAST_NAME = "translateLastName";
+    String TRANSLATION_PROFILE_NATIONALITY = "translateNationality";
+    String TRANSLATION_PROFILE_DATE_OF_BIRTH = "translateDateOfBirth";
+    String TRANSLATION_PROFILE_YEARS_IT_EXPERIENCES = "translateYearsITExperience";
+    String TRANSLATION_PROFILE_PHONE_NUMBERS = "translatePhoneNumbers";
+    String TRANSLATION_PROFILE_EMAILS = "translateEmails";
+    String TRANSLATION_PROFILE_WEBSITES = "translateWebsites";
+    String TRANSLATION_PROFILE_MAIN_SKILLS = "translateMainSkills";
+    String TRANSLATION_PROFILE_MAIN_BACK_END_SKILLS = "translateMainBackEndSkills";
+    String TRANSLATION_PROFILE_MAIN_FRONT_END_SKILLS = "translateMainFrontEndSkills";
+    String TRANSLATION_PROFILE_LANGUAGES = "translateLanguages";
 }
