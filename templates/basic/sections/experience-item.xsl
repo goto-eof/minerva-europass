@@ -3,6 +3,7 @@
                 xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="fo">
 
     <xsl:template name="experience-item">
+        <xsl:param name="root" select="false"/>
         <xsl:param name="item" select="'default-value'"/>
         <xsl:param name="title" select="'default-value'"/>
         <fo:block text-align="left" font-size="10pt">
@@ -26,7 +27,7 @@
                     <fo:table-row background-color="rgb(240,240,240)">
                         <fo:table-cell number-columns-spanned="1">
                             <fo:block padding-top="4px" padding-bottom="4px" margin-left="5px">
-                                <xsl:value-of select="'Date'"/>
+                                <xsl:value-of select="$root/translateExperienceDates"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell number-columns-spanned="4">
@@ -47,7 +48,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Posizioni ricoperte'"/>
+                                    <xsl:value-of select="$root/translateExperienceRole"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -63,7 +64,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Principali attività'"/>
+                                    <xsl:value-of select="$root/translateExperienceMainActivities"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -80,7 +81,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Nome'"/>
+                                    <xsl:value-of select="$root/translateExperienceName"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -94,7 +95,7 @@
                     <fo:table-row>
                         <fo:table-cell margin-left="5px" number-columns-spanned="1" background-color="rgb(240,240,240)">
                             <fo:block padding-top="4px" padding-bottom="4px">
-                                <xsl:value-of select="'Descrizione'"/>
+                                <xsl:value-of select="$root/translateExperienceDescription"/>
                             </fo:block>
                         </fo:table-cell>
                         <fo:table-cell number-columns-spanned="4">
@@ -110,12 +111,12 @@
                                            background-color="rgb(240,240,240)">
                                 <xsl:if test="$item/isWorkedAsFrontEndDeveloper = 'true' ">
                                     <fo:block padding-top="4px" padding-bottom="4px">
-                                        <xsl:value-of select="'Tecnologie (front-end)'"/>
+                                        <xsl:value-of select="$root/translateExperienceFrontEndTechnologies"/>
                                     </fo:block>
                                 </xsl:if>
                                 <xsl:if test="$item/isWorkedAsFrontEndDeveloper = 'false' ">
                                     <fo:block padding-top="4px" color="gray" padding-bottom="4px">
-                                        <xsl:value-of select="'Tecnologie (front-end)'"/>
+                                        <xsl:value-of select="$root/translateExperienceFrontEndTechnologies"/>
                                     </fo:block>
                                 </xsl:if>
                             </fo:table-cell>
@@ -140,12 +141,12 @@
                                            background-color="rgb(240,240,240)">
                                 <xsl:if test="$item/isWorkedAsBackEndDeveloper = 'true' ">
                                     <fo:block padding-top="4px" padding-bottom="4px">
-                                        <xsl:value-of select="'Tecnologie (back-end)'"/>
+                                        <xsl:value-of select="$root/translateExperienceBackEndTechnologies"/>
                                     </fo:block>
                                 </xsl:if>
                                 <xsl:if test="$item/isWorkedAsBackEndDeveloper = 'false' ">
                                     <fo:block padding-top="4px" color="gray" padding-bottom="4px">
-                                        <xsl:value-of select="'Tecnologie (back-end)'"/>
+                                        <xsl:value-of select="$root/translateExperienceBackEndTechnologies"/>
                                     </fo:block>
                                 </xsl:if>
                             </fo:table-cell>
@@ -169,7 +170,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Strumenti'"/>
+                                    <xsl:value-of select="$root/translateExperienceTools"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -185,7 +186,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Metodologia di lavoro'"/>
+                                    <xsl:value-of select="$root/translateExperienceWorkingMethodology"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -202,7 +203,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Azienda'"/>
+                                    <xsl:value-of select="$root/translateExperienceCompany"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -218,7 +219,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'Settore'"/>
+                                    <xsl:value-of select="$root/translateExperienceSector"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">
@@ -234,7 +235,7 @@
                             <fo:table-cell margin-left="5px" number-columns-spanned="1"
                                            background-color="rgb(240,240,240)">
                                 <fo:block padding-top="4px" padding-bottom="4px">
-                                    <xsl:value-of select="'URL'"/>
+                                    <xsl:value-of select="$root/translateExperienceUrl"/>
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell number-columns-spanned="4">

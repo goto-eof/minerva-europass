@@ -37,6 +37,7 @@
                             <fo:table-cell>
                                 <fo:block wrap-option="wrap" text-align="justify">
                                     <xsl:call-template name="experience-item">
+                                        <xsl:with-param name="root" select="$root"/>
                                         <xsl:with-param name="item" select="."/>
                                         <xsl:with-param name="title" select="''"/>
                                     </xsl:call-template>

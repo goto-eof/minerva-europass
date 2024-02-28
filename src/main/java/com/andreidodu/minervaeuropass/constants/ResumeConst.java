@@ -94,4 +94,17 @@ public interface ResumeConst {
     String TRANSLATION_SUMMARY_YEARS_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY = "translateSummaryYearsExperiencePerSingleFrontEndTechnology";
     String TRANSLATION_SUMMARY_NOTE_1 = "translateSummaryNote1";
     String TRANSLATION_SUMMARY_NOTE_2 = "translateSummaryNote2";
+    String TRANSLATION_EXPERIENCE_DATES = "translateExperienceDates";
+    String TRANSLATION_EXPERIENCE_ROLE = "translateExperienceRole";
+    String TRANSLATION_EXPERIENCE_MAIN_ACTIVITIES = "translateExperienceMainActivities";
+    String TRANSLATION_EXPERIENCE_NAME = "translateExperienceName";
+    String TRANSLATION_EXPERIENCE_DESCRIPTION = "translateExperienceDescription";
+    String TRANSLATION_EXPERIENCE_FRONT_END_TECHNOLOGIES = "translateExperienceFrontEndTechnologies";
+    String TRANSLATION_EXPERIENCE_BACK_END_TECHNOLOGIES = "translateExperienceBackEndTechnologies";
+    String TRANSLATION_EXPERIENCE_TOOLS = "translateExperienceTools";
+    String TRANSLATION_EXPERIENCE_WORKING_METHODOLOGY = "translateExperienceWorkingMethodology";
+    String TRANSLATION_EXPERIENCE_COMPANY = "translateExperienceCompany";
+    String TRANSLATION_EXPERIENCE_SECTOR = "translateExperienceSector";
+    String TRANSLATION_EXPERIENCE_URL = "translateExperienceUrl";
+
 }
