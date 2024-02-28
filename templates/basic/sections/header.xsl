@@ -14,8 +14,10 @@
                         <fo:table-cell vertical-align="middle">
                             <fo:block text-align="left">
                                 <fo:block font-size="7pt">
-                                    <xsl:value-of select="$root/applicationName"/> |
-                                    <xsl:value-of select="'generato il '"/>
+                                    <xsl:value-of select="$root/applicationName"/>
+                                    |
+                                    <xsl:value-of select="$root/translateGeneratedOn"/>
+                                    <xsl:value-of select="' '"/>
                                     <xsl:value-of select="$root/generatedOn"/>
                                 </fo:block>
                             </fo:block>
@@ -26,7 +28,8 @@
                         </fo:table-cell>
                         <fo:table-cell>
                             <fo:block font-size="7pt" wrap-option="wrap">
-                                Curriculum Vitae |
+                                <xsl:value-of select="$root/translateResume"/>
+                                |
                                 <xsl:value-of select="' '"/>
                                 <xsl:value-of select="$root/firstName"/>
                                 <xsl:value-of select="' '"/>

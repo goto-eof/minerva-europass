@@ -35,7 +35,7 @@
                         <xsl:for-each select="$topX/item">
                             <fo:table-row>
                                 <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
-                                    <fo:block padding="4px" margin-left="2px">
+                                    <fo:block padding="4px" margin-left="2px" margin-right="2px">
                                         <xsl:value-of select="key"/>
                                     </fo:block>
                                 </fo:table-cell>
@@ -54,7 +54,7 @@
                         <xsl:if test="$yearsOfExperiencePerTechFrontEnd">
                             <fo:table-row>
                                 <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
-                                    <fo:block padding="4px" margin-left="2px">
+                                    <fo:block padding="4px" margin-left="2px" margin-right="2px">
                                         <xsl:value-of
                                                 select="$root/translateSummaryYearsExperiencePerSingleBackEndTechnology"/>
                                     </fo:block>
@@ -68,7 +68,7 @@
 
                             <fo:table-row>
                                 <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="1">
-                                    <fo:block padding="4px" margin-left="2px">
+                                    <fo:block padding="4px" margin-left="2px" margin-right="2px">
                                         <xsl:value-of
                                                 select="$root/translateSummaryYearsExperiencePerSingleFrontEndTechnology"/>
                                     </fo:block>

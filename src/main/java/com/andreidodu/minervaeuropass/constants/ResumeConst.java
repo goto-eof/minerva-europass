@@ -119,4 +119,8 @@ public interface ResumeConst {
     String TRANSLATION_PROFILE_MAIN_BACK_END_SKILLS = "translateMainBackEndSkills";
     String TRANSLATION_PROFILE_MAIN_FRONT_END_SKILLS = "translateMainFrontEndSkills";
     String TRANSLATION_PROFILE_LANGUAGES = "translateLanguages";
+    String TRANSLATION_RESUME = "translateResume";
+    String TRANSLATION_GENERATED_ON = "translateGeneratedOn";
+    String TRANSLATION_PAGE_OF = "translateOf";
+    String TRANSLATION_CONSENT_PROCESSING_DATA = "translateConsentProcessingData";
 }

@@ -19,14 +19,15 @@
                 <fo:table-row>
                     <fo:table-cell number-columns-spanned="6" padding="2px">
                         <fo:block font-size="5pt">
-                            Autorizzo il trattamento dei miei dati personali presenti nel CV ai sensi dell’art. 13 d.
-                            lgs. 30 giugno 2003 n. 196 - “Codice in materia di protezione dei dati personali” e
-                            dell’art. 13 GDPR 679/16 - “Regolamento europeo sulla protezione dei dati personali”.
+                            <xsl:value-of select="$root/translateConsentProcessingData"/>
                         </fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
                         <fo:block text-align="right">
-                            <fo:page-number/> di
+                            <fo:page-number/>
+                            <xsl:value-of select="' '"/>
+                            <xsl:value-of select="$root/translateOf"/>
+                            <xsl:value-of select="' '"/>
                             <fo:page-number-citation-last ref-id="end"/>
                         </fo:block>
                     </fo:table-cell>

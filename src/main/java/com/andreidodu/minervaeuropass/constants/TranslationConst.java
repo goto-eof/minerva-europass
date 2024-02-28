@@ -45,4 +45,8 @@ public interface TranslationConst {
     String KEY_PROFILE_MAIN_BACK_END_SKILLS = "com.me.main.back-end.skills";
     String KEY_PROFILE_MAIN_FRONT_END_SKILLS = "com.me.main.front-end.skills";
     String KEY_PROFILE_LANGUAGES = "com.me.languages";
+    String KEY_RESUME = "com.me.resume";
+    String KEY_GENERATED_ON = "com.me.generated.on";
+    String KEY_PAGE_OF = "com.me.of";
+    String KEY_CONSENT_PROCESSING_DATA = "com.me.consent.processing.data";
 }
