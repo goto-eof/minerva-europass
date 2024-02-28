@@ -27,11 +27,11 @@ one resume template. Here is a [demo.pdf](demo.pdf) file.
 - resume sections:
   - profile (picture, emails, phone numbers, languages, location etc.)
   - introduction
-  - job experience
-  - education
+  - job experience list
+  - education list
   - skill matrix
-  - personal projects
-  - certificates
+  - personal projects list
+  - certificates list
 - calculate years of experience for every job/personal project
 - calculate total years of experience
 - calculate years of experience for every single technology
