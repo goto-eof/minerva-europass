@@ -7,13 +7,15 @@ import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.andreidodu.minervaeuropass.util.StringUtil.addSpaceIfNecessary;
+import static com.andreidodu.minervaeuropass.util.StringUtil.joinList;
 
 @Component
 @RequiredArgsConstructor
@@ -26,9 +28,9 @@ public class ResumeUtil {
         if (list == null || list.isEmpty()) {
             return null;
         }
-        return StringUtils.join(list, ResumeConst.LIST_SEPARATOR.charAt(0))
-                .replace(ResumeConst.LIST_SEPARATOR, " " + ResumeConst.LIST_SEPARATOR + " ");
+        return joinList(list);
     }
+
 
     public List<Map<String, Object>> listToListMap(Map<String, String> listOfMap) {
         List<Map<String, Object>> result = new ArrayList<>();
@@ -210,11 +212,9 @@ public class ResumeUtil {
         Map<String, Integer> result = new HashMap<>();
 
         items.forEach(list -> {
-
             Optional.ofNullable(list).ifPresent(innerList -> innerList.forEach(item -> {
                 result.merge(item.toLowerCase(), 1, Integer::sum);
             }));
-
         });
 
 
@@ -242,21 +242,44 @@ public class ResumeUtil {
 
     public String calculateTimeAgoString(int yearsBetween, int monthsBetween) {
         StringBuilder sb = new StringBuilder();
-        if (yearsBetween > 0) {
-            if (yearsBetween == 1) {
-                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, ThreadContext.getRequestContext().getLocale()) + " ");
-            } else {
-                sb.append(yearsBetween).append(" " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, ThreadContext.getRequestContext().getLocale()) + " ");
-            }
-        }
-        if (monthsBetween > 0) {
-            if (monthsBetween == 1) {
-                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTH, ThreadContext.getRequestContext().getLocale())).append(" ");
-            } else {
-                sb.append(monthsBetween).append(!sb.isEmpty() ? " " : "").append(translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, ThreadContext.getRequestContext().getLocale())).append(" ");
-            }
-        }
+        addYEarsValueIfNecessary(yearsBetween, sb);
+        addMonthValueIfNecessary(monthsBetween, sb);
         return sb.toString();
+    }
+
+    private void addMonthValueIfNecessary(int monthsBetween, StringBuilder sb) {
+        if (monthsBetween <= 0) {
+            return;
+        }
+        if (monthsBetween == 1) {
+            sb.append(monthsBetween)
+                    .append(addSpaceIfNecessary(sb))
+                    .append(translationService.retrieveTranslation(TranslationConst.KEY_MONTH, ThreadContext.getRequestContext().getLocale()))
+                    .append(" ");
+            return;
+        }
+        sb.append(monthsBetween)
+                .append(addSpaceIfNecessary(sb))
+                .append(translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, ThreadContext.getRequestContext().getLocale()))
+                .append(" ");
+
+    }
+
+    private void addYEarsValueIfNecessary(int yearsBetween, StringBuilder sb) {
+        if (yearsBetween <= 0) {
+            return;
+        }
+        if (yearsBetween == 1) {
+            sb.append(yearsBetween)
+                    .append(" ")
+                    .append(translationService.retrieveTranslation(TranslationConst.KEY_YEAR, ThreadContext.getRequestContext().getLocale()))
+                    .append(" ");
+            return;
+        }
+        sb.append(yearsBetween)
+                .append(" ")
+                .append(translationService.retrieveTranslation(TranslationConst.KEY_YEARS, ThreadContext.getRequestContext().getLocale()))
+                .append(" ");
     }
 
 
@@ -292,23 +315,65 @@ public class ResumeUtil {
     }
 
     public String getStringOfYearsOfExperience(int years, int months) {
-        String result = "";
-        if (years > 0) {
-            String yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEARS, ThreadContext.getRequestContext().getLocale());
-            if (years == 1) {
-                yearsString = years + " " + translationService.retrieveTranslation(TranslationConst.KEY_YEAR, ThreadContext.getRequestContext().getLocale());
-            }
-            result += yearsString;
+        StringBuilder sb = addYearsValueIfNecessary(years);
+        return sb.append(addMonthValueIfNecessary(months, addSpaceIfNecessary(sb)))
+                .toString();
+    }
+
+    private StringBuilder addMonthValueIfNecessary(int months, String prefix) {
+        StringBuilder result = new StringBuilder();
+        if (months <= 0) {
+            return result;
         }
-        if (months > 0) {
-            String monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, ThreadContext.getRequestContext().getLocale());
-            if (months == 1) {
-                monthsString = (!result.isEmpty() ? " " : "") + months + " " + translationService.retrieveTranslation(TranslationConst.KEY_MONTH, ThreadContext.getRequestContext().getLocale());
-            }
-            result += monthsString;
-        }
+        manageCaseMoreThanOneMonth(months, result, prefix);
+        manageCaseOneMonth(months, result, prefix);
         return result;
     }
+
+    private void manageCaseOneMonth(int months, StringBuilder result, String prefix) {
+        if (months == 1) {
+            result.append(prefix)
+                    .append(months)
+                    .append(" ")
+                    .append(translationService.retrieveTranslation(TranslationConst.KEY_MONTH, ThreadContext.getRequestContext().getLocale()));
+        }
+    }
+
+    private void manageCaseMoreThanOneMonth(int months, StringBuilder result, String prefix) {
+        if (months > 1) {
+            result.append(prefix)
+                    .append(months)
+                    .append(" ")
+                    .append(translationService.retrieveTranslation(TranslationConst.KEY_MONTHS, ThreadContext.getRequestContext().getLocale()));
+        }
+    }
+
+    private StringBuilder addYearsValueIfNecessary(int years) {
+        StringBuilder result = new StringBuilder();
+        if (years <= 0) {
+            return result;
+        }
+        manageCaseMoreThanOneYear(years, result);
+        manageCaseOneYear(years, result);
+        return result;
+    }
+
+    private void manageCaseOneYear(int years, StringBuilder result) {
+        if (years == 1) {
+            result.append(years)
+                    .append(" ")
+                    .append(translationService.retrieveTranslation(TranslationConst.KEY_YEAR, ThreadContext.getRequestContext().getLocale()));
+        }
+    }
+
+    private void manageCaseMoreThanOneYear(int years, StringBuilder result) {
+        if (years > 1) {
+            result.append(years)
+                    .append(" ")
+                    .append(translationService.retrieveTranslation(TranslationConst.KEY_YEARS, ThreadContext.getRequestContext().getLocale()));
+        }
+    }
+
 
     private void fillMap(LocalDate dateFrom, LocalDate dateTo, Map<String, Boolean> map) {
         LocalDate start = dateFrom;
@@ -352,7 +417,10 @@ public class ResumeUtil {
     }
 
     private List<String> chooseListByDevType(ExperienceType type, ExperienceItemDTO item) {
-        return ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList() : item.getFrontEndTechnologyList();
+        if (ExperienceType.BACK_END.equals(type)) {
+            return item.getBackEndTechnologyList();
+        }
+        return item.getFrontEndTechnologyList();
     }
 
     private TechExperienceDTO calculateYearsOfExperienceByTechnology(String technology, List<ExperienceItemDTO> experienceItemList, ExperienceType type) {
@@ -370,10 +438,16 @@ public class ResumeUtil {
     }
 
     private boolean chooseListByDevType(String technology, ExperienceType type, ExperienceItemDTO item) {
-        return ExperienceType.BACK_END.equals(type) ? item.getBackEndTechnologyList().contains(technology) : item.getFrontEndTechnologyList().contains(technology);
+        if (ExperienceType.BACK_END.equals(type)) {
+            return item.getBackEndTechnologyList().contains(technology);
+        }
+        return item.getFrontEndTechnologyList().contains(technology);
     }
 
     private Boolean isWorkedAsType(ExperienceType type, ExperienceItemDTO item) {
-        return ExperienceType.BACK_END.equals(type) ? item.getIsWorkedAsBackEndDeveloper() : item.getIsWorkedAsFrontEndDeveloper();
+        if (ExperienceType.BACK_END.equals(type)) {
+            return item.getIsWorkedAsBackEndDeveloper();
+        }
+        return item.getIsWorkedAsFrontEndDeveloper();
     }
 }

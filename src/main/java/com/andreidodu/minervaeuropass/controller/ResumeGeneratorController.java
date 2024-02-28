@@ -23,6 +23,7 @@ public class ResumeGeneratorController {
         ThreadContext.getRequestContext().setLocale(locale);
         byte[] pdfBytes = resumeService.generateBytes(resumeDTO, templateName);
         HttpHeaders headers = prepareHeadersForPDFDownload(pdfBytes);
+        ThreadContext.clear();
         return ResponseEntity.ok().headers(headers).body(pdfBytes);
     }
 
