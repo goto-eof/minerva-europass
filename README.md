@@ -29,7 +29,7 @@ one resume template. Here is a [demo.pdf](demo.pdf) file.
   - introduction
   - job experience list
   - education list
-  - skill matrix
+  - skills matrix
   - personal projects list
   - certificates list
 - calculate years of experience for every job/personal project
