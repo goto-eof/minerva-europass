@@ -37,7 +37,7 @@ one resume template.
 - calculate years of experience for every single technology
 - calculate years of experience as front-end/back-end developer
 - calculate technology frequency
-- multi language (WIP)
+- multi language: english and italian
 
 ## Configure and run the application
 
