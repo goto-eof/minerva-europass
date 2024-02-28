@@ -32,13 +32,13 @@ one resume template. Here is a [demo.pdf](demo.pdf) file.
   - skills matrix
   - personal projects list
   - certificates list
-  - configurable
 - calculate years of experience for every job/personal project
 - calculate total years of experience
 - calculate years of experience for every single technology
 - calculate years of experience as front-end/back-end developer
 - calculate technology frequency
-- multi language: english and italian
+- multi-language: english and italian
+- configurable
 
 ## Configure and run the application
 
