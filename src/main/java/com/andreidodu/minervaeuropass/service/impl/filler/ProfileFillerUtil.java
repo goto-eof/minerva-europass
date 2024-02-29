@@ -4,26 +4,26 @@ import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
+import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
 import com.andreidodu.minervaeuropass.util.DateUtil;
-import com.andreidodu.minervaeuropass.util.FileUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
+@Order(20)
 @Component
 @RequiredArgsConstructor
-public class ProfileFillerUtil {
+public class ProfileFillerUtil implements FillerUtil {
 
-    private final FileUtil fileUtil;
     private final TemplateConfiguration templateConfiguration;
     private final ResumeUtil resumeUtil;
 
-    public void fillUpProfile(ResumeDTO resumeDTO, Map<String, Object> result) throws IOException {
+    public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
         result.put(ResumeConst.FIELD_LAST_NAME, resumeDTO.getLastName());
         result.put(ResumeConst.FIELD_CITY, resumeDTO.getCity());
@@ -47,9 +47,6 @@ public class ProfileFillerUtil {
 
         result.put(ResumeConst.FIELD_MAIN_SKILLS, resumeUtil.listToString(resumeDTO.getMainSkillList()));
         result.put(ResumeConst.FIELD_LANGUAGES, resumeUtil.listToString(resumeDTO.getLanguageList()));
-
-        String path = fileUtil.saveImage(resumeDTO.getImage());
-        result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
 
         result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, resumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience()));
 

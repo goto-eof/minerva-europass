@@ -7,23 +7,26 @@ import com.andreidodu.minervaeuropass.dto.resume.CertificateItemDTO;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
+import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Order(80)
 @Component
 @RequiredArgsConstructor
-public class CertificateFillerUtil {
+public class CertificateFillerUtil implements FillerUtil {
 
     private final TemplateConfiguration templateConfiguration;
     private final ResumeUtil resumeUtil;
     private final TranslationService translationService;
 
 
-    public void fillUppCertificate(ResumeDTO resumeDTO, Map<String, Object> result) {
+    public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getCertificates() != null) {
             result.put(ResumeConst.FIELD_CERTIFICATES_TITLE, resumeDTO.getCertificates().getTitle());
             result.put(ResumeConst.FIELD_CERTIFICATES_DESCRIPTION, resumeDTO.getCertificates().getDescription());

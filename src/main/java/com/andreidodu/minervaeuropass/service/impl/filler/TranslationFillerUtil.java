@@ -5,17 +5,21 @@ import com.andreidodu.minervaeuropass.constants.TranslationConst;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
+import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Order(10)
 @Component
 @RequiredArgsConstructor
-public class TranslationFillerUtil {
+public class TranslationFillerUtil implements FillerUtil {
 
     private final TranslationService translationService;
 
+    @Override
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         String locale = ThreadContext.getRequestContext().getLocale();
         result.put(ResumeConst.TRANSLATION_SUMMARY_JOB_EXPERIENCES, translationService.retrieveTranslation(TranslationConst.KEY_SUMMARY_JOB_EXPERIENCES, locale));

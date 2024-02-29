@@ -3,20 +3,22 @@ package com.andreidodu.minervaeuropass.service.impl.filler;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.dto.resume.SkillMatrixItemDTO;
+import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Order(60)
 @Component
 @RequiredArgsConstructor
-public class SkillMatrixFillerUtil {
+public class SkillMatrixFillerUtil implements FillerUtil {
     private final ResumeUtil resumeUtil;
 
-    public void fillUpSkillsMatrix(ResumeDTO resumeDTO, Map<String, Object> result) {
+    public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getSkillsMatrix() != null) {
             result.put(ResumeConst.FIELD_SKILLS_MATRIX_TITLE, resumeDTO.getSkillsMatrix().getTitle());
             result.put(ResumeConst.FIELD_SKILLS_MATRIX_DESCRIPTION, resumeDTO.getSkillsMatrix().getDescription());

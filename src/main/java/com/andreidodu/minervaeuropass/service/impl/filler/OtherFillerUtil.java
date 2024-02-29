@@ -3,19 +3,21 @@ package com.andreidodu.minervaeuropass.service.impl.filler;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.resume.OtherItemDTO;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
+import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Order(90)
 @Component
 @RequiredArgsConstructor
-public class OtherFillerUtil {
+public class OtherFillerUtil implements FillerUtil {
 
-    public void fillUpOther(ResumeDTO resumeDTO, Map<String, Object> result) {
+    public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getOther() != null) {
             result.put(ResumeConst.FIELD_OTHER_TITLE, resumeDTO.getOther().getTitle());
             result.put(ResumeConst.FIELD_OTHER_DESCRIPTION, resumeDTO.getOther().getDescription());

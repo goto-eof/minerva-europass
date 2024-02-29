@@ -3,21 +3,23 @@ package com.andreidodu.minervaeuropass.service.impl.filler;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.resume.EducationItemDTO;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
+import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Order(50)
 @Component
 @RequiredArgsConstructor
-public class EducationFillerUtil {
+public class EducationFillerUtil implements FillerUtil {
     private final DateUtil dateUtil;
 
-    public void fillUpEducation(ResumeDTO resumeDTO, Map<String, Object> result) {
+    public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         if (resumeDTO.getEducation() != null) {
             resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
             result.put(ResumeConst.FIELD_EDUCATION_TITLE, resumeDTO.getEducation().getTitle());

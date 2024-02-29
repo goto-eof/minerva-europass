@@ -26,8 +26,6 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class PdfGeneratorServiceImpl implements PdfGeneratorService {
-
-
     private final TemplateConfiguration templateConfiguration;
     private final XMLService xmlService;
 
