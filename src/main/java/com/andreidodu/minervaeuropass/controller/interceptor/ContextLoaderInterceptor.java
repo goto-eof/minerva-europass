@@ -13,8 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 @Component
-public class RequestInterceptor implements HandlerInterceptor {
-
+public class ContextLoaderInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) {

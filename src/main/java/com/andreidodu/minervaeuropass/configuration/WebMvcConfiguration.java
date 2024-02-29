@@ -1,6 +1,6 @@
 package com.andreidodu.minervaeuropass.configuration;
 
-import com.andreidodu.minervaeuropass.controller.interceptor.RequestInterceptor;
+import com.andreidodu.minervaeuropass.controller.interceptor.ContextLoaderInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -9,10 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @RequiredArgsConstructor
 public class WebMvcConfiguration implements WebMvcConfigurer {
-    final private RequestInterceptor requestInterceptor;
+    final private ContextLoaderInterceptor contextLoaderInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(requestInterceptor);
+        registry.addInterceptor(contextLoaderInterceptor);
     }
 }
