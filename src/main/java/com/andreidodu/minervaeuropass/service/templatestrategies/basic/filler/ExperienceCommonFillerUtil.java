@@ -1,4 +1,4 @@
-package com.andreidodu.minervaeuropass.service.impl.filler;
+package com.andreidodu.minervaeuropass.service.templatestrategies.basic.filler;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.resume.ExperienceItemDTO;

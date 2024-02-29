@@ -1,4 +1,4 @@
-package com.andreidodu.minervaeuropass.service.templatestrategies;
+package com.andreidodu.minervaeuropass.service.templatestrategies.basic;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
