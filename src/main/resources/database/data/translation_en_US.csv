@@ -19,7 +19,6 @@ translation_code_id,language_id,translation,version
 18,1,"Years of experience per single front-end technology",0
 19,1,"*this summary may take into account the generation date of the document in question, which is",0
 20,1,"**The number of years associated with the technology is not synonymous with the level of knowledge of that technology. In a work environment we often focus on certain technologies rather than others, based on the needs of the project. The table in question serves only to give an overall view.",0
-
 21,1,"Dates",0
 22,1,"Main role",0
 23,1,"Main activities",0
@@ -32,8 +31,6 @@ translation_code_id,language_id,translation,version
 30,1,"Company",0
 31,1,"Sector",0
 32,1,"URL",0
-
-
 33,1,"First name",0
 34,1,"Last name",0
 35,1,"Nationality",0
@@ -46,7 +43,6 @@ translation_code_id,language_id,translation,version
 42,1,"Main back-end skills",0
 43,1,"Main front-end skills",0
 44,1,"Languages",0
-
 45,1,"Resume",0
 46,1,"Generated on",0
 47,1,"of",0

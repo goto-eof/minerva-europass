@@ -19,7 +19,6 @@ translation_code_id,language_id,translation,version
 18,2,"Anni di esperienza per singola tecnologia del front-end",0
 19,2,"*questo riepilogo potrebbe tenere conto della data di generazione del documento in questione, la quale è",0
 20,2,"**Il numero degli anni associato alla tecnologia non è sinonimo di livello di conoscenza di tale tecnologia. In un ambiente lavorativo spesso ci si concentra su determinate tecnologie piuttosto che su altre, in base alle necessità del progetto. La tabella in questione serve solo a dare una visione globale.",0
-
 21,2,"Date",0
 22,2,"Posizioni ricoperte",0
 23,2,"Principali attività",0
@@ -32,7 +31,6 @@ translation_code_id,language_id,translation,version
 30,2,"Azienda",0
 31,2,"Settore",0
 32,2,"URL",0
-
 33,2,"Nome",0
 34,2,"Cognome",0
 35,2,"Cittadinanza",0
@@ -45,8 +43,6 @@ translation_code_id,language_id,translation,version
 42,2,"Competenze back-end principali",0
 43,2,"Competenze front-end principali",0
 44,2,"Lingue",0
-
-
 45,2,"Curriculum Vitae",0
 46,2,"Generato il",0
 47,2,"di",0

@@ -1,6 +1,5 @@
 package com.andreidodu.minervaeuropass.model;
 
-import ch.qos.logback.core.model.ModelConstants;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
