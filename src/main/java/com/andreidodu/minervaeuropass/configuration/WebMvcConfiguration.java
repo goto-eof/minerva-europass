@@ -1,6 +1,6 @@
 package com.andreidodu.minervaeuropass.configuration;
 
-import com.andreidodu.minervaeuropass.controller.RequestInterceptor;
+import com.andreidodu.minervaeuropass.controller.interceptor.RequestInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

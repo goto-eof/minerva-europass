@@ -1,4 +1,4 @@
-package com.andreidodu.minervaeuropass.controller;
+package com.andreidodu.minervaeuropass.controller.interceptor;
 
 import com.andreidodu.minervaeuropass.constants.ControllerConst;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
