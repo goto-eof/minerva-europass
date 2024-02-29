@@ -45,4 +45,10 @@ public class TemplateConfiguration {
 
     @Value("${com.andreidodu.minerva-europass.max-number-top-front-end-technologies}")
     private Integer maxNumberTopFrontEndTechnologies;
+
+    @Value("${com.andreidodu.minerva-europass.enable-save-pdf}")
+    private Boolean enableSavePDF;
+
+    @Value("${com.andreidodu.minerva-europass.pdf-path}")
+    private String pdfPath;
 }

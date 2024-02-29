@@ -43,3 +43,5 @@ com:
       show-top-back-end-technologies: false
       max-number-top-front-end-technologies: 5
       show-top-front-end-technologies: false
+      enable-save-pdf: true
+      pdf-path: /your/path/here

@@ -17,13 +17,13 @@ public class FileUtil {
     public static final String BASE_64_SEPARATOR = ",";
     public static final String FILE_EXTENSION = ".bin";
     public static final String SLASH = "/";
-    private final ImageConfiguration imageConfiguration;
 
-    public String saveImage(String base64string) throws IOException {
+
+    public String saveImage(final String imagePath, String base64string) throws IOException {
         byte[] imageByte = base64ToByte(base64string);
         Date dateTime = new Date();
         String filename = dateTime.getTime() + FILE_EXTENSION;
-        String fullPath = imageConfiguration.getImagePath() + SLASH + filename;
+        String fullPath = imagePath + SLASH + filename;
         Path path = new File(fullPath).toPath();
         Files.write(path, imageByte);
         return fullPath;
@@ -32,5 +32,9 @@ public class FileUtil {
     private static byte[] base64ToByte(String base64string) {
         String base64Image = base64string.split(BASE_64_SEPARATOR)[1];
         return Base64.getDecoder().decode(base64Image);
+    }
+
+    public boolean createDirectoryRecursively(String path) {
+        return new File(path).mkdirs();
     }
 }
