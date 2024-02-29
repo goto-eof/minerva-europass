@@ -20,7 +20,7 @@ one resume template. Here is a [demo.pdf](demo.pdf) file.
 - Apache FOP
 - Hibernate
 - Liquibase
-- Postgresql
+- PostgreSQL
 - Docker
 
 ## Features
