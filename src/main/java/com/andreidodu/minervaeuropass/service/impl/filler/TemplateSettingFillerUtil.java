@@ -14,9 +14,11 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class TemplateSettingFillerUtil implements FillerUtil {
-
-
     private final TemplateConfiguration templateConfiguration;
+
+    public boolean accept(ResumeDTO resumeDTO) {
+        return true;
+    }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         result.put(ResumeConst.FIELD_ENABLE_SUMMARY_RESULTS_TECH_FREQUENCY, templateConfiguration.getEnableSummaryResultsTechFrequency().toString());

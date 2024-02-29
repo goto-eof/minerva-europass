@@ -17,12 +17,14 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OtherFillerUtil implements FillerUtil {
 
+    public boolean accept(ResumeDTO resumeDTO) {
+        return resumeDTO.getOther() != null;
+    }
+
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        if (resumeDTO.getOther() != null) {
-            result.put(ResumeConst.FIELD_OTHER_TITLE, resumeDTO.getOther().getTitle());
-            result.put(ResumeConst.FIELD_OTHER_DESCRIPTION, resumeDTO.getOther().getDescription());
-            result.put(ResumeConst.FIELD_OTHER_LIST, otherListToListOfMaps(resumeDTO.getOther().getOtherList()));
-        }
+        result.put(ResumeConst.FIELD_OTHER_TITLE, resumeDTO.getOther().getTitle());
+        result.put(ResumeConst.FIELD_OTHER_DESCRIPTION, resumeDTO.getOther().getDescription());
+        result.put(ResumeConst.FIELD_OTHER_LIST, otherListToListOfMaps(resumeDTO.getOther().getOtherList()));
     }
 
     private static List<Map<String, String>> otherListToListOfMaps(List<OtherItemDTO> otherList) {

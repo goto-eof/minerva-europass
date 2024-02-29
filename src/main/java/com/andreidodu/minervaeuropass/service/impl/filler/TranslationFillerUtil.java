@@ -16,8 +16,11 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class TranslationFillerUtil implements FillerUtil {
-
     private final TranslationService translationService;
+
+    public boolean accept(ResumeDTO resumeDTO) {
+        return true;
+    }
 
     @Override
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {

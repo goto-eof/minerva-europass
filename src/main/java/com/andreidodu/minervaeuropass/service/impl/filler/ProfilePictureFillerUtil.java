@@ -19,6 +19,10 @@ public class ProfilePictureFillerUtil implements FillerUtil {
 
     private final FileUtil fileUtil;
 
+    public boolean accept(ResumeDTO resumeDTO) {
+        return resumeDTO.getImage() != null;
+    }
+
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         try {
             String path = fileUtil.saveImage(resumeDTO.getImage());

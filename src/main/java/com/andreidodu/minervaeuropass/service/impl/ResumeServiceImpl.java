@@ -40,7 +40,9 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public Map<String, Object> processResumeAndReturnMap(ResumeDTO resumeDTO) throws IOException {
         Map<String, Object> result = new HashMap<>();
-        this.fillerList.forEach(filler -> fillUp(resumeDTO, filler, result));
+        this.fillerList.stream()
+                .filter(filler -> filler.accept(resumeDTO))
+                .forEach(filler -> fillUp(resumeDTO, filler, result));
         return result;
     }
 

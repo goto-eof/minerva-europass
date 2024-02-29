@@ -15,6 +15,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+
 @Order(70)
 @Component
 @RequiredArgsConstructor
@@ -25,21 +26,21 @@ public class PersonalProjectsFillerUtil implements FillerUtil {
     private final ResumeUtil resumeUtil;
     private final TranslationService translationService;
 
+    public boolean accept(ResumeDTO resumeDTO) {
+        return resumeDTO.getPersonalProjects() != null;
+    }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        if (resumeDTO.getPersonalProjects() != null) {
-            resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
-            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
-            result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_TITLE, resumeDTO.getPersonalProjects().getTitle());
-            result.put(ResumeConst.FIELD_PERSONAL_PROJECT_LIST, experienceCommonFillerUtil.experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
-            List<Map<String, String>> res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
-            result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
-            result.put(ResumeConst.FIELD_TOP_ROLES_BY_PERSONAL_PROJECTS, resumeUtil.listToListMap(resumeUtil.calculateTopRolesByPersonalProjects(resumeDTO)));
-            result.put(ResumeConst.FIELD_YEARS_EXPERIENCE_BY_PERSONAL_PROJECTS, resumeUtil.listToListMap(resumeUtil.calculateYearsExperienceByPersonalProjects(resumeDTO)));
-            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_PERSONAL_PROJECTS, resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getPersonalProjects().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
-            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_PERSONAL_PROJECTS, resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getPersonalProjects().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
-
-        }
+        resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+        result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
+        result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_TITLE, resumeDTO.getPersonalProjects().getTitle());
+        result.put(ResumeConst.FIELD_PERSONAL_PROJECT_LIST, experienceCommonFillerUtil.experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));
+        List<Map<String, String>> res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
+        result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_PERSONAL_PROJECTS, res);
+        result.put(ResumeConst.FIELD_TOP_ROLES_BY_PERSONAL_PROJECTS, resumeUtil.listToListMap(resumeUtil.calculateTopRolesByPersonalProjects(resumeDTO)));
+        result.put(ResumeConst.FIELD_YEARS_EXPERIENCE_BY_PERSONAL_PROJECTS, resumeUtil.listToListMap(resumeUtil.calculateYearsExperienceByPersonalProjects(resumeDTO)));
+        result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_PERSONAL_PROJECTS, resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getPersonalProjects().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
+        result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_PERSONAL_PROJECTS, resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getPersonalProjects().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience())));
     }
 
     private List<Map<String, String>> calculateTopXTechnologiesFromPersonalProjects(ResumeDTO resumeDTO) {
@@ -62,6 +63,4 @@ public class PersonalProjectsFillerUtil implements FillerUtil {
         res.add(topX);
         return res;
     }
-
-
 }

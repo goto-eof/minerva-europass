@@ -23,6 +23,10 @@ public class ProfileFillerUtil implements FillerUtil {
     private final TemplateConfiguration templateConfiguration;
     private final ResumeUtil resumeUtil;
 
+    public boolean accept(ResumeDTO resumeDTO) {
+        return true;
+    }
+
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
         result.put(ResumeConst.FIELD_LAST_NAME, resumeDTO.getLastName());
@@ -36,11 +40,6 @@ public class ProfileFillerUtil implements FillerUtil {
         result.put(ResumeConst.FIELD_BIRTH_DATE, DateUtil.formatLocalDate(resumeDTO.getBirthDate(), DateUtil.PATTERN_DD_MM_YYYY));
         result.put(ResumeConst.FIELD_YEARS_OLD, String.valueOf(DateUtil.calculateYearsOld(resumeDTO.getBirthDate(), LocalDate.now())));
 
-        if (resumeDTO.getIntroduction() != null) {
-            result.put(ResumeConst.FIELD_INTRODUCTION_TITLE, resumeDTO.getIntroduction().getTitle());
-            result.put(ResumeConst.FIELD_INTRODUCTION_CONTENT, resumeDTO.getIntroduction().getContent());
-            result.put(ResumeConst.FIELD_INTRODUCTION_FOOTER, resumeDTO.getIntroduction().getFooter());
-        }
         result.put(ResumeConst.FIELD_APPLICATION_NAME, ApplicationConst.APPLICATION_NAME);
         result.put(ResumeConst.FIELD_GENERATED_ON, DateUtil.formatLocalDate(LocalDate.now(), DateUtil.PATTERN_DD_MM_YYYY));
         result.put(ResumeConst.FIELD_JOB_TITLE, resumeDTO.getJobTitle());

@@ -13,11 +13,14 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class IntroductionFillerUtil implements FillerUtil {
+
+    public boolean accept(ResumeDTO resumeDTO) {
+        return resumeDTO.getIntroduction() != null;
+    }
+
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        if (resumeDTO.getIntroduction() != null) {
-            result.put(ResumeConst.FIELD_INTRODUCTION_TITLE, resumeDTO.getIntroduction().getTitle());
-            result.put(ResumeConst.FIELD_INTRODUCTION_CONTENT, resumeDTO.getIntroduction().getContent());
-            result.put(ResumeConst.FIELD_INTRODUCTION_FOOTER, resumeDTO.getIntroduction().getFooter());
-        }
+        result.put(ResumeConst.FIELD_INTRODUCTION_TITLE, resumeDTO.getIntroduction().getTitle());
+        result.put(ResumeConst.FIELD_INTRODUCTION_CONTENT, resumeDTO.getIntroduction().getContent());
+        result.put(ResumeConst.FIELD_INTRODUCTION_FOOTER, resumeDTO.getIntroduction().getFooter());
     }
 }

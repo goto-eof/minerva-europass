@@ -16,13 +16,15 @@ import java.util.Map;
 public class OtherSkillsFillerUtil implements FillerUtil {
     private final ResumeUtil resumeUtil;
 
+    public boolean accept(ResumeDTO resumeDTO) {
+        return resumeDTO.getOtherSkills() != null;
+    }
+
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        if (resumeDTO.getOtherSkills() != null) {
-            result.put(ResumeConst.FIELD_OTHER_SKILLS_TITLE, resumeDTO.getOtherSkills().getTitle());
-            result.put(ResumeConst.FIELD_OTHER_SKILLS_DESCRIPTION, resumeDTO.getOtherSkills().getDescription());
-            result.put(ResumeConst.FIELD_OTHER_SKILL_SOCIAL_LIST, resumeUtil.listToString(resumeDTO.getOtherSkills().getSocialList()));
-            result.put(ResumeConst.FIELD_OTHER_SKILL_ORGANIZATIONAL_LIST, resumeUtil.listToString(resumeDTO.getOtherSkills().getOrganizationalList()));
-            result.put(ResumeConst.FIELD_OTHER_SKILL_OTHER_LIST, resumeUtil.listToString(resumeDTO.getOtherSkills().getOtherList()));
-        }
+        result.put(ResumeConst.FIELD_OTHER_SKILLS_TITLE, resumeDTO.getOtherSkills().getTitle());
+        result.put(ResumeConst.FIELD_OTHER_SKILLS_DESCRIPTION, resumeDTO.getOtherSkills().getDescription());
+        result.put(ResumeConst.FIELD_OTHER_SKILL_SOCIAL_LIST, resumeUtil.listToString(resumeDTO.getOtherSkills().getSocialList()));
+        result.put(ResumeConst.FIELD_OTHER_SKILL_ORGANIZATIONAL_LIST, resumeUtil.listToString(resumeDTO.getOtherSkills().getOrganizationalList()));
+        result.put(ResumeConst.FIELD_OTHER_SKILL_OTHER_LIST, resumeUtil.listToString(resumeDTO.getOtherSkills().getOtherList()));
     }
 }

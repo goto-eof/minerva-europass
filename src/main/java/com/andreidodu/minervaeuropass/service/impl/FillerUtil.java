@@ -6,5 +6,7 @@ import com.andreidodu.minervaeuropass.exception.ApplicationException;
 import java.util.Map;
 
 public interface FillerUtil {
+    boolean accept(ResumeDTO resumeDTO);
+
     void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) throws ApplicationException;
 }

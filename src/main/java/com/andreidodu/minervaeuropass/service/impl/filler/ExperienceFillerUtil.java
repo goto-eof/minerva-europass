@@ -15,6 +15,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+
 @Order(40)
 @Component
 @RequiredArgsConstructor
@@ -25,21 +26,23 @@ public class ExperienceFillerUtil implements FillerUtil {
     private final ExperienceCommonFillerUtil experienceCommonFillerUtil;
     private final TranslationService translationService;
 
+    public boolean accept(ResumeDTO resumeDTO) {
+        return resumeDTO.getExperience() != null;
+    }
+
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        if (resumeDTO.getExperience() != null) {
-            resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
-            result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
-            result.put(ResumeConst.FIELD_EXPERIENCE_DESCRIPTION, resumeDTO.getExperience().getDescription());
-            result.put(ResumeConst.FIELD_EXPERIENCE_LIST, experienceCommonFillerUtil.experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
-            List<Map<String, String>> res = calculateTopXTechnologiesFromExperience(resumeDTO);
-            result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE, res);
-            result.put(ResumeConst.FIELD_TOP_ROLES_BY_EXPERIENCE, resumeUtil.listToListMap(resumeUtil.calculateTopRolesByExperience(resumeDTO)));
-            result.put(ResumeConst.FIELD_YEARS_EXPERIENCE_BY_EXPERIENCE, resumeUtil.listToListMap(resumeUtil.calculateYearsExperienceByExperience(resumeDTO)));
-            String yearsOfExperiencePerSingleBackEndTechnology = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience()));
-            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_EXPERIENCE, yearsOfExperiencePerSingleBackEndTechnology);
-            String yearsOfExperiencePerSingleFrontEndTechnology = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience()));
-            result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_EXPERIENCE, yearsOfExperiencePerSingleFrontEndTechnology);
-        }
+        resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+        result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
+        result.put(ResumeConst.FIELD_EXPERIENCE_DESCRIPTION, resumeDTO.getExperience().getDescription());
+        result.put(ResumeConst.FIELD_EXPERIENCE_LIST, experienceCommonFillerUtil.experiencesToListMap(resumeDTO.getExperience().getExperienceList()));
+        List<Map<String, String>> res = calculateTopXTechnologiesFromExperience(resumeDTO);
+        result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_EXPERIENCE, res);
+        result.put(ResumeConst.FIELD_TOP_ROLES_BY_EXPERIENCE, resumeUtil.listToListMap(resumeUtil.calculateTopRolesByExperience(resumeDTO)));
+        result.put(ResumeConst.FIELD_YEARS_EXPERIENCE_BY_EXPERIENCE, resumeUtil.listToListMap(resumeUtil.calculateYearsExperienceByExperience(resumeDTO)));
+        String yearsOfExperiencePerSingleBackEndTechnology = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience()));
+        result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_BACK_END_TECHNOLOGY_IN_EXPERIENCE, yearsOfExperiencePerSingleBackEndTechnology);
+        String yearsOfExperiencePerSingleFrontEndTechnology = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperience(resumeDTO.getExperience().getExperienceList(), ExperienceType.FRONT_END, templateConfiguration.getMaxSummaryResultsTechYearsExperience()));
+        result.put(ResumeConst.FIELD_YEARS_OF_EXPERIENCE_PER_SINGLE_FRONT_END_TECHNOLOGY_IN_EXPERIENCE, yearsOfExperiencePerSingleFrontEndTechnology);
     }
 
     private List<Map<String, String>> calculateTopXTechnologiesFromExperience(ResumeDTO resumeDTO) {

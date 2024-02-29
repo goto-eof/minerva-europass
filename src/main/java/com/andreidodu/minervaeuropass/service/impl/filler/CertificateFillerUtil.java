@@ -25,16 +25,16 @@ public class CertificateFillerUtil implements FillerUtil {
     private final ResumeUtil resumeUtil;
     private final TranslationService translationService;
 
+    public boolean accept(ResumeDTO resumeDTO) {
+        return resumeDTO.getCertificates() != null;
+    }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        if (resumeDTO.getCertificates() != null) {
-            result.put(ResumeConst.FIELD_CERTIFICATES_TITLE, resumeDTO.getCertificates().getTitle());
-            result.put(ResumeConst.FIELD_CERTIFICATES_DESCRIPTION, resumeDTO.getCertificates().getDescription());
-            result.put(ResumeConst.FIELD_CERTIFICATES_LIST, certificatesListToListOfMaps(resumeDTO.getCertificates().getCertificateList()));
-            List<Map<String, String>> res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
-            result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_CERTIFICATES, res);
-
-        }
+        result.put(ResumeConst.FIELD_CERTIFICATES_TITLE, resumeDTO.getCertificates().getTitle());
+        result.put(ResumeConst.FIELD_CERTIFICATES_DESCRIPTION, resumeDTO.getCertificates().getDescription());
+        result.put(ResumeConst.FIELD_CERTIFICATES_LIST, certificatesListToListOfMaps(resumeDTO.getCertificates().getCertificateList()));
+        List<Map<String, String>> res = calculateTopXTechnologiesFromPersonalProjects(resumeDTO);
+        result.put(ResumeConst.KEY_TOP_X_TECHNOLOGIES_FROM_CERTIFICATES, res);
     }
 
     private List<Map<String, Object>> certificatesListToListOfMaps(List<CertificateItemDTO> certificateList) {
