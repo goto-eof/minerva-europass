@@ -4,7 +4,6 @@ import com.andreidodu.minervaeuropass.exception.ApplicationException;
 import com.andreidodu.minervaeuropass.repository.FileRepository;
 import org.springframework.stereotype.Repository;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
