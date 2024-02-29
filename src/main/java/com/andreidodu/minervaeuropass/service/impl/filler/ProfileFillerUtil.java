@@ -28,6 +28,7 @@ public class ProfileFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
+        result.put(ResumeConst.FIELD_ENABLE_PROFILE, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_FIRST_NAME, resumeDTO.getFirstName());
         result.put(ResumeConst.FIELD_LAST_NAME, resumeDTO.getLastName());
         result.put(ResumeConst.FIELD_CITY, resumeDTO.getCity());

@@ -30,6 +30,7 @@ public class CertificateFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
+        result.put(ResumeConst.FIELD_ENABLE_CERTIFICATE_LIST, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_CERTIFICATES_TITLE, resumeDTO.getCertificates().getTitle());
         result.put(ResumeConst.FIELD_CERTIFICATES_DESCRIPTION, resumeDTO.getCertificates().getDescription());
         result.put(ResumeConst.FIELD_CERTIFICATES_LIST, certificatesListToListOfMaps(resumeDTO.getCertificates().getCertificateList()));

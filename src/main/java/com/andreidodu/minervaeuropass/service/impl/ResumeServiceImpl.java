@@ -1,6 +1,5 @@
 package com.andreidodu.minervaeuropass.service.impl;
 
-import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.exception.ApplicationException;
 import com.andreidodu.minervaeuropass.service.ResumeService;
@@ -9,9 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.*;
 
 @Slf4j
@@ -24,17 +21,18 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public byte[] generateBytes(ResumeDTO resumeDTO, String templateName) throws IOException {
         Map<String, Object> resumeMap = this.processResumeAndReturnMap(resumeDTO);
-
-        byte[] pdfBytes = templateStrategyList
+        return templateStrategyList
                 .stream()
                 .filter(strategy -> strategy.accept(templateName))
                 .findFirst()
-                .map(templateStrategy -> templateStrategy.generate(resumeMap))
+                .map(templateStrategy -> executeStrategyAndReturnBytes(templateStrategy, resumeMap))
                 .orElseThrow(() -> new ApplicationException(String.format("Strategy [%s] not found", templateName)));
+    }
 
-        String imagePathAndFilename = (String) resumeMap.get(ResumeConst.FIELD_PROFILE_PICTURE_PATH);
-        Files.delete(new File(imagePathAndFilename).toPath());
-        return pdfBytes;
+    private static byte[] executeStrategyAndReturnBytes(TemplateStrategy templateStrategy, Map<String, Object> resumeMap) {
+        byte[] bytes = templateStrategy.generate(resumeMap);
+        templateStrategy.postGenerate(resumeMap);
+        return bytes;
     }
 
     @Override

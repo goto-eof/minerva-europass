@@ -21,6 +21,7 @@ public class OtherSkillsFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
+        result.put(ResumeConst.FIELD_ENABLE_OTHER_SKILLS, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_OTHER_SKILLS_TITLE, resumeDTO.getOtherSkills().getTitle());
         result.put(ResumeConst.FIELD_OTHER_SKILLS_DESCRIPTION, resumeDTO.getOtherSkills().getDescription());
         result.put(ResumeConst.FIELD_OTHER_SKILL_SOCIAL_LIST, resumeUtil.listToString(resumeDTO.getOtherSkills().getSocialList()));

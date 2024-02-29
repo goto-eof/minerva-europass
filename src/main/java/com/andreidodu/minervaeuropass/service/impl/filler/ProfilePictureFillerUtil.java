@@ -25,6 +25,7 @@ public class ProfilePictureFillerUtil implements FillerUtil {
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         try {
+            result.put(ResumeConst.FIELD_ENABLE_PROFILE_PICTURE, ResumeConst.VALUE_TRUE);
             String path = fileUtil.saveImage(resumeDTO.getImage());
             result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
         } catch (IOException e) {

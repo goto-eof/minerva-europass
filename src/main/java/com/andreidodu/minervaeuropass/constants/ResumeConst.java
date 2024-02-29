@@ -57,10 +57,8 @@ public interface ResumeConst {
     String FIELD_PROFILE_PICTURE_PATH = "profilePicture";
     String FIELD_IS_WORKED_AS_FRONT_END_DEVELOPER = "isWorkedAsFrontEndDeveloper";
     String FIELD_IS_WORKED_AS_BACK_END_DEVELOPER = "isWorkedAsBackEndDeveloper";
-    // TODO load the translation from DB
     String VALUE_FALSE = "false";
-    // TODO load the translation from DB
-
+    String VALUE_TRUE = "true";
     String FIELD_JOB_DURATION = "jobDuration";
     String FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE = "yearsAndMonthsOfExperience";
     String FIELD_OTHER_TITLE = "otherTitle";
@@ -125,4 +123,14 @@ public interface ResumeConst {
     String TRANSLATION_CONSENT_PROCESSING_DATA = "translateConsentProcessingData";
     String TRANSLATION_YEARS = "translateYears";
     String TRANSLATION_LIST_ORDER_DESCRIPTION = "translateListOrderDescription";
+    String FIELD_ENABLE_CERTIFICATE_LIST = "enableCertificateList";
+    String FIELD_ENABLE_EDUCATION_LIST = "enableEducationList";
+    String FIELD_ENABLE_EXPERIENCE_LIST = "enableExperienceList";
+    String FIELD_ENABLE_INTRODUCTION = "enableIntroduction";
+    String FIELD_ENABLE_OTHER = "enableOther";
+    String FIELD_ENABLE_OTHER_SKILLS = "enableOtherSkills";
+    String FIELD_ENABLE_PERSONAL_PROJECTS ="enablePersonalProjects" ;
+    String FIELD_ENABLE_PROFILE = "enableProfile";
+    String FIELD_ENABLE_PROFILE_PICTURE = "enableProfilePicture";
+    String FIELD_ENABLE_SKILL_MATRIX = "enableSkillMatrix";
 }

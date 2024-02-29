@@ -22,6 +22,7 @@ public class OtherFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
+        result.put(ResumeConst.FIELD_ENABLE_OTHER, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_OTHER_TITLE, resumeDTO.getOther().getTitle());
         result.put(ResumeConst.FIELD_OTHER_DESCRIPTION, resumeDTO.getOther().getDescription());
         result.put(ResumeConst.FIELD_OTHER_LIST, otherListToListOfMaps(resumeDTO.getOther().getOtherList()));

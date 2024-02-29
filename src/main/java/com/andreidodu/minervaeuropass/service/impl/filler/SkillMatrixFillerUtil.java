@@ -24,6 +24,7 @@ public class SkillMatrixFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
+        result.put(ResumeConst.FIELD_ENABLE_SKILL_MATRIX, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_SKILLS_MATRIX_TITLE, resumeDTO.getSkillsMatrix().getTitle());
         result.put(ResumeConst.FIELD_SKILLS_MATRIX_DESCRIPTION, resumeDTO.getSkillsMatrix().getDescription());
         result.put(ResumeConst.FIELD_SKILLS_MATRIX_LIST, skillsMatrixListToListMap(resumeDTO.getSkillsMatrix().getSkillsMatrixList()));

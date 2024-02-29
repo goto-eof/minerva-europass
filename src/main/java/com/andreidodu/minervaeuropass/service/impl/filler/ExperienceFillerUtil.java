@@ -31,7 +31,10 @@ public class ExperienceFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        resumeDTO.getExperience().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+        resumeDTO.getExperience()
+                .getExperienceList()
+                .sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+        result.put(ResumeConst.FIELD_ENABLE_EXPERIENCE_LIST, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_EXPERIENCE_TITLE, resumeDTO.getExperience().getTitle());
         result.put(ResumeConst.FIELD_EXPERIENCE_DESCRIPTION, resumeDTO.getExperience().getDescription());
         result.put(ResumeConst.FIELD_EXPERIENCE_LIST, experienceCommonFillerUtil.experiencesToListMap(resumeDTO.getExperience().getExperienceList()));

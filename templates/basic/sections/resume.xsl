@@ -25,20 +25,24 @@
                         </fo:table-cell>
                     </fo:table-row>
                     <fo:table-row>
-                        <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="2">
-                            <fo:block-container>
-                                <xsl:call-template name="profile">
-                                    <xsl:with-param name="root" select="root"/>
-                                </xsl:call-template>
-                            </fo:block-container>
-                        </fo:table-cell>
-                        <fo:table-cell number-columns-spanned="4">
-                            <fo:block-container min-height="25cm"  margin-left="3px" margin-right="3px">
-                                <xsl:call-template name="introduction">
-                                    <xsl:with-param name="root" select="root"/>
-                                </xsl:call-template>
-                            </fo:block-container>
-                        </fo:table-cell>
+                        <xsl:if test="$root/enableProfile = 'true'">
+                            <fo:table-cell background-color="rgb(240,240,240)" number-columns-spanned="2">
+                                <fo:block-container>
+                                    <xsl:call-template name="profile">
+                                        <xsl:with-param name="root" select="root"/>
+                                    </xsl:call-template>
+                                </fo:block-container>
+                            </fo:table-cell>
+                        </xsl:if>
+                        <xsl:if test="$root/enableIntroduction = 'true'">
+                            <fo:table-cell number-columns-spanned="4">
+                                <fo:block-container min-height="25cm" margin-left="3px" margin-right="3px">
+                                    <xsl:call-template name="introduction">
+                                        <xsl:with-param name="root" select="root"/>
+                                    </xsl:call-template>
+                                </fo:block-container>
+                            </fo:table-cell>
+                        </xsl:if>
                     </fo:table-row>
                 </fo:table-body>
             </fo:table>

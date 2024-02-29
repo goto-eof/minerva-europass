@@ -24,9 +24,11 @@
                     <fo:table-row>
                         <fo:table-cell>
                             <fo:block text-align="center">
-                                <fo:external-graphic
-                                        content-width="162px" content-height="162px"
-                                        src="{$root/profilePicture}"/>
+                                <xsl:if test="$root/enableProfilePicture = 'true'">
+                                    <fo:external-graphic
+                                            content-width="162px" content-height="162px"
+                                            src="{$root/profilePicture}"/>
+                                </xsl:if>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>

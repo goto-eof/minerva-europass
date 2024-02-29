@@ -86,11 +86,13 @@
                             <xsl:with-param name="root" select="root"/>
                         </xsl:call-template>
                     </fo:block-container>
-                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="experience">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
+                    <xsl:if test="root/enableExperienceList = 'true'">
+                        <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="experience">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
                     <xsl:if test="root/enableSummary = 'true'">
                         <fo:block-container min-height="26cm" padding-top="0px">
                             <xsl:call-template name="summary">
@@ -109,31 +111,41 @@
                             </xsl:call-template>
                         </fo:block-container>
                     </xsl:if>
-                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="education">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
-                    <fo:block-container min-height="26cm" padding-top="20px">
-                        <xsl:call-template name="other-skills">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
-                    <fo:block-container min-height="26cm" padding-top="20px">
-                        <xsl:call-template name="other">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
-                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="skills-matrix">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
-                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="personal-projects">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
+                    <xsl:if test="root/enableEducationList = 'true'">
+                        <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="education">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
+                    <xsl:if test="root/enableOtherSkills = 'true'">
+                        <fo:block-container min-height="26cm" padding-top="20px">
+                            <xsl:call-template name="other-skills">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
+                    <xsl:if test="root/enableOther = 'true'">
+                        <fo:block-container min-height="26cm" padding-top="20px">
+                            <xsl:call-template name="other">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
+                    <xsl:if test="root/enableSkillMatrix = 'true'">
+                        <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="skills-matrix">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
+                    <xsl:if test="root/enablePersonalProjects = 'true'">
+                        <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="personal-projects">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
                     <xsl:if test="root/enableSummary = 'true'">
                         <fo:block-container min-height="26cm" padding-top="0px">
                             <xsl:call-template name="summary">
@@ -152,11 +164,13 @@
                             </xsl:call-template>
                         </fo:block-container>
                     </xsl:if>
-                    <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="certificates">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
+                    <xsl:if test="root/enableCertificateList = 'true'">
+                        <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="certificates">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
                     <xsl:if test="root/enableSummary = 'true'">
                         <fo:block-container min-height="26cm" padding-top="0px">
                             <xsl:call-template name="summary">

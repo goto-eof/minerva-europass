@@ -25,7 +25,10 @@ public class EducationFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        resumeDTO.getEducation().getEducationList().sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
+        resumeDTO.getEducation()
+                .getEducationList()
+                .sort(Comparator.comparing(EducationItemDTO::getDateFrom).reversed());
+        result.put(ResumeConst.FIELD_ENABLE_EDUCATION_LIST, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_EDUCATION_TITLE, resumeDTO.getEducation().getTitle());
         result.put(ResumeConst.FIELD_EDUCATION_DESCRIPTION, resumeDTO.getEducation().getDescription());
         result.put(ResumeConst.FIELD_EDUCATION_LIST, educationToListMap(resumeDTO.getEducation().getEducationList()));

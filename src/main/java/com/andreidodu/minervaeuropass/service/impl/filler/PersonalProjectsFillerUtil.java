@@ -31,7 +31,10 @@ public class PersonalProjectsFillerUtil implements FillerUtil {
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
-        resumeDTO.getPersonalProjects().getExperienceList().sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+        resumeDTO.getPersonalProjects()
+                .getExperienceList()
+                .sort(Comparator.comparing(ExperienceItemDTO::getDateFrom).reversed());
+        result.put(ResumeConst.FIELD_ENABLE_PERSONAL_PROJECTS, ResumeConst.VALUE_TRUE);
         result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_DESCRIPTION, resumeDTO.getPersonalProjects().getDescription());
         result.put(ResumeConst.FIELD_PERSONAL_PROJECTS_TITLE, resumeDTO.getPersonalProjects().getTitle());
         result.put(ResumeConst.FIELD_PERSONAL_PROJECT_LIST, experienceCommonFillerUtil.experiencesToListMap(resumeDTO.getPersonalProjects().getExperienceList()));

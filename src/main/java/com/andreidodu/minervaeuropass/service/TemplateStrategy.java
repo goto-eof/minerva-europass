@@ -6,4 +6,6 @@ public interface TemplateStrategy {
     boolean accept(String templateName);
 
     byte[] generate(Map<String, Object> resumeMap);
+
+    void postGenerate(Map<String, Object> resumeMap);
 }
