@@ -1,11 +1,12 @@
 package com.andreidodu.minervaeuropass.service;
 
+import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
+
 import java.util.Map;
 
 public interface TemplateStrategy {
     boolean accept(String templateName);
 
-    byte[] generate(Map<String, Object> resumeMap);
+    byte[] execute(ResumeDTO resumeDTO);
 
-    void postGenerate(Map<String, Object> resumeMap);
 }
