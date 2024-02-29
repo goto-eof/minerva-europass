@@ -7,7 +7,7 @@ import com.andreidodu.minervaeuropass.dto.resume.ExperienceItemDTO;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
 import com.andreidodu.minervaeuropass.service.TranslationService;
-import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
+import com.andreidodu.minervaeuropass.service.FillerUtil;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.andreidodu.minervaeuropass.service.impl;
+package com.andreidodu.minervaeuropass.service;
 
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.exception.ApplicationException;

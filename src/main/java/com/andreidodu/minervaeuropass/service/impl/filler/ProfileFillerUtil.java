@@ -4,7 +4,7 @@ import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
-import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
+import com.andreidodu.minervaeuropass.service.FillerUtil;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;

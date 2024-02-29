@@ -2,7 +2,7 @@ package com.andreidodu.minervaeuropass.service.impl.filler;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
-import com.andreidodu.minervaeuropass.service.impl.FillerUtil;
+import com.andreidodu.minervaeuropass.service.FillerUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
