@@ -4,7 +4,6 @@ import com.andreidodu.minervaeuropass.constants.ControllerConst;
 import com.andreidodu.minervaeuropass.global.ThreadContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.HandlerMapping;
@@ -33,7 +32,4 @@ public class RequestInterceptor implements HandlerInterceptor {
         ThreadContext.clear();
     }
 
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception exception) {
-    }
 }
