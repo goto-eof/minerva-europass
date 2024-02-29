@@ -18,7 +18,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final List<TemplateStrategy> templateStrategyList;
 
     @Override
-    public byte[] generateBytes(ResumeDTO resumeDTO, String templateName) throws IOException {
+    public byte[] generateBytes(ResumeDTO resumeDTO, final String templateName) throws IOException {
         return templateStrategyList
                 .stream()
                 .filter(strategy -> strategy.accept(templateName))
