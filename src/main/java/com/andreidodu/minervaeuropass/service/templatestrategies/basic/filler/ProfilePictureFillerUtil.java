@@ -22,14 +22,14 @@ public class ProfilePictureFillerUtil implements FillerUtil {
     private final ImageConfiguration imageConfiguration;
 
     public boolean accept(ResumeDTO resumeDTO) {
-        return resumeDTO.getImage() != null;
+        return resumeDTO.getProfile() != null && resumeDTO.getProfile().getImage() != null;
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
         try {
             result.put(ResumeConst.FIELD_ENABLE_PROFILE_PICTURE, ResumeConst.VALUE_TRUE);
             fileUtil.createDirectoryRecursively(imageConfiguration.getImagePath());
-            String path = fileUtil.saveImage(imageConfiguration.getImagePath(), resumeDTO.getImage());
+            String path = fileUtil.saveImage(imageConfiguration.getImagePath(), resumeDTO.getProfile().getImage());
             result.put(ResumeConst.FIELD_PROFILE_PICTURE_PATH, path);
         } catch (IOException e) {
             throw new ApplicationException(String.format("Unable to save image: %s", e.getMessage()));

@@ -10,21 +10,8 @@ import java.util.Map;
 @Getter
 @Setter
 public class ResumeDTO {
-    private String firstName;
-    private String lastName;
-    private String image;
-    private String city;
-    private String county;
-    private String country;
-    private String jobTitle;
-    private List<String> citizenshipList;
-    private Map<String, String> emailMap;
-    private Map<String, String> phoneNumberMap;
-    private LocalDate birthDate;
-    private Map<String, String> urlMap;
+    private ProfileDTO profile;
     private IntroductionDTO introduction;
-    private List<String> mainSkillList;
-    private List<String> languageList;
     private ExperienceDTO experience;
     private PersonalProjectsDTO personalProjects;
     private EducationDTO education;
