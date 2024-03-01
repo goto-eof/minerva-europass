@@ -58,4 +58,4 @@ only one resume template. Here is a [demo.pdf](demo.pdf) file.
 - click on `View more actions` (3 dots) and save the response as PDF file
 
 ---
-Tested on Linux an on MacOS.
+Tested on Linux and on MacOS.
