@@ -16,7 +16,7 @@ public class ResumeGeneratorController {
     final private ResumeService resumeService;
 
     @PostMapping("/generate/templateName/{templateName}/locale/{locale}")
-    public ResponseEntity<byte[]> generate(@RequestBody ResumeDTO resumeDTO, @PathVariable String templateName) {
+    public ResponseEntity<byte[]> retrieveResumePDF(@RequestBody ResumeDTO resumeDTO, @PathVariable String templateName) {
         byte[] pdfBytes = resumeService.generateBytes(resumeDTO, templateName);
         HttpHeaders headers = prepareHeadersForPDFDownload(pdfBytes);
         return ResponseEntity.ok()
