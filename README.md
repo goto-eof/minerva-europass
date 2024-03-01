@@ -8,7 +8,7 @@
                                                             SERVER
 ```
 
-# Minerva Europass Server (WIP)
+# Minerva Europass Server
 
 Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. Currently, there is
 only one resume template. Here is a [demo.pdf](demo.pdf) file. See also
