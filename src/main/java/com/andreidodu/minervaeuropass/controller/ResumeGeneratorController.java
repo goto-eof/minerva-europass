@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/resume")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:3000")
 public class ResumeGeneratorController {
 
     final private ResumeService resumeService;

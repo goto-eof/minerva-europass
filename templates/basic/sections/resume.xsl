@@ -5,7 +5,7 @@
     <xsl:include href="profile.xsl"/>
     <xsl:include href="introduction.xsl"/>
     <xsl:template name="resume">
-        <xsl:param name="root" select="'default-value'"/>
+        <xsl:param name="root" select="nodeset"/>
         <fo:block page-break-after="always">
             <fo:table table-layout="fixed" width="100%" font-size="7pt" space-before="0.5em" space-after="0.5em">
 

@@ -51,8 +51,9 @@ public class ProfileFillerUtil implements FillerUtil {
         result.put(ResumeConst.FIELD_MAIN_SKILLS, resumeUtil.listToString(resumeDTO.getProfile().getMainSkillList()));
         result.put(ResumeConst.FIELD_LANGUAGES, resumeUtil.listToString(resumeDTO.getProfile().getLanguageList()));
 
-        result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, resumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience()));
-
+        if (resumeDTO.getExperience() != null) {
+            result.put(ResumeConst.FIELD_YEARS_AND_MONTHS_OF_EXPERIENCE, resumeUtil.calculateYearsExperienceFrontEndAndBackEnd(resumeDTO.getExperience()));
+        }
         if (templateConfiguration.getShowTopBackEndTechnologies()) {
             String topXMainBackEndTechnologies = resumeUtil.listToString(resumeUtil.technologiesToYearsOfExperienceLight(resumeDTO.getExperience().getExperienceList(), ExperienceType.BACK_END, templateConfiguration.getMaxNumberTopBackEndTechnologies()));
             result.put(ResumeConst.FIELD_TOP_X_MAIN_BACK_END_TECHNOLOGIES, topXMainBackEndTechnologies);
