@@ -3,6 +3,7 @@ package com.andreidodu.minervaeuropass.service.templatestrategies.basic.filler;
 import com.andreidodu.minervaeuropass.constants.ApplicationConst;
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.constants.TemplateConfiguration;
+import com.andreidodu.minervaeuropass.dto.resume.KeyValueDTO;
 import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.service.FillerUtil;
 import com.andreidodu.minervaeuropass.types.ExperienceType;
@@ -13,7 +14,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Order(20)
 @Component
@@ -35,9 +38,9 @@ public class ProfileFillerUtil implements FillerUtil {
         result.put(ResumeConst.FIELD_COUNTY, resumeDTO.getProfile().getCounty());
         result.put(ResumeConst.FIELD_COUNTRY, resumeDTO.getProfile().getCountry());
         result.put(ResumeConst.FIELD_CITIZENSHIP, resumeUtil.listToString(resumeDTO.getProfile().getCitizenshipList()));
-        result.put(ResumeConst.FIELD_EMAIL_LIST, resumeUtil.listToListMap(resumeDTO.getProfile().getEmailMap()));
-        result.put(ResumeConst.FIELD_URL_LIST, resumeUtil.listToListMap(resumeDTO.getProfile().getUrlMap()));
-        result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, resumeUtil.listToListMap(resumeDTO.getProfile().getPhoneNumberMap()));
+        result.put(ResumeConst.FIELD_EMAIL_LIST, resumeUtil.listToListMap(listOfKeyValueToMap(resumeDTO.getProfile().getEmailMap())));
+        result.put(ResumeConst.FIELD_URL_LIST, resumeUtil.listToListMap(listOfKeyValueToMap(resumeDTO.getProfile().getUrlMap())));
+        result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, resumeUtil.listToListMap(listOfKeyValueToMap(resumeDTO.getProfile().getPhoneNumberMap())));
         result.put(ResumeConst.FIELD_BIRTH_DATE, DateUtil.formatLocalDate(resumeDTO.getProfile().getBirthDate(), DateUtil.PATTERN_DD_MM_YYYY));
         result.put(ResumeConst.FIELD_YEARS_OLD, String.valueOf(DateUtil.calculateYearsOld(resumeDTO.getProfile().getBirthDate(), LocalDate.now())));
 
@@ -59,5 +62,9 @@ public class ProfileFillerUtil implements FillerUtil {
             result.put(ResumeConst.FIELD_TOP_X_MAIN_FRONT_END_TECHNOLOGIES, topXMainFrontEndTechnologies);
         }
 
+    }
+
+    private Map<String, String> listOfKeyValueToMap(List<KeyValueDTO> list) {
+        return list.stream().collect(Collectors.toMap(KeyValueDTO::getKey, KeyValueDTO::getValue));
     }
 }

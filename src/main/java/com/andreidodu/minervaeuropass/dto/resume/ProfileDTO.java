@@ -18,10 +18,10 @@ public class ProfileDTO {
     private String country;
     private String jobTitle;
     private List<String> citizenshipList;
-    private Map<String, String> emailMap;
-    private Map<String, String> phoneNumberMap;
+    private List<KeyValueDTO> emailMap;
+    private List<KeyValueDTO> phoneNumberMap;
     private LocalDate birthDate;
-    private Map<String, String> urlMap;
+    private List<KeyValueDTO> urlMap;
     private List<String> mainSkillList;
     private List<String> languageList;
 }
