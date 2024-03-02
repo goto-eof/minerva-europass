@@ -7,8 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CertificatesDTO {
-    private String title;
-    private String description;
+public class CertificatesDTO extends SectionCommonDTO {
     private List<CertificateItemDTO> certificateList;
 }

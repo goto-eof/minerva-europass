@@ -7,9 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class OtherSkillsDTO {
-    private String title;
-    private String description;
+public class OtherSkillsDTO extends SectionCommonDTO{
     private List<String> socialList;
     private List<String> organizationalList;
     private List<String> otherList;

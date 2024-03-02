@@ -5,8 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class IntroductionDTO {
-    private String title;
-    private String content;
+public class IntroductionDTO extends SectionCommonDTO{
     private String footer;
 }

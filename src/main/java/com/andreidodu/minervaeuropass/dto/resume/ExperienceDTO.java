@@ -7,8 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ExperienceDTO {
-    private String title;
-    private String description;
+public class ExperienceDTO extends SectionCommonDTO{
     private List<ExperienceItemDTO> experienceList;
 }

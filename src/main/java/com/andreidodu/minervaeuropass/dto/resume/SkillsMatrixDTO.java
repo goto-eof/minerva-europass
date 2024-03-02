@@ -7,8 +7,6 @@ import java.util.List;
 
 @Getter
 @Setter
-public class SkillsMatrixDTO {
-    private String title;
-    private String description;
+public class SkillsMatrixDTO extends SectionCommonDTO{
     private List<SkillMatrixItemDTO> skillsMatrixList;
 }
