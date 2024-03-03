@@ -16,8 +16,8 @@ public class ResumeDTO {
     private PersonalProjectsDTO personalProjects;
     private EducationDTO education;
     private OtherSkillsDTO otherSkills;
-    private SkillsMatrixDTO skillsMatrix;
     private OtherDTO other;
+    private SkillsMatrixDTO skillsMatrix;
     private CertificatesDTO certificates;
     private String localeName;
 }
