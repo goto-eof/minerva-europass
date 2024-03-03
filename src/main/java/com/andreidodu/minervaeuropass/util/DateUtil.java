@@ -21,6 +21,9 @@ public class DateUtil {
 
 
     public static String formatLocalDate(LocalDate date, String stringPattern) {
+        if (date == null){
+            return null;
+        }
         Locale locale = calculateLocale(ThreadContext.getRequestContext().getLocale());
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern(stringPattern, locale);
         return date.format(pattern);
@@ -33,7 +36,10 @@ public class DateUtil {
         return Locale.US;
     }
 
-    public static int calculateYearsOld(LocalDate from, LocalDate to) {
+    public static Integer calculateYearsOld(LocalDate from, LocalDate to) {
+        if (from == null){
+            return null;
+        }
         return from.until(to)
                 .getYears();
     }

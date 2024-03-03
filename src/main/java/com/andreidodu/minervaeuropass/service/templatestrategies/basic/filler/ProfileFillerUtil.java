@@ -14,6 +14,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class ProfileFillerUtil implements FillerUtil {
         result.put(ResumeConst.FIELD_URL_LIST, resumeUtil.listToListMap(listOfKeyValueToMap(resumeDTO.getProfile().getUrlMap())));
         result.put(ResumeConst.FIELD_PHONE_NUMBER_LIST, resumeUtil.listToListMap(listOfKeyValueToMap(resumeDTO.getProfile().getPhoneNumberMap())));
         result.put(ResumeConst.FIELD_BIRTH_DATE, DateUtil.formatLocalDate(resumeDTO.getProfile().getBirthDate(), DateUtil.PATTERN_DD_MM_YYYY));
-        result.put(ResumeConst.FIELD_YEARS_OLD, String.valueOf(DateUtil.calculateYearsOld(resumeDTO.getProfile().getBirthDate(), LocalDate.now())));
+        result.put(ResumeConst.FIELD_YEARS_OLD, toString(DateUtil.calculateYearsOld(resumeDTO.getProfile().getBirthDate(), LocalDate.now())));
 
         result.put(ResumeConst.FIELD_APPLICATION_NAME, ApplicationConst.APPLICATION_NAME);
         result.put(ResumeConst.FIELD_GENERATED_ON, DateUtil.formatLocalDate(LocalDate.now(), DateUtil.PATTERN_DD_MM_YYYY));
@@ -66,6 +67,17 @@ public class ProfileFillerUtil implements FillerUtil {
     }
 
     private Map<String, String> listOfKeyValueToMap(List<KeyValueDTO> list) {
+        if (list == null) {
+            return new HashMap<>();
+        }
         return list.stream().collect(Collectors.toMap(KeyValueDTO::getKey, KeyValueDTO::getValue));
+    }
+
+
+    private String toString(Number number) {
+        if (number == null) {
+            return null;
+        }
+        return number.toString();
     }
 }

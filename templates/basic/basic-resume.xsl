@@ -81,11 +81,15 @@
                     <fo:block font-size="20pt" text-align="center" padding="10px">
                         <xsl:value-of select="root/title"/>
                     </fo:block>
-                    <fo:block-container min-height="26cm" padding-top="0px">
-                        <xsl:call-template name="resume">
-                            <xsl:with-param name="root" select="root"/>
-                        </xsl:call-template>
-                    </fo:block-container>
+
+                    <xsl:if test="root/enableProfile">
+                        <fo:block-container min-height="26cm" padding-top="0px">
+                            <xsl:call-template name="resume">
+                                <xsl:with-param name="root" select="root"/>
+                            </xsl:call-template>
+                        </fo:block-container>
+                    </xsl:if>
+
                     <xsl:if test="root/enableExperienceList = 'true'">
                         <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                             <xsl:call-template name="experience">
@@ -93,23 +97,25 @@
                             </xsl:call-template>
                         </fo:block-container>
                     </xsl:if>
-                    <xsl:if test="root/enableSummary = 'true'">
-                        <fo:block-container min-height="26cm" padding-top="0px">
-                            <xsl:call-template name="summary">
-                                <xsl:with-param name="root"
-                                                select="root"/>
-                                <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
-                                                select="root/yearsOfExperiencePerSingleBackEndTechnologyInExperience"/>
-                                <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
-                                                select="root/yearsOfExperiencePerSingleFrontEndTechnologyInExperience"/>
-                                <xsl:with-param name="title"
-                                                select="root/translationSummaryJobExperiences"/>
-                                <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
-                                <xsl:with-param name="topRoles" select="root/topRolesByExperience"/>
-                                <xsl:with-param name="yearsExperienceByField"
-                                                select="root/yearsExperienceByExperience"/>
-                            </xsl:call-template>
-                        </fo:block-container>
+                    <xsl:if test="root/enableExperienceList = 'true'">
+                        <xsl:if test="root/enableSummary = 'true'">
+                            <fo:block-container min-height="26cm" padding-top="0px">
+                                <xsl:call-template name="summary">
+                                    <xsl:with-param name="root"
+                                                    select="root"/>
+                                    <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
+                                                    select="root/yearsOfExperiencePerSingleBackEndTechnologyInExperience"/>
+                                    <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
+                                                    select="root/yearsOfExperiencePerSingleFrontEndTechnologyInExperience"/>
+                                    <xsl:with-param name="title"
+                                                    select="root/translationSummaryJobExperiences"/>
+                                    <xsl:with-param name="topX" select="root/topXTechnologiesFromExperience"/>
+                                    <xsl:with-param name="topRoles" select="root/topRolesByExperience"/>
+                                    <xsl:with-param name="yearsExperienceByField"
+                                                    select="root/yearsExperienceByExperience"/>
+                                </xsl:call-template>
+                            </fo:block-container>
+                        </xsl:if>
                     </xsl:if>
                     <xsl:if test="root/enableEducationList = 'true'">
                         <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
@@ -146,24 +152,28 @@
                             </xsl:call-template>
                         </fo:block-container>
                     </xsl:if>
-                    <xsl:if test="root/enableSummary = 'true'">
-                        <fo:block-container min-height="26cm" padding-top="0px">
-                            <xsl:call-template name="summary">
-                                <xsl:with-param name="root"
-                                                select="root"/>
-                                <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
-                                                select="root/yearsOfExperiencePerSingleBackEndTechnologyInPersonalProjects"/>
-                                <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
-                                                select="root/yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects"/>
-                                <xsl:with-param name="title"
-                                                select="root/translationSummaryPersonalProjects"/>
-                                <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
-                                <xsl:with-param name="topRoles" select="root/topRolesByPersonalProjects"/>
-                                <xsl:with-param name="yearsExperienceByField"
-                                                select="root/yearsExperienceByPersonalProjects"/>
-                            </xsl:call-template>
-                        </fo:block-container>
+                    <xsl:if test="root/enablePersonalProjects = 'true'">
+
+                        <xsl:if test="root/enableSummary = 'true'">
+                            <fo:block-container min-height="26cm" padding-top="0px">
+                                <xsl:call-template name="summary">
+                                    <xsl:with-param name="root"
+                                                    select="root"/>
+                                    <xsl:with-param name="yearsOfExperiencePerTechBackEnd"
+                                                    select="root/yearsOfExperiencePerSingleBackEndTechnologyInPersonalProjects"/>
+                                    <xsl:with-param name="yearsOfExperiencePerTechFrontEnd"
+                                                    select="root/yearsOfExperiencePerSingleFrontEndTechnologyInPersonalProjects"/>
+                                    <xsl:with-param name="title"
+                                                    select="root/translationSummaryPersonalProjects"/>
+                                    <xsl:with-param name="topX" select="root/topXTechnologiesFromPersonalProjects"/>
+                                    <xsl:with-param name="topRoles" select="root/topRolesByPersonalProjects"/>
+                                    <xsl:with-param name="yearsExperienceByField"
+                                                    select="root/yearsExperienceByPersonalProjects"/>
+                                </xsl:call-template>
+                            </fo:block-container>
+                        </xsl:if>
                     </xsl:if>
+
                     <xsl:if test="root/enableCertificateList = 'true'">
                         <fo:block-container page-break-before="always" min-height="26cm" padding-top="0px">
                             <xsl:call-template name="certificates">
@@ -171,16 +181,18 @@
                             </xsl:call-template>
                         </fo:block-container>
                     </xsl:if>
-                    <xsl:if test="root/enableSummary = 'true'">
-                        <fo:block-container min-height="26cm" padding-top="0px">
-                            <xsl:call-template name="summary">
-                                <xsl:with-param name="root"
-                                                select="root"/>
-                                <xsl:with-param name="title"
-                                                select="root/translateSummaryCertificates"/>
-                                <xsl:with-param name="topX" select="root/topXTechnologiesFromCertificates"/>
-                            </xsl:call-template>
-                        </fo:block-container>
+                    <xsl:if test="root/enableCertificateList = 'true'">
+                        <xsl:if test="root/enableSummary = 'true'">
+                            <fo:block-container min-height="26cm" padding-top="0px">
+                                <xsl:call-template name="summary">
+                                    <xsl:with-param name="root"
+                                                    select="root"/>
+                                    <xsl:with-param name="title"
+                                                    select="root/translateSummaryCertificates"/>
+                                    <xsl:with-param name="topX" select="root/topXTechnologiesFromCertificates"/>
+                                </xsl:call-template>
+                            </fo:block-container>
+                        </xsl:if>
                     </xsl:if>
                 </fo:flow>
             </fo:page-sequence>

@@ -34,6 +34,11 @@
                                 </fo:block-container>
                             </fo:table-cell>
                         </xsl:if>
+                        <xsl:if test="$root/enableProfile != 'true'">
+                            <fo:table-cell>
+                                <fo:block></fo:block>
+                            </fo:table-cell>
+                        </xsl:if>
                         <xsl:if test="$root/enableIntroduction = 'true'">
                             <fo:table-cell number-columns-spanned="4">
                                 <fo:block-container min-height="25cm" margin-left="3px" margin-right="3px">
@@ -41,6 +46,11 @@
                                         <xsl:with-param name="root" select="$root"/>
                                     </xsl:call-template>
                                 </fo:block-container>
+                            </fo:table-cell>
+                        </xsl:if>
+                        <xsl:if test="$root/enableIntroduction != 'true'">
+                            <fo:table-cell>
+                                <fo:block></fo:block>
                             </fo:table-cell>
                         </xsl:if>
                     </fo:table-row>
