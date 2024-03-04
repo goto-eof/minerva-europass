@@ -2,7 +2,7 @@ package com.andreidodu.minervaeuropass.service.templatestrategies.basic.filler;
 
 import com.andreidodu.minervaeuropass.constants.ResumeConst;
 import com.andreidodu.minervaeuropass.dto.resume.ExperienceItemDTO;
-import com.andreidodu.minervaeuropass.dto.resume.UrlDTO;
+import com.andreidodu.minervaeuropass.dto.resume.KeyValueDTO;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
@@ -51,11 +51,11 @@ public class ExperienceCommonFillerUtil {
         }).toList();
     }
 
-    private static List<Map<String, String>> urlListToListMap(List<UrlDTO> urlList) {
+    private static List<Map<String, String>> urlListToListMap(List<KeyValueDTO> urlList) {
         return urlList.stream().map(item -> {
             Map<String, String> result = new HashMap<>();
-            result.put(ResumeConst.FIELD_URL, item.getUrl());
-            result.put(ResumeConst.FIELD_DESCRIPTION, item.getDescription());
+            result.put(ResumeConst.FIELD_URL, item.getValue());
+            result.put(ResumeConst.FIELD_DESCRIPTION, item.getKey());
             return result;
         }).toList();
     }

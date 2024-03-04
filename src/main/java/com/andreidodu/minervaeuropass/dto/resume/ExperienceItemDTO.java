@@ -17,7 +17,7 @@ public class ExperienceItemDTO implements ExperienceCommon {
     private String name;
     private String description;
     private String url;
-    private List<UrlDTO> urlList;
+    private List<KeyValueDTO> urlList;
     private String mainActivities;
     private String customer;
     private String sector;
