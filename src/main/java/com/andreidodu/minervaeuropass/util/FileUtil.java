@@ -37,4 +37,8 @@ public class FileUtil {
     public boolean createDirectoryRecursively(String path) {
         return new File(path).mkdirs();
     }
+
+    public boolean checkExistence(final String filename) {
+        return new File(filename).exists();
+    }
 }
