@@ -44,7 +44,7 @@ the [client side application](https://github.com/goto-eof/minerva-europass-clien
 - configurable
 
 ## Configure and run the application
-
+- configure the project in order to run with JDK 21
 - copy the `application.yml` and create `application-dev.yml`
 - set `spring.profiles.active=dev` as Environment Variable of your IDE
 - edit the `application-dev.yml` and set the `image-path` property to an existing path, like the Desktop path
