@@ -23,7 +23,7 @@ public class ConfigurationCheckerUtil {
     }
 
     private void checkImagePath() {
-        if (fileUtil.checkExistence(imageConfiguration.getImagePath())) {
+        if (fileUtil.isPathExists(imageConfiguration.getImagePath())) {
             log.info("\n\nImage path configured correctly: {}\n\n", imageConfiguration.getImagePath());
             return;
         }
@@ -31,7 +31,7 @@ public class ConfigurationCheckerUtil {
     }
 
     private void checkPDFPath() {
-        if (fileUtil.checkExistence(templateConfiguration.getPdfPath())) {
+        if (fileUtil.isPathExists(templateConfiguration.getPdfPath())) {
             log.info("\n\nPDF path configured correctly: {}\n\n", templateConfiguration.getPdfPath());
             return;
         }

@@ -1,6 +1,5 @@
 package com.andreidodu.minervaeuropass.util;
 
-import com.andreidodu.minervaeuropass.constants.ImageConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +20,16 @@ public class FileUtil {
 
     public String saveImage(final String imagePath, String base64string) throws IOException {
         byte[] imageByte = base64ToByte(base64string);
-        Date dateTime = new Date();
-        String filename = dateTime.getTime() + FILE_EXTENSION;
+        String filename = calculateFilename();
         String fullPath = imagePath + SLASH + filename;
         Path path = new File(fullPath).toPath();
         Files.write(path, imageByte);
         return fullPath;
+    }
+
+    private static String calculateFilename() {
+        Date dateTime = new Date();
+        return dateTime.getTime() + FILE_EXTENSION;
     }
 
     private static byte[] base64ToByte(String base64string) {
@@ -35,10 +38,13 @@ public class FileUtil {
     }
 
     public boolean createDirectoryRecursively(String path) {
+        if (isPathExists(path)) {
+            return false;
+        }
         return new File(path).mkdirs();
     }
 
-    public boolean checkExistence(final String filename) {
-        return new File(filename).exists();
+    public boolean isPathExists(final String path) {
+        return new File(path).exists();
     }
 }
