@@ -59,4 +59,4 @@ the [client side application](https://github.com/goto-eof/minerva-europass-clien
 - click on `View more actions` (3 dots) and save the response as PDF file
 
 ---
-Tested on Linux and on MacOS.
+Tested on Linux and MacOS.
