@@ -6,6 +6,7 @@ import com.andreidodu.minervaeuropass.exception.ApplicationException;
 import com.andreidodu.minervaeuropass.service.FileService;
 import com.andreidodu.minervaeuropass.service.ResumeService;
 import com.andreidodu.minervaeuropass.service.TemplateStrategy;
+import com.andreidodu.minervaeuropass.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final List<TemplateStrategy> templateStrategyList;
     private final FileService fileService;
     private final TemplateConfiguration templateConfiguration;
+    private final FileUtil fileUtil;
 
     @Override
     public byte[] generateBytes(ResumeDTO resumeDTO, final String templateName) {
@@ -33,6 +35,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     private byte[] storeACopyIfNecessary(byte[] bytes) {
         if (templateConfiguration.getEnableSavePDF()) {
+            fileUtil.createDirectoryRecursively(templateConfiguration.getPdfPath());
             fileService.storeACopy(bytes);
         }
         return bytes;
