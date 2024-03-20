@@ -3,7 +3,7 @@ spring:
     dispatch-options-request: true
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5436/minerva
+    url: jdbc:postgresql://localhost:5439/minerva
     username: postgres
     password: postgres
     testOnBorrow: true

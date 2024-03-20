@@ -56,6 +56,8 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     implementation 'org.apache.xmlgraphics:fop:2.8'
+    testImplementation 'org.springframework.batch:spring-batch-test:5.1.1'
+
 }
 
 tasks.named('test') {
