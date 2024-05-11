@@ -10,19 +10,14 @@
 
 # Minerva Europass Server
 
-Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. Currently, there is
-only one resume template. Here is a [demo.pdf](demo.pdf) file. See also
+Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. The particularity of
+Minerva Europass is the automatic time calculation for each experience and the summary of technologies which you used.
+Currently, there is only one resume template. Here is a [demo.pdf](demo.pdf) file. See also
 the [client side application](https://github.com/goto-eof/minerva-europass-client).
 
 ## Technologies
 
-- Java
-- Spring Boot
-- Apache FOP
-- Hibernate
-- Liquibase
-- PostgreSQL
-- Docker
+Java • Spring Boot • Apache FOP • Hibernate • Liquibase • PostgreSQL • Docker
 
 ## Features
 
@@ -44,6 +39,7 @@ the [client side application](https://github.com/goto-eof/minerva-europass-clien
 - configurable
 
 ## Configure and run the application
+
 - configure the project in order to run it with JDK 21
 - copy the `application.yml` and create `application-dev.yml`
 - set `spring.profiles.active=dev` as Environment Variable of your IDE
