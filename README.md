@@ -12,7 +12,7 @@
 
 Minerva Europass (alias IT Europass) allows, as you can understand, to generate your own Resume. The particularity of
 Minerva Europass is the automatic time calculation for each experience and the summary of technologies which you used.
-Currently, there is only one resume template. Here is a [demo.pdf](demo.pdf) file. See also
+Currently, there is only one resume template. This is the back-end side. Here is a [demo.pdf](demo.pdf) file. See also
 the [client side application](https://github.com/goto-eof/minerva-europass-client).
 
 ## Technologies
