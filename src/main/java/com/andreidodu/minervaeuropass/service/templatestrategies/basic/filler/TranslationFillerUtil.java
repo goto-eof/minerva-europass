@@ -62,5 +62,5 @@ public class TranslationFillerUtil implements FillerUtil {
         result.put(ResumeConst.TRANSLATION_CONSENT_PROCESSING_DATA, translationService.retrieveTranslation(TranslationConst.KEY_CONSENT_PROCESSING_DATA, locale));
         result.put(ResumeConst.TRANSLATION_YEARS, translationService.retrieveTranslation(TranslationConst.KEY_YEARS, locale));
         result.put(ResumeConst.TRANSLATION_LIST_ORDER_DESCRIPTION, translationService.retrieveTranslation(TranslationConst.KEY_LIST_ORDER_DESCRIPTION, locale));
-    }
+       }
 }

@@ -50,4 +50,6 @@ public interface TranslationConst {
     String KEY_PAGE_OF = "com.me.of";
     String KEY_CONSENT_PROCESSING_DATA = "com.me.consent.processing.data";
     String KEY_LIST_ORDER_DESCRIPTION = "com.me.list.order.description";
+    String KEY_UNCATEGORIZED_BACK_END = "com.skills.uncategorized.back-end";
+    String KEY_UNCATEGORIZED_FRONT_END = "com.skills.uncategorized.front-end";
 }

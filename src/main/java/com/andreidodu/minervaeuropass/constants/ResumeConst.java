@@ -131,7 +131,7 @@ public interface ResumeConst {
     String FIELD_ENABLE_INTRODUCTION = "enableIntroduction";
     String FIELD_ENABLE_OTHER = "enableOther";
     String FIELD_ENABLE_OTHER_SKILLS = "enableOtherSkills";
-    String FIELD_ENABLE_PERSONAL_PROJECTS ="enablePersonalProjects" ;
+    String FIELD_ENABLE_PERSONAL_PROJECTS = "enablePersonalProjects";
     String FIELD_ENABLE_PROFILE = "enableProfile";
     String FIELD_ENABLE_PROFILE_PICTURE = "enableProfilePicture";
     String FIELD_ENABLE_SKILL_MATRIX = "enableSkillMatrix";
