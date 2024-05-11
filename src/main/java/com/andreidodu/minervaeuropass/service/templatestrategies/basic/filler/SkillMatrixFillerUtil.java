@@ -72,12 +72,15 @@ public class SkillMatrixFillerUtil implements FillerUtil {
         Optional.ofNullable(resumeDTO.getExperience())
                 .flatMap(experienceDTO -> Optional.ofNullable(experienceDTO.getExperienceList()))
                 .ifPresent(experienceList -> {
-                    Set<String> experiences = experienceList.stream()
+                    List<String> experiences = experienceList.stream()
                             .filter(experience -> BooleanUtils.isTrue(filterCondition.apply(experience)))
                             .map(retrieveFunction)
                             .flatMap(Collection::stream)
                             .filter(skill -> !allSkills.contains(skill.toLowerCase()))
-                            .collect(Collectors.toSet());
+                            .distinct()
+                            .sorted()
+                            .toList();
+
                     if (!experiences.isEmpty()) {
                         Map<String, Object> result = new HashMap<>();
                         result.put(ResumeConst.FIELD_KEY, keyValue);
