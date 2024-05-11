@@ -11,6 +11,7 @@ import com.andreidodu.minervaeuropass.service.FillerUtil;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,7 @@ public class CertificateFillerUtil implements FillerUtil {
     private final TranslationService translationService;
 
     public boolean accept(ResumeDTO resumeDTO) {
-        return resumeDTO.getCertificates() != null;
+        return resumeDTO.getCertificates() != null && BooleanUtils.isTrue(resumeDTO.getCertificates().getEnabled());
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {

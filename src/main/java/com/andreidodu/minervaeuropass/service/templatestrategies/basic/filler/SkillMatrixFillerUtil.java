@@ -5,7 +5,10 @@ import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.dto.resume.SkillMatrixItemDTO;
 import com.andreidodu.minervaeuropass.service.FillerUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
+import com.querydsl.core.BooleanBuilder;
+import liquibase.util.BooleanUtil;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +23,8 @@ public class SkillMatrixFillerUtil implements FillerUtil {
     private final ResumeUtil resumeUtil;
 
     public boolean accept(ResumeDTO resumeDTO) {
-        return resumeDTO.getSkillsMatrix() != null;
+        return resumeDTO.getSkillsMatrix() != null &&
+                BooleanUtils.isTrue(resumeDTO.getSkillsMatrix().getEnabled());
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {

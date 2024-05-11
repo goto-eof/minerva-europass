@@ -5,6 +5,7 @@ import com.andreidodu.minervaeuropass.dto.resume.ResumeDTO;
 import com.andreidodu.minervaeuropass.service.FillerUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,8 @@ public class OtherSkillsFillerUtil implements FillerUtil {
     private final ResumeUtil resumeUtil;
 
     public boolean accept(ResumeDTO resumeDTO) {
-        return resumeDTO.getOtherSkills() != null;
+        return resumeDTO.getOtherSkills() != null &&
+                BooleanUtils.isTrue(resumeDTO.getOtherSkills().getEnabled());
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {

@@ -9,4 +9,5 @@ public abstract
 class SectionCommonDTO {
     private String title;
     private String description;
+    private Boolean enabled = true;
 }

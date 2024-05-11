@@ -10,6 +10,7 @@ import java.util.Map;
 @Getter
 @Setter
 public class ProfileDTO {
+    private Boolean enabled = true;
     private String firstName;
     private String lastName;
     private String image;

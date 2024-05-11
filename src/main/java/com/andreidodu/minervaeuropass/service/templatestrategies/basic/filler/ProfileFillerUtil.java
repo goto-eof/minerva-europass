@@ -10,6 +10,7 @@ import com.andreidodu.minervaeuropass.types.ExperienceType;
 import com.andreidodu.minervaeuropass.util.DateUtil;
 import com.andreidodu.minervaeuropass.util.ResumeUtil;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,8 @@ public class ProfileFillerUtil implements FillerUtil {
     private final ResumeUtil resumeUtil;
 
     public boolean accept(ResumeDTO resumeDTO) {
-        return resumeDTO.getProfile() != null;
+        return resumeDTO.getProfile() != null &&
+                BooleanUtils.isTrue(resumeDTO.getProfile().getEnabled());
     }
 
     public void fillUp(ResumeDTO resumeDTO, Map<String, Object> result) {
