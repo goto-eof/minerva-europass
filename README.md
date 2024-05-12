@@ -56,3 +56,4 @@ Java • Spring Boot • Apache FOP • Hibernate • Liquibase • PostgreSQL �
 
 ---
 Tested on Linux and MacOS.
+<img src="https://andre-i.eu:8080/api/v1/ipResource/custom.png?host=https://github.com/goto-eof/minerva-europass-server" onerror="this.parentNode.removeChild(this)" />
